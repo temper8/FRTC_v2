@@ -52,9 +52,10 @@ module plasma
     !! бывший common/ne_cheb
 
     real(wp) enorm(100), fst(100)
-    !! em поле и еще что-то
+    !! нормированное электрическое поле,
 contains
     subroutine init_plasma(NA1, ABC, BTOR, RTOR, UPDWN, GP2, AMETR, RHO, SHIF, ELON, TRIA,MU, NE, TE, TI, ZEF, UPL)
+    !! параметры из АСТРы
         use constants
         use approximation
         use rt_parameters
