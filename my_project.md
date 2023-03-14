@@ -14,6 +14,6 @@ exclude: saveprofiles.f
 
 This is my Fortran project!
 
-Код рейтрейсинга
+Код FRTC
 
 Тут что-то про него надо написать
