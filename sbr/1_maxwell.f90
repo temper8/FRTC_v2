@@ -1,4 +1,5 @@
 module maxwell
+      !! Все что относится к распределению Максвелла
       use kind_module      
       use constants, only : zero, pisqrt, pi2sqrt, pqe
       implicit none
@@ -105,10 +106,10 @@ contains
       end      
 
       real(wp) function fmaxw_classic(v,alfa2,dfmaxw)
-            !! распределение Максвелла
-            !! $$ f(v) = exp(-0.5*v^2*(1.0 + 0.5*alfa2*v^2))/sqrt(2*pi)$$
+            !! распределение Максвелла с альфа-частицами
+            !! $$ f(v) = \frac{1}{\sqrt{2\pi}} \exp(-\frac{1}{2} v^2 (1.0 + \frac{1}{2} \cdot alfa_2 \cdot v^2))$$
             !! и его производная
-            !! $$ dfmaxw = - v *(1.0 + alfa2*v^2) * f(v) $$
+            !! $$ dfmaxw = - v \cdot (1.0 + alfa_2 \cdot v^2) \cdot f(v) $$
             implicit none
             real(wp) v,alfa2,dfmaxw
             real(wp) arg,alfa,api,b,psiq,f,df
@@ -178,7 +179,6 @@ contains
             psiq=f
             return
             end
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
       function erfcc(x)
             implicit none
