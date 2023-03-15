@@ -1,5 +1,5 @@
 ---
-project: FRTS project
+project: FRTС project
 author: Popov's Lab
 preprocess: False
 src_dir: sbr/
