@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="description" content="FRTС project">
+    <meta name="author" content="Popov's Lab" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>All Procedures &ndash; FRTС project
+</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+    <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <script src="../js/jquery-2.1.3.min.js"></script>
+    <script src="../js/svg-pan-zoom.min.js"></script>
+
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">FRTС project </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown" role="button"
+              aria-haspopup="true"
+     aria-expanded="false">Contents <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a href="../lists/files.html">Source Files</a></li>
+            <li><a href="../lists/modules.html">Modules</a></li>
+            <li><a href="../lists/procedures.html">Procedures</a></li>
+                   <li><a href="../lists/types.html">Derived Types</a></li>
+       
+            </ul>
+        
+            </li>
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/files.html">Source Files</a></li>
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
+                             <li class="visible-xs hidden-sm visible-lg"><a href="../lists/types.html">Derived Types</a></li>
+          </ul>
+        <form action="../search.html" class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+        </div>
+<!--
+        <button type="submit" class="btn btn-default">Submit</button>
+-->
+        </form>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12" id='text'>
+			 <h1>Procedures</h1>
+			 <table class="table table-striped">
+			 <thead><tr><th>Procedure</th><th>Location</th><th>Procedure Type</th><th>Description</th></tr></thead>
+			 <tbody>
+			   <tr><td><a href='../proc/approx.html'>approx</a></td><td><a href='../module/approximation.html'>approximation</a></td><td>Subroutine</td><td><p>
+<script type="math/tex">y(i)=y(x(i))</script>  the data to be approximated.<br>
+<script type="math/tex">n</script>  number of points in the input data.<br>
+<script type="math/tex">m</script>  number of coefficients of decomposition
+       over base functions <script type="math/tex">f(k,x)</script> :<br>
+<script type="math/tex">y(x)=sum_1^m [b(k)*f(k,x)]</script>
+<br>
+<script type="math/tex">b(i)</script>  found decomposition coefficients </p></td></tr>
+			   <tr><td><a href='../proc/burying_procedure.html'>burying_procedure</a></td><td><a href='../module/fokkerplanck1d_mod.html'>FokkerPlanck1D_mod</a></td><td>Subroutine</td><td><p>write(<em>,</em>)'#1 j,k,ibeg=',j,k,ibeg
+write(<em>,</em>)'#1 v(ibeg)=',vj(ibeg),' f1/f2=',fout1/fout2</p></td></tr>
+			   <tr><td><a href='../proc/calc_enorm.html'>calc_enorm</a></td><td><a href='../module/plasma.html'>plasma</a></td><td>Subroutine</td><td><p>fst(j)=pn<em>xlogj</em>c0<strong>4/pi4/vt</strong>3</p></td></tr>
+			   <tr><td><a href='../proc/calc_max_power_method.html'>calc_max_power_method</a></td><td><a href='../module/spectrum_mod.html'>spectrum_mod</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/chang_cooper_abcoef.html'>chang_cooper_abcoef</a></td><td><a href='../module/chang_cooper_module.html'>chang_cooper_module</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/chang_cooper_solver.html'>chang_cooper_solver</a></td><td><a href='../module/chang_cooper_module.html'>chang_cooper_module</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/chder.html'>chder</a></td><td><a href='../module/chebyshev.html'>chebyshev</a></td><td>Subroutine</td><td><p>Given a,b,c(1:n), as output from routine chebft(), and given n, 
+the desired degree of approximation (length of c to be used), 
+this routine returns the array cder(1:n), the Chebyshev 
+coefficients of the derivative of the function whose coefficients 
+are c(1:n).</p></td></tr>
+			   <tr><td><a href='../proc/chebev.html'>chebev</a></td><td><a href='../module/chebyshev.html'>chebyshev</a></td><td>Function</td><td><p>Chebyshev evaluation: All arguments are input. 
+c(1:m) is an array of Chebyshev coefficients, the first m elements 
+of c output from chebft (which must have been called with
+the same a and b). The Chebyshev polynomial evaluated
+and the result is returned as the function value.</p></td></tr>
+			   <tr><td><a href='../proc/chebft1.html'>chebft1</a></td><td><a href='../module/chebyshev.html'>chebyshev</a></td><td>Subroutine</td><td><p>Chebyshev fit: Given a function func, lower and upper limits
+of the interval [a,b], and a maximum degree n, this routine 
+computes the n coefficients c(k) such that func(x) approximately =
+SUMM_(k=1)^(k=n)[c(k)*T(k-1)(y)]-c(1)/2, where y and x are related by
+(5.8.10). This routine is to be used with moderately large n 
+(e.g., 30 or 50), the array of cs subsequently to be truncated
+at the smaller value m such that c(m+1) and subsequent elements 
+are negligible. Parameters: Maximum expected value of n, and ð. </p></td></tr>
+			   <tr><td><a href='../proc/copy_to_spectrum_1d.html'>copy_to_spectrum_1D</a></td><td><a href='../module/spectrum1d.html'>spectrum1D</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/create_spectrum.html'>create_spectrum</a></td><td><a href='../module/spectrum1d.html'>spectrum1D</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/create_vt_grid.html'>create_vt_grid</a></td><td><a href='../module/maxwell.html'>maxwell</a></td><td>Function</td><td><p>создание сетки тепловых скоростей</p></td></tr>
+			   <tr><td><a href='../proc/currlhcd.html'>currlhcd</a></td><td><a href='../module/maxwell.html'>maxwell</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/currlhcd_old.html'>currlhcd_old</a></td><td><a href='../sourcefile/drivencurrent95.f90.html'>drivencurrent95.f90</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/dfind.html'>dfind</a></td><td><a href='../module/current.html'>current</a></td><td>Subroutine</td><td><p>!        adde=zze<em>(dd/dens(j))</em>weight
+!        e2perp(i,j)=e2perp(i,j)+adde</p><a href="../proc/dfind.html" class="pull-right"><emph>Read more&hellip;</emph></a></td></tr>
+			   <tr><td><a href='../proc/divide_spectrum.html'>divide_spectrum</a></td><td><a href='../module/spectrum_mod.html'>spectrum_mod</a></td><td>Subroutine</td><td><p>деление спектра на две части</p></td></tr>
+			   <tr><td><a href='../proc/driven_current_result_print.html'>driven_current_result_print</a></td><td><a href='../module/driven_current_module.html'>driven_current_module</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/driven_current_result_save.html'>driven_current_result_save</a></td><td><a href='../module/driven_current_module.html'>driven_current_module</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/drivencurrent95.html'>drivencurrent95</a></td><td><a href='../sourcefile/drivencurrent95.f90.html'>drivencurrent95.f90</a></td><td>Subroutine</td><td><p>outj(i)  = LH driven current density, MA/m^2
+   dndt(i)  = d^2Jr1/dt^2/E, MA/m^2/sec^2/(V/m), ~runaway d(el.density)/dt/E
+   djdt(i)  = dJr2/dt, time drivative of runaway current Jr2, MA/m^2/sec
+   outjrun(i)  = LH driven runaway current density, MA/m^2
+   outnerun(i) = runaway electron density/10^19 m^-3</p><a href="../proc/drivencurrent95.html" class="pull-right"><emph>Read more&hellip;</emph></a></td></tr>
+			   <tr><td><a href='../proc/dsplnt.html'>dsplnt</a></td><td><a href='../module/spline_module.html'>spline_module</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/erfcc.html'>erfcc</a></td><td><a href='../module/maxwell.html'>maxwell</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/fdf.html'>fdf</a></td><td><a href='../module/approximation.html'>approximation</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/fdfddf.html'>fdfddf</a></td><td><a href='../module/approximation.html'>approximation</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/find_achieved_radial_points.html'>find_achieved_radial_points</a></td><td><a href='../module/current.html'>current</a></td><td>Subroutine</td><td><p>find achieved radial points jbeg-jend</p></td></tr>
+			   <tr><td><a href='../proc/find_volums_and_surfaces.html'>find_volums_and_surfaces</a></td><td><a href='../module/plasma.html'>plasma</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/fmaxw.html'>fmaxw</a></td><td><a href='../module/maxwell.html'>maxwell</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/fmaxw_classic.html'>fmaxw_classic</a></td><td><a href='../module/maxwell.html'>maxwell</a></td><td>Function</td><td><p>распределение Максвелла
+<script type="math/tex; mode=display"> f(v) = exp(-0.5*v^2*(1.0 + 0.5*alfa2*v^2))/sqrt(2*pi)</script>
+и его производная
+<script type="math/tex; mode=display"> dfmaxw = - v *(1.0 + alfa2*v^2) * f(v) </script>
+</p></td></tr>
+			   <tr><td><a href='../proc/fmaxw_ext.html'>fmaxw_ext</a></td><td><a href='../module/maxwell.html'>maxwell</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/fn.html'>fn</a></td><td><a href='../module/plasma.html'>plasma</a></td><td>Function</td><td><p>plasma  density,  cm^-3</p></td></tr>
+			   <tr><td><a href='../proc/fn1.html'>fn1</a></td><td><a href='../module/plasma.html'>plasma</a></td><td>Function</td><td><p>plasma density and its derivative</p></td></tr>
+			   <tr><td><a href='../proc/fn2.html'>fn2</a></td><td><a href='../module/plasma.html'>plasma</a></td><td>Function</td><td><p>plasma density and its first and second derivatives</p></td></tr>
+			   <tr><td><a href='../interface/fokkerplanck1d.html'>FokkerPlanck1D</a></td><td><a href='../module/fokkerplanck1d_mod.html'>FokkerPlanck1D_mod</a></td><td>Interface</td><td></td></tr>
+			   <tr><td><a href='../proc/fokkerplanck1d_constructor.html'>FokkerPlanck1D_constructor</a></td><td><a href='../module/fokkerplanck1d_mod.html'>FokkerPlanck1D_mod</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/fokkerplanck1d_init_diffusion.html'>FokkerPlanck1D_init_diffusion</a></td><td><a href='../module/fokkerplanck1d_mod.html'>FokkerPlanck1D_mod</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/fokkerplanck1d_init_zero_diffusion.html'>FokkerPlanck1D_init_zero_diffusion</a></td><td><a href='../module/fokkerplanck1d_mod.html'>FokkerPlanck1D_mod</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/fokkerplanck1d_print.html'>FokkerPlanck1D_print</a></td><td><a href='../module/fokkerplanck1d_mod.html'>FokkerPlanck1D_mod</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/fokkerplanck1d_solve_time_step.html'>FokkerPlanck1D_solve_time_step</a></td><td><a href='../module/fokkerplanck1d_mod.html'>FokkerPlanck1D_mod</a></td><td>Subroutine</td><td><p>!!!!!!!!!!   solve problem   !!!!!!!!!!!!!!!!!!!!!!!!!!</p></td></tr>
+			   <tr><td><a href='../proc/fokkerplanck_compute.html'>fokkerplanck_compute</a></td><td><a href='../module/fokkerplanck_module.html'>FokkerPlanck_module</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/ft.html'>ft</a></td><td><a href='../module/plasma.html'>plasma</a></td><td>Function</td><td><p>electron temperature, erg
+     ft=y            ! kev</p></td></tr>
+			   <tr><td><a href='../proc/fti.html'>fti</a></td><td><a href='../module/plasma.html'>plasma</a></td><td>Function</td><td><p>ion temperature, kev</p></td></tr>
+			   <tr><td><a href='../proc/funmaxwell.html'>funmaxwell</a></td><td><a href='../module/maxwell.html'>maxwell</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/fvt.html'>fvt</a></td><td><a href='../module/plasma.html'>plasma</a></td><td>Function</td><td><p>нет описания</p></td></tr>
+			   <tr><td><a href='../proc/gaussint.html'>gaussint</a></td><td><a href='../module/plasma.html'>plasma</a></td><td>Function</td><td><p>что-то про гаусс</p></td></tr>
+			   <tr><td><a href='../proc/get_negative_part_method.html'>get_negative_part_method</a></td><td><a href='../module/spectrum_mod.html'>spectrum_mod</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/get_positive_part_method.html'>get_positive_part_method</a></td><td><a href='../module/spectrum_mod.html'>spectrum_mod</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/init_diffusion.html'>init_diffusion</a></td><td><a href='../module/fokkerplanck_module.html'>FokkerPlanck_module</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/init_fmaxw_classic.html'>init_fmaxw_classic</a></td><td><a href='../module/maxwell.html'>maxwell</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/init_fmaxw_ext.html'>init_fmaxw_ext</a></td><td><a href='../module/maxwell.html'>maxwell</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/init_iteration.html'>init_iteration</a></td><td><a href='../module/iterator_mod.html'>iterator_mod</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/init_maxwell.html'>init_maxwell</a></td><td><a href='../module/plasma.html'>plasma</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/init_parameters.html'>init_parameters</a></td><td><a href='../module/plasma.html'>plasma</a></td><td>Subroutine</td><td><p>!!!!!!      ptkev=ft(zero)/0.16d-8  !Te in keV
+      ccurnr=pqe<em>pqe</em>0.333d-9/pme</p></td></tr>
+			   <tr><td><a href='../proc/init_plasma.html'>init_plasma</a></td><td><a href='../module/plasma.html'>plasma</a></td><td>Subroutine</td><td><p>variant
+ amy=(btor/q)<em>rho</em>(drho/dr) is a function of "minor radius" r=rh(i).
+ Poloidal magnetic field: B_pol=amy(r)*sqrt(g22/g), where g is
+ determinant of 3D metric tensor and g22 is the (22) element of
+ the tensor, normalized on ABC^4 and ABC^2, correspondingly.</p><a href="../proc/init_plasma.html" class="pull-right"><emph>Read more&hellip;</emph></a></td></tr>
+			   <tr><td><a href='../proc/init_trajectory.html'>init_trajectory</a></td><td><a href='../module/trajectory.html'>trajectory</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/init_vi.html'>init_vi</a></td><td><a href='../module/maxwell.html'>maxwell</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/iteration_result_print.html'>iteration_result_print</a></td><td><a href='../module/iteration_result_mod.html'>iteration_result_mod</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/iteration_result_save.html'>iteration_result_save</a></td><td><a href='../module/iteration_result_mod.html'>iteration_result_mod</a></td><td>Subroutine</td><td><p>save Iteration Result to file</p></td></tr>
+			   <tr><td><a href='../proc/k2.html'>k2</a></td><td><a href='../module/savelyev_solver_module.html'>savelyev_solver_module</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/kinv.html'>kinv</a></td><td><a href='../module/savelyev_solver_module.html'>savelyev_solver_module</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/kinv2.html'>kinv2</a></td><td><a href='../module/savelyev_solver_module.html'>savelyev_solver_module</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/lhcurrent.html'>lhcurrent</a></td><td><a href='../sourcefile/drivencurrent95.f90.html'>drivencurrent95.f90</a></td><td>Subroutine</td><td><p>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</p><a href="../proc/lhcurrent.html" class="pull-right"><emph>Read more&hellip;</emph></a></td></tr>
+			   <tr><td><a href='../proc/lubksb.html'>lubksb</a></td><td><a href='../module/approximation.html'>approximation</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/ludcmp.html'>ludcmp</a></td><td><a href='../module/approximation.html'>approximation</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/make_spline_approximation.html'>make_spline_approximation</a></td><td><a href='../module/spectrum_mod.html'>spectrum_mod</a></td><td>Function</td><td><p>approximation of input LH spectrum</p></td></tr>
+			   <tr><td><a href='../proc/manager.html'>manager</a></td><td><a href='../module/manager_mod.html'>manager_mod</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/obeom.html'>obeom</a></td><td><a href='../module/plasma.html'>plasma</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/ploshad.html'>ploshad</a></td><td><a href='../module/plasma.html'>plasma</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/polin.html'>polin</a></td><td><a href='../module/approximation.html'>approximation</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/polin1.html'>polin1</a></td><td><a href='../module/approximation.html'>approximation</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/polin2.html'>polin2</a></td><td><a href='../module/approximation.html'>approximation</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/psiq.html'>psiq</a></td><td><a href='../module/maxwell.html'>maxwell</a></td><td>Function</td><td><p>! psiq=exp(ksiV<em><em>2)</em>erfcc(ksiV)</em>exp(-0.25/alfa2)</p></td></tr>
+			   <tr><td><a href='../proc/qf.html'>qf</a></td><td><a href='../module/savelyev_solver_module.html'>savelyev_solver_module</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/read_negative_spectrum.html'>read_negative_spectrum</a></td><td><a href='../module/spectrum1d.html'>spectrum1D</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/read_parameters.html'>read_parameters</a></td><td><a href='../module/rt_parameters.html'>rt_parameters</a></td><td>Subroutine</td><td><p>!!!!!!!!!!!  read  physical parameters !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!  read parameters for alphas calculation !!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!  read  numerical parameters !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!  read  options !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!  read grill parameters and input LH spectrum !!!!!!!!!!!!
+!!!!!!!!!!! checking initial parameters !!!!!!!!!!!!!!!!!!!!!!!!!!!!!</p></td></tr>
+			   <tr><td><a href='../proc/read_positive_spectrum.html'>read_positive_spectrum</a></td><td><a href='../module/spectrum1d.html'>spectrum1D</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/read_spectrum.html'>read_spectrum</a></td><td><a href='../module/spectrum_mod.html'>spectrum_mod</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/recalculate_f_for_a_new_mesh.html'>recalculate_f_for_a_new_mesh</a></td><td><a href='../module/iterator_mod.html'>iterator_mod</a></td><td>Subroutine</td><td><p>recalculate f' for a new mesh
+!         if(vrj(i).gt.vvj(i0)) exit</p></td></tr>
+			   <tr><td><a href='../proc/rini.html'>rini</a></td><td><a href='../module/manager_mod.html'>manager_mod</a></td><td>Function</td><td><p>xm=yn<em>dsqrt(g22)         !given yn=(N</em>jpol) at Nfi=0
+yn3=yn*dsqrt(g33)       !if given Nfi at Nteta=0</p></td></tr>
+			   <tr><td><a href='../proc/rmink.html'>rmink</a></td><td><a href='../module/savelyev_solver_module.html'>savelyev_solver_module</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/rmink2.html'>rmink2</a></td><td><a href='../module/savelyev_solver_module.html'>savelyev_solver_module</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/rplusk.html'>rplusk</a></td><td><a href='../module/savelyev_solver_module.html'>savelyev_solver_module</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/rplusk2.html'>rplusk2</a></td><td><a href='../module/savelyev_solver_module.html'>savelyev_solver_module</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/rs.html'>rs</a></td><td><a href='../module/savelyev_solver_module.html'>savelyev_solver_module</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/savelyev_abccoef.html'>savelyev_abccoef</a></td><td><a href='../module/savelyev_solver_module.html'>savelyev_solver_module</a></td><td>Subroutine</td><td><p>-- fill abc matrix</p></td></tr>
+			   <tr><td><a href='../proc/savelyev_solver.html'>savelyev_solver</a></td><td><a href='../module/savelyev_solver_module.html'>savelyev_solver_module</a></td><td>Subroutine</td><td><p>разностная схема Савельева для уравнения Фоккера-Планка</p></td></tr>
+			   <tr><td><a href='../proc/show_constants.html'>show_constants</a></td><td><a href='../module/constants.html'>constants</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/show_parameters.html'>show_parameters</a></td><td><a href='../module/rt_parameters.html'>rt_parameters</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../interface/spectrum.html'>spectrum</a></td><td><a href='../module/spectrum_mod.html'>spectrum_mod</a></td><td>Interface</td><td></td></tr>
+			   <tr><td><a href='../proc/spectrum_approximation.html'>spectrum_approximation</a></td><td><a href='../module/spectrum1d.html'>spectrum1D</a></td><td>Subroutine</td><td><p>approximation of input LH spectrum</p></td></tr>
+			   <tr><td><a href='../proc/spectrum_constructor.html'>spectrum_constructor</a></td><td><a href='../module/spectrum_mod.html'>spectrum_mod</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/splne.html'>splne</a></td><td><a href='../module/spline_module.html'>spline_module</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/splnt.html'>splnt</a></td><td><a href='../module/spline_module.html'>spline_module</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/sys_time.html'>sys_time</a></td><td><a href='../module/utils.html'>Utils</a></td><td>Function</td><td></td></tr>
+			   <tr><td><a href='../proc/tridag.html'>tridag</a></td><td><a href='../module/savelyev_solver_module.html'>savelyev_solver_module</a></td><td>Subroutine</td><td><p>создает трехдиагональнйю матрицу</p></td></tr>
+			   <tr><td><a href='../proc/view.html'>view</a></td><td><a href='../module/trajectory.html'>trajectory</a></td><td>Subroutine</td><td><p>!writing trajectories into a file
+          pintld=-dland(i)<em>(dflf+dfrt)/2d0
+          pdec1=-pdecv</em>df</p></td></tr>
+			   <tr><td><a href='../proc/write_array.html'>write_array</a></td><td><a href='../module/writer_module.html'>writer_module</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/write_distribution.html'>write_distribution</a></td><td><a href='../module/writer_module.html'>writer_module</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/write_matrix.html'>write_matrix</a></td><td><a href='../module/writer_module.html'>writer_module</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/write_spectrum.html'>write_spectrum</a></td><td><a href='../module/spectrum1d.html'>spectrum1D</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/write_v_array.html'>write_v_array</a></td><td><a href='../module/writer_module.html'>writer_module</a></td><td>Subroutine</td><td><p>сохраняет массивы расределения и скорости</p></td></tr>
+			   <tr><td><a href='../proc/write_x_array.html'>write_x_array</a></td><td><a href='../module/writer_module.html'>writer_module</a></td><td>Subroutine</td><td></td></tr>
+			   <tr><td><a href='../proc/zefff.html'>zefff</a></td><td><a href='../module/plasma.html'>plasma</a></td><td>Function</td><td><p>z_effective profile</p></td></tr>
+			 </tbody></table>
+             
+        </div>
+      </div>
+    <hr>    
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+      <div class="row">
+        <div class="col-xs-6 col-md-6"><p>FRTС project was developed by Popov's Lab<br>&copy; 2023 
+</p>
+        </div>
+        <div class="col-xs-6 col-md-6">
+          <p class="text-right">
+            Documentation generated by 
+            <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+ on 2023-03-15 15:46            </p>
+        </div>
+      </div>
+      <br>
+      </div> <!-- /container -->    
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+<!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+-->
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- MathJax JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+        jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+        extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
+      });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script src="../tipuesearch/tipuesearch_content.js"></script>
+    <script src="../tipuesearch/tipuesearch_set.js"></script>
+    <script src="../tipuesearch/tipuesearch.js"></script>
+    
+  </body>
+</html>
