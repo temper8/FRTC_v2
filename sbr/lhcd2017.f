@@ -790,7 +790,7 @@ c---------------------------------------------
       real*8 pabs
       dimension ystart(2),yy(4)
       !common /abc/ rzz,tetzz,xmzz,iznzz,iwzz,irszz
-      common /abcd/ irs
+      !common /abcd/ irs
       common /abcde/ izn!,iw
       common /abcdg/ iabsorp
       common /bcg/ hrad
@@ -971,7 +971,7 @@ c-------------------------------------
       external extd2
       real*8 pabs
       !common /abc/ rzz,tetzz,xmzz,iznzz,iwzz,irszz
-      common /abcd/ irs
+      !common /abcd/ irs
       common /abcde/ izn!,iw
       common /abcdg/ iabsorp
       common /bcef/ ynz,ynpopq
@@ -1108,9 +1108,10 @@ c---------------------------------------
       use constants
       use plasma
       use rt_parameters
+      use manager_mod, only: irs
       implicit real*8 (a-h,o-z)
       external derivs
-      common /abcd/ irs
+      !common /abcd/ irs
       common /abcde/ izn!,iw
       common /abcdg/ iabsorp
       common /bdeo/ ivar
