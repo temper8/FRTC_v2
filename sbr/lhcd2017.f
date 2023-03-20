@@ -164,7 +164,7 @@ cc*********************************************************************
       !common/gridv/vgrid(101,100),dfundv(101,100),nvpt
       !common /vvv2/ psum4
       common /arr/ dgdu(50,100),kzero(100)
-      common /ag/ inak,lenstor,lfree
+      !common /ag/ inak,lenstor,lfree
       common /maxrho/ rmx_n,rmx_t,rmx_z,rmx_ti
       
       type(IterationResult) :: iteration_result
@@ -574,7 +574,7 @@ c------------------------------------------
       use current
       !use spectrum1D, only: pabs
       use trajectory
-      use manager_mod, only: pow, iabsorp
+      use manager_mod, only: pow, iabsorp, inak,lenstor,lfree
       implicit real*8 (a-h,o-z)
       real*8 pabs
       real*8 radth
@@ -584,7 +584,7 @@ c------------------------------------------
       common /a0ghp/ vlf,vrt,dflf,dfrt
       !common /abcdg/ iabsorp
       !common /acg/ pow
-      common /ag/ inak,lenstor,lfree
+      !common /ag/ inak,lenstor,lfree
       common /bcg/ hrad
       common /bg/ im4
       common /ceg/ ipow,jfoundr

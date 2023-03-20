@@ -21,6 +21,8 @@ module manager_mod
     !common /abcdg/ iabsorp
     integer icall1,icall2
     !common /aef2/ icall1,icall2
+    integer inak,lenstor,lfree
+    !common /ag/ inak,lenstor,lfree
 contains
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     subroutine manager(iterat,iw0, ntet, spectr)
@@ -50,13 +52,13 @@ contains
 
         !common /a0gh/ pabs
         !common /aef2/ icall1,icall2
-        common /ag/ inak,lenstor,lfree
+        !common /ag/ inak,lenstor,lfree
         !common/refl/nrefj(mpnt)
-        integer lenstor, ntet, iout, itr, inak, nnj,  n_it
+        integer ntet, iout, itr,  nnj,  n_it
         integer maxref, iterat, nmax0, ibad, itet, nref
         integer nbad1, nbad2, inz
         integer iw0, ifail, iabsirp, inak0,ib,ie
-        integer lfree, nmax, i, nb1,nb2
+        integer nmax, i, nb1,nb2
         !integer iznzz, iwzz, irszz
         real(wp) htet, hr, yn, rin, xmin, rstart
         real(wp) xnr, powexit, dltpow,  pow1, pgamma, xm
