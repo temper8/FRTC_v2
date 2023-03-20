@@ -574,7 +574,7 @@ c------------------------------------------
       use current
       !use spectrum1D, only: pabs
       use trajectory
-      use manager_mod, only: pow
+      use manager_mod, only: pow, iabsorp
       implicit real*8 (a-h,o-z)
       real*8 pabs
       real*8 radth
@@ -582,7 +582,7 @@ c------------------------------------------
       common /xn1xn2/ an1,an2
       common /vth/ vthc(length),poloidn(length)
       common /a0ghp/ vlf,vrt,dflf,dfrt
-      common /abcdg/ iabsorp
+      !common /abcdg/ iabsorp
       !common /acg/ pow
       common /ag/ inak,lenstor,lfree
       common /bcg/ hrad
@@ -792,7 +792,7 @@ c---------------------------------------------
       !common /abc/ rzz,tetzz,xmzz,iznzz,iwzz,irszz
       !common /abcd/ irs
       !common /abcde/ izn!,iw
-      common /abcdg/ iabsorp
+      !common /abcdg/ iabsorp
       common /bcg/ hrad
       common /bcef/ ynz,ynpopq
       common /be1/ xnr1,xnr2,xnr3,xnr4
@@ -973,7 +973,7 @@ c-------------------------------------
       !common /abc/ rzz,tetzz,xmzz,iznzz,iwzz,irszz
       !common /abcd/ irs
       !common /abcde/ izn!,iw
-      common /abcdg/ iabsorp
+      !common /abcdg/ iabsorp
       common /bcef/ ynz,ynpopq
       common /bcg/ hrad
       common /cefn/ iconv,irefl
@@ -1108,12 +1108,12 @@ c---------------------------------------
       use constants
       use plasma
       use rt_parameters
-      use manager_mod, only: irs, ivar, izn
+      use manager_mod, only: irs, ivar, izn, iabsorp
       implicit real*8 (a-h,o-z)
       external derivs
       !common /abcd/ irs
       !common /abcde/ izn!,iw
-      common /abcdg/ iabsorp
+      !common /abcdg/ iabsorp
       !common /bdeo/ ivar
       common /bcef/ ynz,ynpopq
       common /df/ pdec14,pdec24,pdec34,idec

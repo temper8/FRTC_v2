@@ -17,6 +17,8 @@ module manager_mod
     !common /abcd/ irs
     integer izn
     !common /abcde/ izn
+    integer iabsorp
+    !common /abcdg/ iabsorp
 contains
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     subroutine manager(iterat,iw0, ntet, spectr)
@@ -41,7 +43,7 @@ contains
         !common /abc/ rzz,tetzz,xmzz,iznzz,iwzz,irszz
         !common /abcd/ irs
         !common /abcde/ izn
-        common /abcdg/ iabsorp
+        !common /abcdg/ iabsorp
         !common /abefo/ yn3
 
         !common /a0gh/ pabs
@@ -52,7 +54,7 @@ contains
         integer maxref, iterat, nmax0, ibad, itet, nref
         integer nbad1, nbad2, icall1, icall2, inz
         integer iw0, ifail, iabsirp, inak0,ib,ie
-        integer lfree, nmax, iabsorp, i, nb1,nb2
+        integer lfree, nmax, i, nb1,nb2
         !integer iznzz, iwzz, irszz
         real(wp) htet, hr, yn, rin, xmin, rstart
         real(wp) xnr, powexit, dltpow,  pow1, pgamma, xm
