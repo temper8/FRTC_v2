@@ -1108,13 +1108,13 @@ c---------------------------------------
       use constants
       use plasma
       use rt_parameters
-      use manager_mod, only: irs
+      use manager_mod, only: irs, ivar
       implicit real*8 (a-h,o-z)
       external derivs
       !common /abcd/ irs
       common /abcde/ izn!,iw
       common /abcdg/ iabsorp
-      common /bdeo/ ivar
+      !common /bdeo/ ivar
       common /bcef/ ynz,ynpopq
       common /df/ pdec14,pdec24,pdec34,idec
       common /dg/ pintld4,pintcl4,pintal4
