@@ -574,6 +574,7 @@ c------------------------------------------
       use current
       !use spectrum1D, only: pabs
       use trajectory
+      use manager_mod, only: pow
       implicit real*8 (a-h,o-z)
       real*8 pabs
       real*8 radth
@@ -582,7 +583,7 @@ c------------------------------------------
       common /vth/ vthc(length),poloidn(length)
       common /a0ghp/ vlf,vrt,dflf,dfrt
       common /abcdg/ iabsorp
-      common /acg/ pow
+      !common /acg/ pow
       common /ag/ inak,lenstor,lfree
       common /bcg/ hrad
       common /bg/ im4

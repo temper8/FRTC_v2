@@ -8,7 +8,8 @@ module manager_mod
     !!common /beo/ iroot
     integer :: ivar
     !!common /bdeo/ ivar    
-
+    real(wp) pow
+    !common /acg/ pow
 contains
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     subroutine manager(iterat,iw0, ntet, spectr)
@@ -35,8 +36,7 @@ contains
         common /abcde/ izn
         common /abcdg/ iabsorp
         !common /abefo/ yn3
-        real(wp) pow
-        common /acg/ pow
+
         !common /a0gh/ pabs
         common /aef2/ icall1,icall2
         common /ag/ inak,lenstor,lfree
