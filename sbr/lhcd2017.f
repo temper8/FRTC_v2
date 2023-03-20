@@ -1257,11 +1257,11 @@ c---------------------------------------
       use approximation
       use plasma
       use rt_parameters
-      use manager_mod, only: ivar, iroot, yn3, izn
+      use manager_mod, only: ivar, iroot, yn3, izn, icall1, icall2
       implicit real*8 (a-h,o-z)
       !common /abcde/ izn!,iw
       common /bcef/ ynz,ynpopq
-      common /aef2/ icall1,icall2
+      !common /aef2/ icall1,icall2
       common /be1/ xnr1,xnr2,xnr3,xnr4
       common /be2/ ider
       common /cefn/ iconv,irefl
@@ -1616,10 +1616,10 @@ c    reflection
       use approximation
       use plasma
       use rt_parameters            
-      use manager_mod, only: yn3
+      use manager_mod, only: yn3, icall1,icall2
       implicit real*8 (a-h,o-z)
       common /bcef/ ynz,ynpopq
-      common /aef2/ icall1,icall2
+      !common /aef2/ icall1,icall2
       common /cefn/ iconv,irefl
       common /df/ pdec14,pdec24,pdec34,idec
       common/metrika/g11,g12,g22,g33,gg,g,si,co
