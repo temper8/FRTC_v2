@@ -784,12 +784,12 @@ c---------------------------------------------
       use approximation
       use plasma
       use rt_parameters
-      use manager_mod, only: ivar, iroot
+      use manager_mod  !, only: ivar, iroot
       implicit real*8 (a-h,o-z)
       external extd4
       real*8 pabs
       dimension ystart(2),yy(4)
-      common /abc/ rzz,tetzz,xmzz,iznzz,iwzz,irszz
+      !common /abc/ rzz,tetzz,xmzz,iznzz,iwzz,irszz
       common /abcd/ irs
       common /abcde/ izn!,iw
       common /abcdg/ iabsorp
@@ -966,10 +966,11 @@ c-------------------------------------
       use constants
       use plasma
       use rt_parameters
+      use manager_mod
       implicit real*8 (a-h,o-z)
       external extd2
       real*8 pabs
-      common /abc/ rzz,tetzz,xmzz,iznzz,iwzz,irszz
+      !common /abc/ rzz,tetzz,xmzz,iznzz,iwzz,irszz
       common /abcd/ irs
       common /abcde/ izn!,iw
       common /abcdg/ iabsorp

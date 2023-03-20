@@ -9,7 +9,10 @@ module manager_mod
     integer :: ivar
     !!common /bdeo/ ivar    
     real(wp) pow
-    !common /acg/ pow
+    !!common /acg/ pow
+    real(wp) :: rzz,tetzz,xmzz
+    integer  :: iznzz,iwzz,irszz
+    !!common /abc/ rzz,tetzz,xmzz,iznzz,iwzz,irszz
 contains
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     subroutine manager(iterat,iw0, ntet, spectr)
@@ -30,8 +33,8 @@ contains
         !common /a0a2/ tet1,tet2
         ! real(wp) plost,pnab
         !common /a0a4/ plost,pnab
-        real(wp) rzz,tetzz,xmzz
-        common /abc/ rzz,tetzz,xmzz,iznzz,iwzz,irszz
+        !real(wp) rzz,tetzz,xmzz
+        !common /abc/ rzz,tetzz,xmzz,iznzz,iwzz,irszz
         common /abcd/ irs
         common /abcde/ izn
         common /abcdg/ iabsorp
@@ -46,7 +49,7 @@ contains
         integer nbad1, nbad2, icall1, icall2, inz
         integer iw0, ifail, iabsirp, inak0,ib,ie,izn
         integer lfree, nmax, iabsorp, i, nb1,nb2
-        integer iznzz, iwzz, irszz
+        !integer iznzz, iwzz, irszz
         real(wp) htet, hr, yn, rin, xmin, rstart
         real(wp) xnr, powexit, dltpow,  pow1, pgamma, xm
         real(wp) tetin0, tetin, tet
