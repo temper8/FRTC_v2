@@ -97,12 +97,16 @@ contains
       end subroutine      
 
       real(wp) function funmaxwell(v,dfunmaxwell)
+            !! распределение Максвелла 
+            !! $$ f(v) = \frac{1}{\sqrt{2\pi}} \exp(-\frac{1}{2} v^2 ))$$
+            !! и его производная
+            !! $$ dfmaxw = - v \cdot f(v) $$
             implicit none
-            real(wp) v,dfunmaxwell,arg
+            real(wp) v, dfunmaxwell, arg
 
-            arg=-0.5d0*v**2
-            funmaxwell=dexp(arg)/pi2sqrt
-            dfunmaxwell=-v*funmaxwell
+            arg = -0.5d0*v**2
+            funmaxwell = exp(arg)/pi2sqrt
+            dfunmaxwell = -v*funmaxwell
       end      
 
       real(wp) function fmaxw_classic(v,alfa2,dfmaxw)
@@ -120,6 +124,11 @@ contains
       end
 
       real(wp) function fmaxw_ext(v,alfa2,dfmaxw)
+            !! $$ alfa = \sqrt{alfa_2} $$
+            !! $$ api = 2 \cdot alfa \cdot \exp({-\frac{1}{4 alfa_2}}) $$
+            !! $$ b = 2 - erf(0.5/alfa) + api $$
+            !! $$ f = psiq(v, alfa_2) $$
+            !! $$ fmaxw = \frac{f+api}{b \sqrt{2\pi}} $$
             implicit none
             real(wp) v,alfa2,dfmaxw
             real(wp) arg,alfa,api,b,f,df
@@ -154,7 +163,7 @@ contains
       end      
 
       real(wp) function psiq(v,alfa2)
-!!! psiq=exp(ksiV**2)*erfcc(ksiV)*exp(-0.25/alfa2)
+            !! $$ psiq=exp(ksiV**2)*erfcc(ksiV)*exp(-0.25/alfa2) $$
             implicit none
             real(wp) v,alfa2,df
             real(wp) x,t,z,f,asymp,alfa,q,u
