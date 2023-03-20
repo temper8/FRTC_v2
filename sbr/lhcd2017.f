@@ -791,7 +791,7 @@ c---------------------------------------------
       dimension ystart(2),yy(4)
       !common /abc/ rzz,tetzz,xmzz,iznzz,iwzz,irszz
       !common /abcd/ irs
-      common /abcde/ izn!,iw
+      !common /abcde/ izn!,iw
       common /abcdg/ iabsorp
       common /bcg/ hrad
       common /bcef/ ynz,ynpopq
@@ -972,7 +972,7 @@ c-------------------------------------
       real*8 pabs
       !common /abc/ rzz,tetzz,xmzz,iznzz,iwzz,irszz
       !common /abcd/ irs
-      common /abcde/ izn!,iw
+      !common /abcde/ izn!,iw
       common /abcdg/ iabsorp
       common /bcef/ ynz,ynpopq
       common /bcg/ hrad
@@ -1108,11 +1108,11 @@ c---------------------------------------
       use constants
       use plasma
       use rt_parameters
-      use manager_mod, only: irs, ivar
+      use manager_mod, only: irs, ivar, izn
       implicit real*8 (a-h,o-z)
       external derivs
       !common /abcd/ irs
-      common /abcde/ izn!,iw
+      !common /abcde/ izn!,iw
       common /abcdg/ iabsorp
       !common /bdeo/ ivar
       common /bcef/ ynz,ynpopq
@@ -1257,9 +1257,9 @@ c---------------------------------------
       use approximation
       use plasma
       use rt_parameters
-      use manager_mod, only: ivar, iroot, yn3
+      use manager_mod, only: ivar, iroot, yn3, izn
       implicit real*8 (a-h,o-z)
-      common /abcde/ izn!,iw
+      !common /abcde/ izn!,iw
       common /bcef/ ynz,ynpopq
       common /aef2/ icall1,icall2
       common /be1/ xnr1,xnr2,xnr3,xnr4
