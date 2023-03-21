@@ -576,7 +576,7 @@ c------------------------------------------
       !use spectrum1D, only: pabs
       use trajectory
       use manager_mod, only: pow,  inak,lenstor,lfree
-      use trajectory, only: iabsorp
+      use trajectory, only: iabsorp, im4
       implicit real*8 (a-h,o-z)
       real*8 pabs
       real*8 radth
@@ -588,7 +588,7 @@ c------------------------------------------
       !common /acg/ pow
       !common /ag/ inak,lenstor,lfree
       !common /bcg/ hrad
-      common /bg/ im4
+      !common /bg/ im4
       common /ceg/ ipow,jfoundr
       common /eg1/ vfound,ifound
       common /eg2/ pdec1,pdec2,pdec3,pdecv,pdecal,dfdv,icf1,icf2

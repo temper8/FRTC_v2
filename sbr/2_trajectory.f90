@@ -24,6 +24,8 @@ module trajectory
     !common /be1/ xnr1,xnr2,xnr3,xnr4
     integer  :: ider
     !common /be2/ ider
+    integer im4
+    !common /bg/ im4
 
     integer nrefj(mpnt)
     !! common/refl/nrefj(mpnt)
