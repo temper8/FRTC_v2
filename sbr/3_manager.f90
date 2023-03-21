@@ -258,21 +258,27 @@ contains
         use spectrum_mod
         use trajectory
         implicit none
+
         type(spectrum_point), intent(in) :: point
-        real(wp), intent(inout)             :: xm
+        real(wp), intent(inout)          :: xm
         real(wp), intent(in)             :: tet, xnr, hr
-        integer, intent(inout)              :: ifail
+        integer, intent(inout)           :: ifail
 
         integer :: ntry
         real(wp) :: vgrp(3),vph(3)
+
         !real(wp) :: ynz,ynpopq
         !common /bcef/ ynz,ynpopq
+
         real(wp) :: g11,g12,g22,g33,gg,g,si,co
         common/metrika/g11,g12,g22,g33,gg,g,si,co !sav2009
+
         real(wp) :: pa, prt, prm
         real(wp) :: f1,f2
+
         real(wp),  parameter :: rhostart=1.d0
-        integer, parameter :: ntry_max=5
+        integer,   parameter :: ntry_max=5
+
         ifail = 1
         rini = zero
         ntry = 0
