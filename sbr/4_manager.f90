@@ -254,8 +254,8 @@ contains
         implicit none
 
         type(spectrum_point), intent(in) :: point
-        real(wp), intent(inout)          :: xm
-        real(wp), intent(in)             :: tet, xnr, hr
+        real(wp), intent(inout)          :: xm, xnr
+        real(wp), intent(in)             :: tet,  hr
         integer, intent(inout)           :: ifail
 
         integer :: ntry
