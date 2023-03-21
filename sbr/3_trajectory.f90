@@ -4,8 +4,7 @@ module trajectory
     integer, parameter :: length = 5000000
     integer, parameter :: mpnt = 100000
 
-    integer  :: iroot
-    !!common /beo/ iroot
+
     integer  :: irs
     !common /abcd/ irs
     integer  :: iabsorp
@@ -14,16 +13,10 @@ module trajectory
     !!common /abc/ rzz,tetzz,xmzz    
     integer  :: iznzz,iwzz,irszz
     !!common /abc/ iznzz,iwzz,irszz
-    integer  :: izn
-    !common /abcde/ izn
+
     real(wp) :: hrad
     !common /bcg/ hrad
-    real(wp) ::ynz, ynpopq
-    !common /bcef/ ynz,ynpopq
-    real(wp) :: xnr1,xnr2,xnr3,xnr4
-    !common /be1/ xnr1,xnr2,xnr3,xnr4
-    integer  :: ider
-    !common /be2/ ider
+
     integer  :: im4
     !common /bg/ im4
 

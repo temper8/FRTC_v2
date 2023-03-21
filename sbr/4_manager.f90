@@ -2,17 +2,8 @@ module manager_mod
     use kind_module
     implicit none
 
-    real(wp) :: yn3
-    !! common /abefo/ yn3
-
-    integer :: ivar
-    !!common /bdeo/ ivar    
-
     real(wp) pow
     !!common /acg/ pow
-
-    integer icall1,icall2
-    !common /aef2/ icall1,icall2
 
     integer inak,lenstor,lfree
     !common /ag/ inak,lenstor,lfree
@@ -26,6 +17,7 @@ contains
         use trajectory
         use spectrum_mod
         use iterator_mod,only: plost, pnab
+        use dispersion_module, only: icall1, icall2, yn3, ivar, izn,  iroot
         implicit none
         type (spectrum) spectr
         type (spectrum_point) point
@@ -256,8 +248,8 @@ contains
         use constants, only : zero
         use rt_parameters, only : inew
         use spectrum_mod
-        use trajectory
-        use dispersion_module
+        !use trajectory
+        use dispersion_module, only: yn3, ivar, iroot, disp2
         implicit none
 
         type(spectrum_point), intent(in) :: point

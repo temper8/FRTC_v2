@@ -144,7 +144,7 @@ cc*********************************************************************
       use trajectory, only: view, nrefj, init_trajectory
       use spectrum_mod
       use manager_mod
-      use trajectory
+      use dispersion_module
       use current
       use iteration_result_mod
       use iterator_mod
@@ -575,6 +575,7 @@ c------------------------------------------
       use current
       !use spectrum1D, only: pabs
       use trajectory
+      use dispersion_module
       use manager_mod, only: pow, inak, lenstor, lfree
       implicit real*8 (a-h,o-z)
       real*8 pabs
@@ -683,6 +684,7 @@ c----------------------------------
       subroutine dqliter(dltpow,ib,ie,h,powexit,iout) !sav2008
       use rt_parameters
       use trajectory
+      use dispersion_module
       use current
       use iterator_mod, only: psum4
       implicit real*8 (a-h,o-z)
@@ -928,9 +930,8 @@ c---------------------------------------
       use constants
       use plasma
       use rt_parameters
-      use manager_mod, only:  ivar
-      use trajectory, only: irs, izn, iabsorp, ynz,ynpopq
-      use dispersion_module
+      use trajectory, only: irs, iabsorp
+      use dispersion_module, only: ynz, ynpopq, disp2
       implicit real*8 (a-h,o-z)
       external derivs
       !common /abcd/ irs
@@ -1081,8 +1082,8 @@ c---------------------------------------
       use approximation
       use plasma
       use rt_parameters            
-      use manager_mod, only: yn3, icall1,icall2
-      use trajectory, only: ynz,ynpopq
+      !use trajectory, only: 
+      use dispersion_module, only: yn3, icall1, icall2, ynz, ynpopq
       implicit real*8 (a-h,o-z)
       !common /bcef/ ynz,ynpopq
       !common /aef2/ icall1,icall2
@@ -1371,7 +1372,7 @@ cc        source=4d-12*factor*ddens*tdens*dexp(-20d0/tt)/tt**2
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       subroutine dhdomega(rho,theta,yn1,yn2)
-      use manager_mod, only: yn3            
+      use dispersion_module, only: yn3            
       implicit real*8 (a-h,o-z)
       !common /a0ef2/ ww
       !common /abefo/ yn3
