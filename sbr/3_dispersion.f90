@@ -30,9 +30,16 @@ contains
         use approximation
         use plasma
         use rt_parameters
+        implicit none
+        real(wp), intent(in) :: pa
+        real(wp), intent(in) :: yn2
+        real(wp), intent(in) :: ptet
+        real(wp), intent(inout) :: xnro
+        real(wp), intent(inout) :: prt
+        real(wp), intent(inout) :: prm        
         !use manager_mod, only: ivar, yn3, icall1, icall2
         !use trajectory !, only: iroot, izn, ynz,ynpopq
-        implicit real*8 (a-h,o-z)
+        !implicit real*8 (a-h,o-z)
         !common /abcde/ izn!,iw
         !common /bcef/ ynz,ynpopq
         !common /aef2/ icall1,icall2
@@ -44,16 +51,54 @@ contains
         integer ipow,jfoundr
         common /ceg/ ipow,jfoundr
         
-        integer ifound
+        integer  :: ifound
+        real(wp) :: vfound
         common /eg1/ vfound,ifound
-        common /eg2/ pdec1,pdec2,pdec3,pdecv,pdecal,dfdv,icf1,icf2
-        common /eg3/ cf1,cf2,cf3,cf4,cf5,cf6
-        common/fj/dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
-        common/direct/znakstart
-        common/metrika/g11,g12,g22,g33,gg,g,si,co
-        common/fjham/ham
-        integer  jr, icf1, icf2
 
+        real(wp) :: pdec1,pdec2,pdec3,pdecv,pdecal,dfdv
+        integer  :: icf1,icf2
+        common /eg2/ pdec1,pdec2,pdec3,pdecv,pdecal,dfdv,icf1,icf2
+        
+        real(wp) :: cf1,cf2,cf3,cf4,cf5,cf6
+        common /eg3/ cf1,cf2,cf3,cf4,cf5,cf6
+
+        real(wp) :: dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
+        common/fj/dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
+
+        real(wp) :: znakstart
+        common/direct/znakstart
+
+        real(wp) :: g11,g12,g22,g33,gg,g,si,co
+        common/metrika/g11,g12,g22,g33,gg,g,si,co
+
+        real(wp) :: ham
+        common/fjham/ham
+
+        integer  :: jr
+        real(wp) :: xdl, xdlp, xly, xlyp
+        real(wp) :: xgm, xgmp, xmy, xmyp, xlyv, cotet, sitet
+        real(wp) :: dxdr, dxdt, dzdr, dzdt
+        real(wp) :: x0, x0t, xj
+        real(wp) :: g2v1, g2jq, g3v
+        real(wp) :: b, bp, bt
+        real(wp) :: dxdrdt, dxdtdt, dzdrdt, dzdtdt
+        real(wp) :: pn, fnr, fnrr, wpq, whe, v,u1, u
+        real(wp) :: e1, e2, e3
+        real(wp) :: ynzq
+        real(wp) :: as, bs, cs, pnew, yny, gpr, dls
+        real(wp) :: dl1, ynpopq1, al, bl, cl, cl1, dll
+        real(wp) :: s1, p1, p2, p3, ynzt, e2t, u1t, cot, sit
+        real(wp) :: bpt, g2jqt, btt, xjt
+        real(wp) :: g11t, g22t, g33t, g12t, gprt
+        real(wp) :: dl2, xnr, ynyt, dnym
+        real(wp) :: dnx, dll1, bat, e1t
+        real(wp) :: s2, dnm, v1, v2, vvt, vvm, vz, vt
+        real(wp) :: s21, sjg, s23, s24, s22, sl1
+        real(wp) :: pnewt, fder,  aimh, pnye, pnyi
+        real(wp) :: tmp, fcoll, source, argum
+        real(wp) :: dek1, dek2, dek3
+        external zatukh
+        real(wp) :: zatukh
         iconv=0
         irefl=0
         if(pa.ge.one.or.pa.le.zero) goto 70
