@@ -4,6 +4,19 @@ module trajectory
     integer, parameter :: length = 5000000
     integer, parameter :: mpnt = 100000
 
+    integer  :: iroot
+    !!common /beo/ iroot
+    integer  :: irs
+    !common /abcd/ irs
+    integer  :: iabsorp
+    !common /abcdg/ iabsorp
+    real(wp) :: rzz,tetzz,xmzz
+    !!common /abc/ rzz,tetzz,xmzz    
+    integer  :: iznzz,iwzz,irszz
+    !!common /abc/ iznzz,iwzz,irszz
+    integer  :: izn
+    !common /abcde/ izn
+
     integer nrefj(mpnt)
     !! common/refl/nrefj(mpnt)
     real(wp) dland(length),dcoll(length),perpn(length),dalf(length)
@@ -325,7 +338,7 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
         use approximation
         use plasma
         use rt_parameters
-        use manager_mod  !, only: ivar, iroot
+        !use manager_mod  !, only: ivar, iroot
         implicit real*8 (a-h,o-z)
         !external extd4
         real*8 pabs

@@ -4,23 +4,16 @@ module manager_mod
 
     real(wp) :: yn3
     !! common /abefo/ yn3
-    integer :: iroot
-    !!common /beo/ iroot
+
     integer :: ivar
     !!common /bdeo/ ivar    
+
     real(wp) pow
     !!common /acg/ pow
-    real(wp) :: rzz,tetzz,xmzz
-    integer  :: iznzz,iwzz,irszz
-    !!common /abc/ rzz,tetzz,xmzz,iznzz,iwzz,irszz
-    integer irs
-    !common /abcd/ irs
-    integer izn
-    !common /abcde/ izn
-    integer iabsorp
-    !common /abcdg/ iabsorp
+
     integer icall1,icall2
     !common /aef2/ icall1,icall2
+    
     integer inak,lenstor,lfree
     !common /ag/ inak,lenstor,lfree
 contains
@@ -263,6 +256,7 @@ contains
         use constants, only : zero
         use rt_parameters, only : inew
         use spectrum_mod
+        use trajectory
         implicit none
         type(spectrum_point) :: point
         real(wp) xm, tet,xnr,hr

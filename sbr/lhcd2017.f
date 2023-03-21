@@ -144,6 +144,7 @@ cc*********************************************************************
       use trajectory, only: view, nrefj, init_trajectory
       use spectrum_mod
       use manager_mod
+      use trajectory
       use current
       use iteration_result_mod
       use iterator_mod
@@ -574,7 +575,8 @@ c------------------------------------------
       use current
       !use spectrum1D, only: pabs
       use trajectory
-      use manager_mod, only: pow, iabsorp, inak,lenstor,lfree
+      use manager_mod, only: pow,  inak,lenstor,lfree
+      use trajectory, only: iabsorp
       implicit real*8 (a-h,o-z)
       real*8 pabs
       real*8 radth
@@ -784,6 +786,7 @@ c---------------------------------------------
       use plasma
       use rt_parameters
       use manager_mod
+      use trajectory
       implicit real*8 (a-h,o-z)
       external extd2
       real*8 pabs
@@ -925,7 +928,8 @@ c---------------------------------------
       use constants
       use plasma
       use rt_parameters
-      use manager_mod, only: irs, ivar, izn, iabsorp
+      use manager_mod, only:  ivar
+      use trajectory, only: irs, izn, iabsorp
       implicit real*8 (a-h,o-z)
       external derivs
       !common /abcd/ irs
@@ -1074,7 +1078,8 @@ c---------------------------------------
       use approximation
       use plasma
       use rt_parameters
-      use manager_mod, only: ivar, iroot, yn3, izn, icall1, icall2
+      use manager_mod, only: ivar, yn3, icall1, icall2
+      use trajectory, only: iroot, izn
       implicit real*8 (a-h,o-z)
       !common /abcde/ izn!,iw
       common /bcef/ ynz,ynpopq
