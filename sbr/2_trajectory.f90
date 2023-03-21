@@ -24,7 +24,7 @@ module trajectory
     !common /be1/ xnr1,xnr2,xnr3,xnr4
     integer  :: ider
     !common /be2/ ider
-    integer im4
+    integer  :: im4
     !common /bg/ im4
 
     integer nrefj(mpnt)
@@ -365,8 +365,6 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
         integer nomth,nomnz
         parameter (pgdop=0.02d0,hmin=0.d-7) !sav2008, old hmin=1.d-7
         integer :: nrefl
-        integer :: ider
-        integer :: im4
         integer :: nb1, nb2
         integer :: irep
         integer :: irf, irf1
