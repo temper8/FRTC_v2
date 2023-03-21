@@ -575,8 +575,7 @@ c------------------------------------------
       use current
       !use spectrum1D, only: pabs
       use trajectory
-      use manager_mod, only: pow,  inak,lenstor,lfree
-      use trajectory, only: iabsorp, im4
+      use manager_mod, only: pow, inak, lenstor, lfree
       implicit real*8 (a-h,o-z)
       real*8 pabs
       real*8 radth
