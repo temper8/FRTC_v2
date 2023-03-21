@@ -1085,7 +1085,7 @@ c---------------------------------------
       !common /bcef/ ynz,ynpopq
       !common /aef2/ icall1,icall2
       !common /be1/ xnr1,xnr2,xnr3,xnr4
-      common /be2/ ider
+      !common /be2/ ider
       common /cefn/ iconv,irefl
       common /ceg/ ipow,jfoundr
       common /eg1/ vfound,ifound

@@ -22,7 +22,9 @@ module trajectory
     !common /bcef/ ynz,ynpopq
     real(wp) :: xnr1,xnr2,xnr3,xnr4
     !common /be1/ xnr1,xnr2,xnr3,xnr4
-    
+    integer  :: ider
+    !common /be2/ ider
+
     integer nrefj(mpnt)
     !! common/refl/nrefj(mpnt)
     real(wp) dland(length),dcoll(length),perpn(length),dalf(length)
@@ -356,8 +358,8 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
         !common /bcg/ hrad
         !common /bcef/ ynz,ynpopq
         !common /be1/ xnr1,xnr2,xnr3,xnr4
-        common /be2/ ider
-        common /bg/ im4
+        !common /be2/ ider
+        !common /bg/ im4
         integer nomth,nomnz
         parameter (pgdop=0.02d0,hmin=0.d-7) !sav2008, old hmin=1.d-7
         integer :: nrefl
