@@ -13,7 +13,7 @@ module manager_mod
 
     integer icall1,icall2
     !common /aef2/ icall1,icall2
-    
+
     integer inak,lenstor,lfree
     !common /ag/ inak,lenstor,lfree
 contains
@@ -262,8 +262,8 @@ contains
         real(wp) xm, tet,xnr,hr
         integer ifail, ntry
         real(wp) :: vgrp(3),vph(3)
-        real(wp) :: ynz,ynpopq
-        common /bcef/ ynz,ynpopq
+        !real(wp) :: ynz,ynpopq
+        !common /bcef/ ynz,ynpopq
         real(wp) :: g11,g12,g22,g33,gg,g,si,co
         common/metrika/g11,g12,g22,g33,gg,g,si,co !sav2009
         real(wp) :: pa, prt, prm

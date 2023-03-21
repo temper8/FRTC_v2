@@ -158,7 +158,7 @@ cc*********************************************************************
      &,rxx(102),pwe(102),wrk(102)
       !dimension vmid(100),vz1(100),vz2(100),ibeg(100),iend(100)
       !common /a0a4/ plost,pnab
-      common /bcef/ ynz,ynpopq
+      !common /bcef/ ynz,ynpopq
       common /a0ghp/ vlf,vrt,dflf,dfrt
       common/plosh/ zv1(100,2),zv2(100,2)!,sk(100)
       common /asou/ rsou(102),sou(102),npta
@@ -794,7 +794,7 @@ c---------------------------------------------
       !common /abcd/ irs
       !common /abcde/ izn!,iw
       !common /abcdg/ iabsorp
-      common /bcef/ ynz,ynpopq
+      !common /bcef/ ynz,ynpopq
       !common /bcg/ hrad
       common /cefn/ iconv,irefl
       common /ceg/ ipow,jfoundr
@@ -929,14 +929,14 @@ c---------------------------------------
       use plasma
       use rt_parameters
       use manager_mod, only:  ivar
-      use trajectory, only: irs, izn, iabsorp
+      use trajectory, only: irs, izn, iabsorp, ynz,ynpopq
       implicit real*8 (a-h,o-z)
       external derivs
       !common /abcd/ irs
       !common /abcde/ izn!,iw
       !common /abcdg/ iabsorp
       !common /bdeo/ ivar
-      common /bcef/ ynz,ynpopq
+      !common /bcef/ ynz,ynpopq
       common /df/ pdec14,pdec24,pdec34,idec
       common /dg/ pintld4,pintcl4,pintal4
       parameter(hbeg=1.d-4,iturns=1,maxat=3,nvar=4) !sav2008
@@ -1079,10 +1079,10 @@ c---------------------------------------
       use plasma
       use rt_parameters
       use manager_mod, only: ivar, yn3, icall1, icall2
-      use trajectory, only: iroot, izn
+      use trajectory, only: iroot, izn, ynz,ynpopq
       implicit real*8 (a-h,o-z)
       !common /abcde/ izn!,iw
-      common /bcef/ ynz,ynpopq
+      !common /bcef/ ynz,ynpopq
       !common /aef2/ icall1,icall2
       common /be1/ xnr1,xnr2,xnr3,xnr4
       common /be2/ ider
@@ -1439,8 +1439,9 @@ c    reflection
       use plasma
       use rt_parameters            
       use manager_mod, only: yn3, icall1,icall2
+      use trajectory, only: ynz,ynpopq
       implicit real*8 (a-h,o-z)
-      common /bcef/ ynz,ynpopq
+      !common /bcef/ ynz,ynpopq
       !common /aef2/ icall1,icall2
       common /cefn/ iconv,irefl
       common /df/ pdec14,pdec24,pdec34,idec
