@@ -18,7 +18,7 @@ module trajectory
     !common /abcde/ izn
     real(wp) :: hrad
     !common /bcg/ hrad
-    real(wp) ::ynz,ynpopq
+    real(wp) ::ynz, ynpopq
     !common /bcef/ ynz,ynpopq
     real(wp) :: xnr1,xnr2,xnr3,xnr4
     !common /be1/ xnr1,xnr2,xnr3,xnr4
@@ -459,7 +459,7 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
         ider=0
         call disp2(xend,xm,tet,xnr,prt,prm)
         ider=1
-        ynz0=ynz
+        ynz0 = ynz
   40    yy(1)=tet
         yy(2)=xm
         yy(3)=xend
