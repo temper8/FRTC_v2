@@ -69,7 +69,6 @@ subroutine init_trajectory
     yn3beg = zero
 end subroutine 
 
-
 subroutine view(tview,iview,nnz,ntet) !sav2008
 !!!writing trajectories into a file
     use constants
@@ -339,10 +338,7 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
 9     format('Total passes:           P_tot=',f6.3,2x,' P_land=',f5.3,2x,' P_coll=',f6.3,2x,' P_a=',f6.3)
 20    format('written time slice (seconds) =',f9.3)
     end
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     subroutine traj(xm0, tet0, xbeg, nmax, nb1, nb2, nomth, nomnz, pabs) !sav2009
         use constants
         use approximation
@@ -405,10 +401,10 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
         xm=xm0
         hr=1.d0/dble(nr+1) !sav2008
         hrad=hr
-    !---------------------------------------
-    ! find saving point and define
-    ! parameters, depending on direction
-    !---------------------------------------
+        !---------------------------------------
+        ! find saving point and define
+        ! parameters, depending on direction
+        !---------------------------------------
   
   10    irf1=idnint(xbeg/hr)
         if (dabs(irf1*hr-xbeg).lt.tin)  then
@@ -454,11 +450,11 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
             return
         end if
         if (xend.eq.xbeg) nb1=nb1+1
-  !sav2008 20    continue
+        !sav2008 20    continue
   
-    !--------------------------------------------------------
-    !  pass turning point
-    !----------------------------------------------------------
+        !--------------------------------------------------------
+        !  pass turning point
+        !--------------------------------------------------------
         irs0=irs
         ider=0
         call disp2(xend,xm,tet,xnr,prt,prm)
@@ -494,9 +490,9 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
 
         if(ipri.gt.2) write (*,*) 'from r=',rexi,'to r=',rnew
   
-    !---------------------------------------
-    ! find mode
-    !---------------------------------------
+        !---------------------------------------
+        ! find mode
+        !---------------------------------------
         iroot=3
         ider=0
         xnrv=xnrnew
@@ -558,7 +554,6 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
         irszz=irs
     end  
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     subroutine extd4(x,y,dydx)
         implicit real*8 (a-h,o-z)
         dimension y(*),dydx(*)
