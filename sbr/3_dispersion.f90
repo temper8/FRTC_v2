@@ -430,6 +430,292 @@ contains
         return
     end
 
+    subroutine disp4(pa,ptet,xnr,yn2)
+        use constants
+        use approximation
+        use plasma
+        use rt_parameters            
+        !use trajectory, only: 
+        !use dispersion_module, only: yn3, icall1, icall2, ynz, ynpopq
+        !use dispersion_module, only: disp2, source_new
+        implicit real*8 (a-h,o-z)
+        !common /bcef/ ynz,ynpopq
+        !common /aef2/ icall1,icall2
+
+        integer :: irefl, iconv
+        common /cefn/ iconv,irefl
+
+        common /df/ pdec14,pdec24,pdec34,idec
+        common/metrika/g11,g12,g22,g33,gg,g,si,co
+        common/fj/dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
+        common/fjham/ham
+        integer :: idec
+        irefl=0
+        iconv=0
+        if(pa.eq.zero) pa=1.d-7
+        if(pa.lt.zero) pa=dabs(pa)
+        !sav2008      if(pa.gt.one) then
+        !sav2008       dhdm=666d0
+        !sav2008       dhdtet=-666d0
+        !sav2008       dhdnr=666d0
+        !sav2008       dhdr=-666d0
+        !sav2008       irefl=1
+        !sav2008       return
+        !sav2008      end if
+  
+        icall2=icall2+1
+        !!      pn=fn1(pa,fnr)
+        !!      pn=fn2(pa,fnr,fnrr)
+        if(inew.eq.0) then !vardens
+         pn=fn1(pa,fnr)
+        else
+         pn=fn2(pa,fnr,fnrr)
+        end if
+  
+  !cc        hstp=1.d-7
+  !cc        pplus=fn2(pa+hstp,fnr2,fnrr2)
+  !cc        pminus=fn2(pa-hstp,fnr1,fnrr1)
+  !cc        fnr=0.5d0*(pplus-pminus)/hstp
+  !cc        fnrr=0.5d0*(fnr2-fnr1)/hstp
+  
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        wpq=c0**2*pn
+        xdl=fdfddf(pa,cdl,ncoef,xdlp,xdlpp)
+        xly=fdfddf(pa,cly,ncoef,xlyp,xlypp)
+        xgm=fdfddf(pa,cgm,ncoef,xgmp,xgmpp)
+        xmy=fdf(pa,cmy,ncoef,xmyp)
+        cotet=dcos(ptet)
+        sitet=dsin(ptet)
+        xlyv=xly+xlyp*pa
+        !--------------------------------------
+        ! components of metric tensor
+        !--------------------------------------
+        dxdr=-xdlp+cotet-xgmp*sitet**2
+        dxdt=-(pa+two*xgm*cotet)*sitet
+        dzdr=xlyv*sitet
+        dzdt=xly*pa*cotet
+        x0=r0/rm-xdl+pa*cotet-xgm*sitet**2
+        dxdrdr=-xdlpp-xgmpp*sitet**2
+        dxdtdt=-cotet*(pa+two*xgm*cotet)+sitet**2*two*xgm
+        dxdtdr=-sitet*(one+two*xgmp*cotet)
+        dxdrdt=dxdtdr
+        dzdrdr=(two*xlyp+pa*xlypp)*sitet
+        dzdtdt=-xly*pa*sitet
+        dzdtdr=xlyv*cotet
+        dzdrdt=dzdtdr
+        x0t=dxdt
+        x0r=dxdr
+        g11=dxdr**2+dzdr**2
+        g22=dxdt**2+dzdt**2
+        g12=dxdr*dxdt+dzdr*dzdt
+        g33=x0**2
+        xj=(dzdr*dxdt-dxdr*dzdt)**2  !gg=g11*g22-g12*g12
+        gg=xj
+        g=xj*g33
+        g2jq=dsqrt(g22/xj)
+        g2gq=dsqrt(g22/g)
+        g22q=dsqrt(g22)
+        g33q=dsqrt(g33)
+        !c--------------------------------------
+        !c  magnetic field
+        !c--------------------------------------
+        bt=b_tor*(r0/rm)/x0
+        bp=g2gq*xmy
+        b=dsqrt(bp*bp+bt*bt)
+        whe=b*c1
+        si=bp/b
+        co=bt/b
+        !c---------------------------------------
+        !c components of dielectric tensor
+        !c---------------------------------------
+        v=wpq/ww**2
+        u1=whe/ww
+        u=u1**2
+        e1=one-v*(one/xmi-one/u)
+        e2=v/u1
+        e3=one-v
+        !c-------------------------------------
+        !c dispersion equation
+        !c--------------------------------------
+        ynz=yn2*si/g22q+yn3*co/g33q
+        ynzq=ynz**2
+        vpop=xnr**2*g22-two*xnr*yn2*g12+g11*yn2**2
+        ynpopq=vpop/xj+yn3**2/g33-ynzq
+        as=e1
+        bs=-(e1**2-e2**2+e1*e3-(e1+e3)*ynzq)
+        cs=e3*(e1**2-e2**2-two*e1*ynzq+ynzq**2)
+        !c----------------------------------------------------
+  !sav2009
+        dhdv=(1.d0/(u**2*xmi**2))*((2.d0-2.d0*ynpopq-3.d0*v)*v*xmi**2-&
+            u**2*(3.d0*v**2+2.d0*v*(-1.d0+ynpopq*(1.d0+xmi)&
+            +2.d0*xmi*(-1.d0+ynzq))+&
+            xmi*(-2.d0+ynpopq+xmi*(-1.d0+ynzq))*(-1.d0+ynpopq+ynzq))&
+            +u*xmi*(3.d0*v**2*(2.d0+xmi)&
+            +(-2.d0+ynpopq)*xmi*(-1.d0+ynpopq+ynzq)&
+            +v*(-4.d0+4.d0*ynpopq*(1.d0+xmi)+xmi*(-6.d0+4.d0*ynzq))))
+
+        dhdu=-(1.d0/(u**3*xmi))*(v*(-1.d0+ynpopq+v)*(2.d0*u*v-2.d0*v*xmi &
+            +u*(-2.d0+ynpopq+v)*xmi)+u*v*(-2.d0+ynpopq+2.d0*v)*xmi*ynzq)
+        dhdv2v=2.d0*v*dhdv !w*d(-H)/dv
+        dhdu2u=2.d0*u*dhdu !w*d(-H)/du
+        !c----------------------------------------------------
+  !est !sav2009
+        if(inew.gt.0) then
+            if(inew.eq.1) then
+                yny= - (yn2*co/g22q-yn3*si/g33q)
+            else if(inew.eq.2) then
+                yny= - g2jq*(yn2*co/g22q-yn3*si/g33q)
+            end if
+            gpr=c0**2/ww**2/u1*fnr*xsz
+            gdop=yny*gpr
+            bs=bs+gdop
+            cs=cs+gdop*(ynzq-e3)
+            !sav2009:
+            dgpr=-gpr        !w*d(gpr)/dw
+            wde3dw=2.d0*v    !w*d(e3)/dw
+            wdbsdw=yny*dgpr  !w*d(bs)/dw
+            wdcsdw=(ynzq-e3)*wdbsdw-gdop*wde3dw   !w*d(cs)/dw
+            wdhdw=wdbsdw*ynpopq+wdcsdw   !w*d(H1)/dw
+            dhdv2v=dhdv2v-wdhdw !correction to dhdv2v: w*d(-H)/dv+w*d(-H1)/dw
+        end if
+        ham=as*ynpopq**2+bs*ynpopq+cs !sav2009
+        !--------------------------------------------------------
+        !!      dl=bs**2-4d0*as*bs
+        !c--------------------------------------
+        !c   calculation of derivatives
+        !c--------------------------------------
+        g11r=two*dxdr*dxdrdr+two*dzdr*dzdrdr
+        g22r=two*dxdt*dxdtdr+two*dzdt*dzdtdr
+        g11t=two*dxdr*dxdrdt+two*dzdr*dzdrdt
+        g22t=two*dxdt*dxdtdt+two*dzdt*dzdtdt
+        g12r=dxdrdr*dxdt+dxdr*dxdtdr+dzdrdr*dzdt+dzdr*dzdtdr
+        g12t=dxdrdt*dxdt+dxdr*dxdtdt+dzdrdt*dzdt+dzdr*dzdtdt
+        g33r=two*x0*x0r
+        g33t=two*x0*x0t
+        g22qr=g22r/(g22q*two)
+        g22qt=g22t/(g22q*two)
+        g33qr=g33r/(g33q*two)
+        g33qt=g33t/(g33q*two)
+        xjr=g11r*g22+g22r*g11-two*g12*g12r
+        xjt=g11t*g22+g22t*g11-two*g12*g12t
+        g2jqr=(g22r/xj-g22/xj**2*xjr)/(g2jq*two) !sav2009
+        g2jqt=(g22t/xj-g22/xj**2*xjt)/(g2jq*two) !sav2009
+        gr=xjr*g33+g33r*xj
+        gt=xjt*g33+g33t*xj
+        g2gqt=(g22t/g-g22/g**2*gt)/(g2gq*two)
+        g2gqr=(g22r/g-g22/g**2*gr)/(g2gq*two)
+        bpt=xmy*g2gqt
+        bpr=g2gqr*xmy+g2gq*xmyp
+        btr=-b_tor*(r0/rm)/x0**2*x0r
+        btt=-b_tor*(r0/rm)/x0**2*x0t
+        bat=one/b*(bp*bpt+bt*btt)
+        bar=one/b*(bp*bpr+bt*btr)
+        sit=bpt/b-bp/b**2*bat
+        cot=btt/b-bt/b**2*bat
+        sir=bpr/b-bp/b**2*bar
+        cor=btr/b-bt/b**2*bar
+        dvdr=fnr*c0**2/ww**2
+        du1dr=c1*bar/ww
+        dudr=two*u1*du1dr
+        du1dt=c1*bat/ww
+        dudt=two*u1*du1dt
+        e1r=-dvdr*(one/xmi-one/u)-v*dudr/u**2
+        e1t=-v*dudt/u**2
+        e2r=dvdr/u1-v/u1**2*du1dr
+        e2t=-v/u1**2*du1dt
+        e3r=-dvdr
+        ynzr=yn2*(sir/g22q-si/g22q**2*g22qr) + yn3*(cor/g33q-co/g33q**2*g33qr)
+        ynzt=yn2*(sit/g22q-si/g22q**2*g22qt) + yn3*(cot/g33q-co/g33q**2*g33qt)
+        ynzqr=two*ynz*ynzr
+        ynzqt=two*ynz*ynzt
+        vpopr=(xnr**2*g22r-two*xnr*yn2*g12r+yn2**2*g11r)
+        vpopt=(xnr**2*g22t-two*xnr*yn2*g12t+yn2**2*g11t)
+        ynpopqr=vpopr/xj-vpop/xj**2*xjr-yn3**2/g33**2*g33r-ynzqr
+        ynpopqt=vpopt/xj-vpop/xj**2*xjt-yn3**2/g33**2*g33t-ynzqt
+        asr=e1r
+        bsr=(e3r+e1r)*(ynzq-e1)+(e3+e1)*(ynzqr-e1r)+two*e2*e2r
+        csr=e3r*((ynzq-e1)**2-e2**2)+e3*(two*(ynzq-e1)*(ynzqr-e1r) - two*e2*e2r)
+        ast=e1t
+        bst=e1t*(ynzq-e1)+(e3+e1)*(ynzqt-e1t)+two*e2*e2t
+        cst=e3*(two*(ynzq-e1)*(ynzqt-e1t)-two*e2*e2t)
+        !---------------------------------------------------
+        !est !sav2009
+        if (inew.gt.0) then
+            if(inew.eq.1) then
+                ynyr= - (yn2*(cor/g22q-co/g22q**2*g22qr)&
+                        -yn3*(sir/g33q-si/g33q**2*g33qr))
+                ynyt= - (yn2*(cot/g22q-co/g22q**2*g22qt)-&
+                        -yn3*(sit/g33q-si/g33q**2*g33qt))
+            else if(inew.eq.2) then
+                ynyr= - g2jq*(yn2*(cor/g22q-co/g22q**2*g22qr)&
+                                -yn3*(sir/g33q-si/g33q**2*g33qr))
+                ynyr=ynyr - g2jqr*(yn2*co/g22q-yn3*si/g33q)
+                ynyt= - g2jq*(yn2*(cot/g22q-co/g22q**2*g22qt)-&
+                                -yn3*(sit/g33q-si/g33q**2*g33qt))
+                ynyt=ynyt - g2jqt*(yn2*co/g22q-yn3*si/g33q)
+            end if
+            gprr=c0**2/ww**2*(fnrr/u1-fnr/u1**2*du1dr)*xsz
+            gprt=-c0**2/ww**2*fnr/u1**2*du1dt*xsz
+            gdopr=ynyr*gpr+yny*gprr
+            gdopt=ynyt*gpr+yny*gprt
+            bsr=bsr+gdopr
+            csr=csr+gdopr*(ynzq-e3)+gdop*(ynzqr-e3r)
+            bst=bst+gdopt
+            cst=cst+gdopt*(ynzq-e3)+gdop*ynzqt
+        end if
+  !c---------------------------------------------------
+  
+        dhdr=asr*ynpopq**2+bsr*ynpopq+&
+            as*two*ynpopq*ynpopqr+bs*ynpopqr+csr
+        dhdtet=ast*ynpopq**2+bst*ynpopq+&
+              as*two*ynpopq*ynpopqt+bs*ynpopqt+cst
+        dnx=two*as*ynpopq+bs
+        dnz=ynpopq*(e1+e3)+two*(ynzq-e1)*e3
+        dhdnr=dnx*two*(g22*xnr-g12*yn2)/xj
+        dhdm=dnx*two*(yn2*g11-xnr*g12)/xj+(dnz-dnx)*two*ynz*si/g22q
+  !sav2009
+        dhdn3=two*((yn3-ynz*co*g33q)*dnx+ynz*co*g33q*dnz)/g33 !sav2009
+  !c----------------------------------------------------------------
+  !est !sav2009
+        if (inew.gt.0) then
+            if(inew.eq.1) then
+                dny= - gpr*(ynpopq+ynzq-e3)
+            else if(inew.eq.2) then
+                dny= - g2jq*gpr*(ynpopq+ynzq-e3)
+            end if
+            dhdm=dhdm+dny*co/g22q+two*ynz*yny*gpr*si/g22q
+            dhdn3=dhdn3-dny*si/g33q+two*ynz*yny*gpr*co/g33q !sav2009
+        end if
+  !c---------------------------------------------------
+  !sav2009
+        ddn2=g11*dhdnr**2+g22*dhdm**2+2.d0*g12*dhdnr*dhdm+g33*dhdn3**2
+        ddn=dsqrt(ddn2)
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        if(idec.ne.0) then
+            vt=fvt(pa)
+            sl1=(ynzq-e1)*(ynzq+ynpopq-e1)-e2**2
+            aimh=wpq/ww**2*pi*sl1*cltn**2/ynzq
+            pdec14=dabs(aimh/xsz/ddn)
+            pnye=cnye*wpq**2/(pn*vt**3)
+            pnyi=cnyi*pnye*zefff(pa)
+            pdec24=dabs(pnyi/ww*(wpq/whe**2*ynpopq+wpq/ww**2*ynzq)*ynpopq/&
+            xsz/ddn)
+            if(itend0.gt.0) then
+                tmp=ft(pa)/0.16d-8
+                fcoll=.5d-13*pn*zalfa**2*xlog/xmalfa/tmp**1.5d0
+        !cc        ddens=dn1*pn
+        !cc        tdens=dn2*pn
+        !cc        tt=fti(pa)**0.33333d0    ! (ti, kev)^1/3
+        !cc        source=4d-12*factor*ddens*tdens*dexp(-20d0/tt)/tt**2
+                call source_new(pa,source)
+                dek1=cnstal*pdec14*(1.d0-e3/ynpopq)**2/dsqrt(ynpopq)
+                dek2=source/(fcoll*pn)
+                pdec34=dek1*dek2
+            end if
+        end if
+    end
+
+
     subroutine dhdomega(rho,theta,yn1,yn2)
         !use dispersion_module, only: yn3            
         implicit real*8 (a-h,o-z)
