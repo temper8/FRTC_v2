@@ -376,7 +376,7 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
         integer :: irf, irf1
         integer :: ib2
         integer :: irs0        
-        
+
         real(wp), parameter :: pgdop=0.02d0
         real(wp), parameter :: hmin=0.d-7 !sav2008, old hmin=1.d-7
         real(wp) :: eps0
@@ -412,45 +412,46 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
   
   10    irf1=idnint(xbeg/hr)
         if (dabs(irf1*hr-xbeg).lt.tin)  then
-          xsav=hr*irf1
+            xsav=hr*irf1
         else
-          irf=int(xbeg/hr)
-          if (irs.eq.1)  xsav=hr*irf
-          if (irs.eq.-1) xsav=hr*(irf+1)
+            irf=int(xbeg/hr)
+            if (irs.eq.1)  xsav=hr*irf
+            if (irs.eq.-1) xsav=hr*(irf+1)
         end if
-        xend=.5d0-.5d0*irs+tin*irs
+        xend= 0.5d0 - 0.5d0*irs + tin*irs
         if (ipri.gt.2) write (*,*) 'xbeg-xend',xbeg,xend
-        hsav=-hr*irs
-        h1=hsav
-    !---------------------------------------
-    ! solve eqs. starting from xbeg
-    !---------------------------------------
-        ystart(1)=tet
-        ystart(2)=xm
+        hsav = -hr*irs
+        h1 = hsav
+        !---------------------------------------
+        ! solve eqs. starting from xbeg
+        !---------------------------------------
+        ystart(1) = tet
+        ystart(2) = xm
         call driver2(ystart,xbeg,xend,xsav,hmin,h1, pabs)
-        tet=ystart(1)
-        xm=ystart(2)
-        ib2=0
-           rnew2=ystart(3)
-           cotet=dcos(tet)
-           sitet=dsin(tet)
-           xdl = fdf(rnew2,cdl,ncoef,xdlp)
-           xly = fdf(rnew2,cly,ncoef,xlyp)
-           xgm = fdf(rnew2,cgm,ncoef,xgmp)
-           xx=-xdl+rnew2*cotet-xgm*sitet**2
-           zz=rnew2*xly*sitet
-           xxx=(r0+rm*xx)/1d2
-           zzz=(z0+rm*zz)/1d2 
-  !      open(33,file='lhcd/out/dots.dat',position="append")
-  !      write(33,*)xxx, zzz, nomth, nomnz
-  !      close(33)
-    !---------------------------------------
-    ! absorption
-    !---------------------------------------
+        tet = ystart(1)
+        xm = ystart(2)
+        ib2 = 0
+            rnew2=ystart(3)
+            cotet=dcos(tet)
+            sitet=dsin(tet)
+            xdl = fdf(rnew2,cdl,ncoef,xdlp)
+            xly = fdf(rnew2,cly,ncoef,xlyp)
+            xgm = fdf(rnew2,cgm,ncoef,xgmp)
+            xx=-xdl+rnew2*cotet-xgm*sitet**2
+            zz=rnew2*xly*sitet
+            xxx=(r0+rm*xx)/1d2
+            zzz=(z0+rm*zz)/1d2 
+            ! open(33,file='lhcd/out/dots.dat',position="append")
+            ! write(33,*)xxx, zzz, nomth, nomnz
+            ! close(33)
+
+        !---------------------------------------
+        ! absorption
+        !---------------------------------------
         if(iabsorp.ne.0) then
-          if(ipri.gt.2) write (*,*)'in traj() iabsorp=',iabsorp
-          nmax=nrefl
-          return
+            if(ipri.gt.2) write (*,*)'in traj() iabsorp=',iabsorp
+            nmax=nrefl
+            return
         end if
         if (xend.eq.xbeg) nb1=nb1+1
   !sav2008 20    continue
@@ -472,22 +473,25 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
         rexi=xend
         call driver4(yy,x1,x2,rexi,hmin,extd4)
         if(iabsorp.eq.-1) return !failed to turn
-        tetnew=yy(1)
-        xmnew=yy(2)
-        rnew=yy(3)
-        xnrnew=yy(4)
-           cotet=dcos(tetnew)
-           sitet=dsin(tetnew)
-           xdl=fdf(rnew,cdl,ncoef,xdlp)
-           xly=fdf(rnew,cly,ncoef,xlyp)
-           xgm=fdf(rnew,cgm,ncoef,xgmp)
-           xx=-xdl+rnew*cotet-xgm*sitet**2
-           zz=rnew*xly*sitet
-           xxx=(r0+rm*xx)/1d2
-           zzz=(z0+rm*zz)/1d2 
-  !      open(33,file='lhcd/out/dots.dat',position="append")
-  !      write(33,*)xxx, zzz, nomth, nomnz
-  !      close(33)
+
+        tetnew = yy(1)
+        xmnew  = yy(2)
+        rnew   = yy(3)
+        xnrnew = yy(4)
+
+            cotet = cos(tetnew)
+            sitet = sin(tetnew)
+            xdl = fdf(rnew,cdl,ncoef,xdlp)
+            xly = fdf(rnew,cly,ncoef,xlyp)
+            xgm = fdf(rnew,cgm,ncoef,xgmp)
+            xx = -xdl+rnew*cotet-xgm*sitet**2
+            zz = rnew*xly*sitet
+            xxx = (r0+rm*xx)/1d2
+            zzz = (z0+rm*zz)/1d2 
+            ! open(33,file='lhcd/out/dots.dat',position="append")
+            ! write(33,*)xxx, zzz, nomth, nomnz
+            ! close(33)
+
         if(ipri.gt.2) write (*,*) 'from r=',rexi,'to r=',rnew
   
     !---------------------------------------
@@ -499,42 +503,43 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
         call disp2(rnew,xmnew,tetnew,xnrv,prt,prm)
         ider=1
         iroot=1
-  !ipric      if (ipri.gt.2) then
-  !ipric       write (*,*)'nr check, r=',rnew,' tet=',tetnew
-  !ipric       write (*,*)'iw=',iw,' izn=',izn
-  !ipric       write (*,*) xnrnew,xnr1
-  !ipric       write (*,*) xnr2,xnr3,xnr4
-  !ipric       pause
-  !ipric      end if
-        pg1=dabs(xnrnew-xnr1)
-        pg2=dabs(xnrnew-xnr2)
-        pg3=dabs(xnrnew-xnr3)
-        pg4=dabs(xnrnew-xnr4)
-        pg=dmin1(pg1,pg2,pg3,pg4)
-        if(dabs(pg/xnrnew).gt.pgdop) then
-    !---------------------------------------------
-    !c bad accuracy, continue with 4 equations
-    !--------------------------------------------
-          ib2=ib2+1
-          nb2=nb2+1
-          if (ib2.gt.4) then
-            if (ipri.gt.1) write (*,*) 'error: cant leave 4 eqs'
-            iabsorp=-1
-            return
-          end if
-          eps=eps/5d0
-          rrange=rrange*2d0
-          hdrob=hdrob*2d0
-          goto 40
+        !ipric      if (ipri.gt.2) then
+        !ipric       write (*,*)'nr check, r=',rnew,' tet=',tetnew
+        !ipric       write (*,*)'iw=',iw,' izn=',izn
+        !ipric       write (*,*) xnrnew,xnr1
+        !ipric       write (*,*) xnr2,xnr3,xnr4
+        !ipric       pause
+        !ipric      end if
+        pg1 = abs(xnrnew-xnr1)
+        pg2 = abs(xnrnew-xnr2)
+        pg3 = abs(xnrnew-xnr3)
+        pg4 = abs(xnrnew-xnr4)
+
+        pg = dmin1(pg1,pg2,pg3,pg4)
+        if (dabs(pg/xnrnew).gt.pgdop) then
+            !---------------------------------------------
+            ! bad accuracy, continue with 4 equations
+            !--------------------------------------------
+            ib2=ib2+1
+            nb2=nb2+1
+            if (ib2.gt.4) then
+                if (ipri.gt.1) write (*,*) 'error: cant leave 4 eqs'
+                iabsorp=-1
+                return
+            end if
+            eps=eps/5d0
+            rrange=rrange*2d0
+            hdrob=hdrob*2d0
+            goto 40
         end if
-    !-------------------------------------
-    !          change wave type
-    !-------------------------------------
+        !-------------------------------------
+        !          change wave type
+        !-------------------------------------
         if (pg.ne.pg1) then
-          if (pg.eq.pg2) izn=-izn
-          if (pg.eq.pg3) iw=-iw
-          if (pg.eq.pg4) iw=-iw
-          if (pg.eq.pg4) izn=-izn
+            if (pg.eq.pg2) izn=-izn
+            if (pg.eq.pg3) iw=-iw
+            if (pg.eq.pg4) iw=-iw
+            if (pg.eq.pg4) izn=-izn
         end if
         if (irs0.ne.irs) nrefl=nrefl+1
         xbeg=rnew
@@ -544,7 +549,7 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
         eps=eps0
         rrange=rrange0
         hdrob=hdrob0
-        if(nrefl.lt.nmax) go to 10
+        if(nrefl.lt.nmax) goto 10
         rzz=xbeg
         tetzz=tet
         xmzz=xm
