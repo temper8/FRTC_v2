@@ -16,7 +16,10 @@ module trajectory
     !!common /abc/ iznzz,iwzz,irszz
     integer  :: izn
     !common /abcde/ izn
+    real(wp) :: hrad
+    !common /bcg/ hrad
 
+    
     integer nrefj(mpnt)
     !! common/refl/nrefj(mpnt)
     real(wp) dland(length),dcoll(length),perpn(length),dalf(length)
@@ -347,7 +350,7 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
         !common /abcd/ irs
         !common /abcde/ izn!,iw
         !common /abcdg/ iabsorp
-        common /bcg/ hrad
+        !common /bcg/ hrad
         common /bcef/ ynz,ynpopq
         common /be1/ xnr1,xnr2,xnr3,xnr4
         common /be2/ ider

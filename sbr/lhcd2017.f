@@ -587,7 +587,7 @@ c------------------------------------------
       !common /abcdg/ iabsorp
       !common /acg/ pow
       !common /ag/ inak,lenstor,lfree
-      common /bcg/ hrad
+      !common /bcg/ hrad
       common /bg/ im4
       common /ceg/ ipow,jfoundr
       common /eg1/ vfound,ifound
@@ -795,7 +795,7 @@ c---------------------------------------------
       !common /abcde/ izn!,iw
       !common /abcdg/ iabsorp
       common /bcef/ ynz,ynpopq
-      common /bcg/ hrad
+      !common /bcg/ hrad
       common /cefn/ iconv,irefl
       common /ceg/ ipow,jfoundr
       common /cmn/ ind
