@@ -343,16 +343,24 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
 
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    subroutine traj(xm0,tet0,xbeg,nmax,nb1,nb2,nomth,nomnz, pabs) !sav2009
+    subroutine traj(xm0, tet0, xbeg, nmax, nb1, nb2, nomth, nomnz, pabs) !sav2009
         use constants
         use approximation
         use plasma
         use rt_parameters
+        real(wp), intent(in)    :: xm0
+        real(wp), intent(in)    :: tet0
+        real(wp), intent(inout) :: xbeg
+        real(wp), intent(in)    :: pabs
+        integer,  intent(inout) :: nmax        
+        integer,  intent(inout) :: nb1, nb2        
+        integer,  intent(in)    :: nomth, nomnz
+
         !use manager_mod  !, only: ivar, iroot
-        implicit real*8 (a-h,o-z)
+        !implicit real*8 (a-h,o-z)
         !external extd4
-        real*8 pabs
-        dimension ystart(2),yy(4)
+
+
         !common /abc/ rzz,tetzz,xmzz,iznzz,iwzz,irszz
         !common /abcd/ irs
         !common /abcde/ izn!,iw
@@ -362,15 +370,27 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
         !common /be1/ xnr1,xnr2,xnr3,xnr4
         !common /be2/ ider
         !common /bg/ im4
-        integer nomth,nomnz
-        parameter (pgdop=0.02d0,hmin=0.d-7) !sav2008, old hmin=1.d-7
+
         integer :: nrefl
-        integer :: nb1, nb2
         integer :: irep
         integer :: irf, irf1
         integer :: ib2
-        integer :: nmax
-        integer :: irs0
+        integer :: irs0        
+        
+        real(wp), parameter :: pgdop=0.02d0
+        real(wp), parameter :: hmin=0.d-7 !sav2008, old hmin=1.d-7
+        real(wp) :: eps0
+        real(wp) :: rrange0, hdrob0, tet, xm, hr
+        real(wp) :: xsav, xend,hsav, h1
+        real(wp) :: ystart(2),yy(4)
+        real(wp) :: rnew2
+        real(wp) :: cotet, sitet
+        real(wp) :: xdl, xly, xgm, xgmp, xx, zz, xxx, zzz
+        real(wp) :: xdlp, xlyp, xnr, prt, prm
+        real(wp) :: ynz0, x1, x2, rexi, tetnew
+        real(wp) :: xmnew, rnew, xnrnew, xnrv
+        real(wp) :: pg1, pg2, pg3, pg4, pg
+
         eps0=eps
         rrange0=rrange
         hdrob0=hdrob
