@@ -1079,12 +1079,12 @@ c---------------------------------------
       use plasma
       use rt_parameters
       use manager_mod, only: ivar, yn3, icall1, icall2
-      use trajectory, only: iroot, izn, ynz,ynpopq
+      use trajectory !, only: iroot, izn, ynz,ynpopq
       implicit real*8 (a-h,o-z)
       !common /abcde/ izn!,iw
       !common /bcef/ ynz,ynpopq
       !common /aef2/ icall1,icall2
-      common /be1/ xnr1,xnr2,xnr3,xnr4
+      !common /be1/ xnr1,xnr2,xnr3,xnr4
       common /be2/ ider
       common /cefn/ iconv,irefl
       common /ceg/ ipow,jfoundr
