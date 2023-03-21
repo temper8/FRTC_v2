@@ -249,7 +249,8 @@ contains
         use rt_parameters, only : inew
         use spectrum_mod
         !use trajectory
-        use dispersion_module, only: yn3, ivar, iroot, disp2
+        use dispersion_module, only: yn3, ivar, iroot
+        use dispersion_module, only: disp2
         implicit none
 
         type(spectrum_point), intent(in) :: point

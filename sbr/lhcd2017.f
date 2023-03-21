@@ -931,7 +931,8 @@ c---------------------------------------
       use plasma
       use rt_parameters
       use trajectory, only: irs, iabsorp
-      use dispersion_module, only: ynz, ynpopq, disp2
+      use dispersion_module, only: ivar, izn, ynz, ynpopq
+      use dispersion_module, only: disp2
       implicit real*8 (a-h,o-z)
       external derivs
       !common /abcd/ irs
@@ -1084,6 +1085,7 @@ c---------------------------------------
       use rt_parameters            
       !use trajectory, only: 
       use dispersion_module, only: yn3, icall1, icall2, ynz, ynpopq
+      use dispersion_module, only: disp2, source_new
       implicit real*8 (a-h,o-z)
       !common /bcef/ ynz,ynpopq
       !common /aef2/ icall1,icall2
@@ -1360,7 +1362,7 @@ cc        source=4d-12*factor*ddens*tdens*dexp(-20d0/tt)/tt**2
       end
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       subroutine extd2(x,y,dydx)
-      use dispersion_module
+      use dispersion_module, only: disp2
       implicit real*8 (a-h,o-z)
       dimension y(*),dydx(*)
       tt=y(1)
@@ -1371,33 +1373,7 @@ cc        source=4d-12*factor*ddens*tdens*dexp(-20d0/tt)/tt**2
       end
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      subroutine dhdomega(rho,theta,yn1,yn2)
-      use dispersion_module, only: yn3            
-      implicit real*8 (a-h,o-z)
-      !common /a0ef2/ ww
-      !common /abefo/ yn3
-      common/fj/dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
-      common/direct/znakstart
-      parameter(zero=0.d0,h=1.d-6)
 
-      call disp4(rho,theta,yn1,yn2)
-
-!!w*dH/dw=wdhdw:
-      wdhdw=-(yn1*dhdnr+yn2*dhdm+yn3*dhdn3+dhdv2v+dhdu2u)
-      znak=dsign(1.d0,wdhdw)
-      znakstart=znak
-c      write(*,*)'formula: znak=',znak
-c      write(*,*)'wdhdw=',wdhdw,' H=',ham
-c      write(*,*)'rho=',rho,' teta=',theta
-c      write(*,*)'yn1=',yn1,' yn2=',yn2
-c      write(*,*)'dhdnr=',dhdnr,' dhdm=',dhdm
-c      write(*,*)'dhdr=',dhdr,' dhdtet=',dhdtet
-c      write(*,*)'dhdn3=',dhdn3,' yn3=',yn3
-c      write(*,*)'yn1*dhdnr=',yn1*dhdnr,' yn2*dhdm=',yn2*dhdm
-c      write(*,*)'yn1*dhdnr+yn2*dhdm=',yn1*dhdnr+yn2*dhdm
-cc      pause
-
-      end
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       subroutine difeq(y,dydx,nv,x,htry,eps,yscal,hdid,hnext,derivs)
       use rt_parameters, only : hmin1
@@ -1907,19 +1883,7 @@ c----------------------------------------------------------------
       end
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      subroutine source_new(r,out)
-      implicit real*8 (a-h,o-z)
-      common /asou/ rsou(102),sou(102),npta
-      call lock2(rsou,npta,r,klo,khi,ierr)
-      if(ierr.ne.0) then
-       write(*,*)'lock2 error in source_new'
-       write(*,*)'ierr=',ierr,' rho=',r
-       stop
-      else
-       call linf(rsou,sou,r,fout,klo,khi)
-       out=dabs(fout)
-      end if
-      end
+
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       subroutine linf(x,y,t,fout,klo,khi)
       implicit real*8 (a-h,o-z)

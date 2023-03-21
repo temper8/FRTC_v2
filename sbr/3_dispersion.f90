@@ -384,4 +384,47 @@ contains
         if (ivar.eq.10) ivar=-1
         return
     end
+
+    subroutine dhdomega(rho,theta,yn1,yn2)
+        !use dispersion_module, only: yn3            
+        implicit real*8 (a-h,o-z)
+        !common /a0ef2/ ww
+        !common /abefo/ yn3
+        common/fj/dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
+        common/direct/znakstart
+        parameter(zero=0.d0,h=1.d-6)
+  
+        call disp4(rho,theta,yn1,yn2)
+  
+  !!w*dH/dw=wdhdw:
+        wdhdw=-(yn1*dhdnr+yn2*dhdm+yn3*dhdn3+dhdv2v+dhdu2u)
+        znak=dsign(1.d0,wdhdw)
+        znakstart=znak
+  !c      write(*,*)'formula: znak=',znak
+  !c      write(*,*)'wdhdw=',wdhdw,' H=',ham
+  !c      write(*,*)'rho=',rho,' teta=',theta
+  !c      write(*,*)'yn1=',yn1,' yn2=',yn2
+  !c      write(*,*)'dhdnr=',dhdnr,' dhdm=',dhdm
+  !c      write(*,*)'dhdr=',dhdr,' dhdtet=',dhdtet
+  !c      write(*,*)'dhdn3=',dhdn3,' yn3=',yn3
+  !c      write(*,*)'yn1*dhdnr=',yn1*dhdnr,' yn2*dhdm=',yn2*dhdm
+  !c      write(*,*)'yn1*dhdnr+yn2*dhdm=',yn1*dhdnr+yn2*dhdm
+  !cc      pause
+  
+        end    
+
+    subroutine source_new(r,out)
+        implicit real*8 (a-h,o-z)
+        integer npta, klo, khi, ierr
+        common /asou/ rsou(102),sou(102),npta
+        call lock2(rsou,npta,r,klo,khi,ierr)
+        if(ierr.ne.0) then
+            write(*,*)'lock2 error in source_new'
+            write(*,*)'ierr=',ierr,' rho=',r
+            stop
+        else
+            call linf(rsou,sou,r,fout,klo,khi)
+            out=dabs(fout)
+        end if
+    end        
 end module dispersion_module
