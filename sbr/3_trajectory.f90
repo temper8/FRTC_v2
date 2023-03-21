@@ -67,6 +67,7 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
     use constants
     use approximation
     use plasma
+    use dispersion_module, only: zatukh
     use rt_parameters, only :  nr, itend0, kv, nmaxm    
     use spectrum1D, only: ynzm, pm      
     implicit real(wp) (a-h,o-z)

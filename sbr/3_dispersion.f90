@@ -97,8 +97,8 @@ contains
         real(wp) :: pnewt, fder,  aimh, pnye, pnyi
         real(wp) :: tmp, fcoll, source, argum
         real(wp) :: dek1, dek2, dek3
-        external zatukh
-        real(wp) :: zatukh
+        !external zatukh
+        !real(wp) :: zatukh
         iconv=0
         irefl=0
         if(pa.ge.one.or.pa.le.zero) goto 70
@@ -472,4 +472,51 @@ contains
             out=dabs(fout)
         end if
     end        
+
+    real(wp) function zatukh(psy,j,u,n)
+        use constants
+        implicit real*8 (a-h,o-z)
+        real(wp), intent(in) :: psy
+        real(wp), intent(in) :: u(:,:)
+        integer,  intent(in) :: j, n
+        dimension x(50),y(50),a(50),b(50)
+        !common /a0befr/ pi,pi2
+        common /arr/ dgdu(50,100),kzero(100)
+        integer :: km, k, kzero, i, l
+        km=kzero(j)
+        um=u(km,j)
+        if(um.ge.one) then
+            zatukh=zero
+            if(psy.lt.one) zatukh=.5d0*pi/psy**3
+            return
+        end if
+        if(psy-um.le.zero.or.u(n,j)-psy.le.zero) then
+            zatukh=zero
+            return
+        end if
+        do k=1,n
+            x(k)=u(k,j)
+            y(k)=dgdu(k,j)
+        end do
+        i=n-1
+        do l=1,n-1
+            if(x(l+1)-psy.gt.zero.and.psy-x(l).ge.zero) i=l
+        end do
+        do k=i,n-1
+            b(k)=(y(k+1)-y(k))/(x(k+1)-x(k))
+            a(k)=y(k)-b(k)*x(k)
+        end do
+        s2=dsqrt((x(i+1)-psy)*(x(i+1)+psy))
+        ss2=x(i+1)+s2
+        sum=a(i)*dlog(psy/ss2)-b(i)*s2
+        do k=2,n-i
+            s1=dsqrt((x(i+k-1)-psy)*(x(i+k-1)+psy))
+            ss1=x(i+k-1)+s1
+            s2=dsqrt((x(i+k)-psy)*(x(i+k)+psy))
+            ss2=x(i+k)+s2
+            sum=sum+a(i+k-1)*dlog(ss1/ss2)+b(i+k-1)*(s1-s2)
+        end do
+        zatukh=sum
+        return
+     end    
 end module dispersion_module
