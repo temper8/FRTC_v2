@@ -344,6 +344,7 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
         use approximation
         use plasma
         use rt_parameters
+        use dispersion_module
         real(wp), intent(in)    :: xm0
         real(wp), intent(in)    :: tet0
         real(wp), intent(inout) :: xbeg

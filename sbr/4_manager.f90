@@ -257,6 +257,7 @@ contains
         use rt_parameters, only : inew
         use spectrum_mod
         use trajectory
+        use dispersion_module
         implicit none
 
         type(spectrum_point), intent(in) :: point
