@@ -252,15 +252,18 @@ contains
     end    
 
 
-    real(wp) function rini(xm,tet,xnr,point,hr,ifail) !sav2009
+    real(wp) function rini(xm, tet, xnr,point, hr, ifail) !sav2009
         use constants, only : zero
         use rt_parameters, only : inew
         use spectrum_mod
         use trajectory
         implicit none
-        type(spectrum_point) :: point
-        real(wp) xm, tet,xnr,hr
-        integer ifail, ntry
+        type(spectrum_point), intent(in) :: point
+        real(wp), intent(inout)             :: xm
+        real(wp), intent(in)             :: tet, xnr, hr
+        integer, intent(inout)              :: ifail
+
+        integer :: ntry
         real(wp) :: vgrp(3),vph(3)
         !real(wp) :: ynz,ynpopq
         !common /bcef/ ynz,ynpopq
