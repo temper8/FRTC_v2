@@ -474,13 +474,13 @@ contains
          pn=fn2(pa,fnr,fnrr)
         end if
   
-  !cc        hstp=1.d-7
-  !cc        pplus=fn2(pa+hstp,fnr2,fnrr2)
-  !cc        pminus=fn2(pa-hstp,fnr1,fnrr1)
-  !cc        fnr=0.5d0*(pplus-pminus)/hstp
-  !cc        fnrr=0.5d0*(fnr2-fnr1)/hstp
-  
-  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        !cc        hstp=1.d-7
+        !cc        pplus=fn2(pa+hstp,fnr2,fnrr2)
+        !cc        pminus=fn2(pa-hstp,fnr1,fnrr1)
+        !cc        fnr=0.5d0*(pplus-pminus)/hstp
+        !cc        fnrr=0.5d0*(fnr2-fnr1)/hstp
+        
+        !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         wpq=c0**2*pn
         xdl=fdfddf(pa,cdl,ncoef,xdlp,xdlpp)
         xly=fdfddf(pa,cly,ncoef,xlyp,xlypp)
@@ -547,7 +547,7 @@ contains
         bs=-(e1**2-e2**2+e1*e3-(e1+e3)*ynzq)
         cs=e3*(e1**2-e2**2-two*e1*ynzq+ynzq**2)
         !c----------------------------------------------------
-  !sav2009
+        !sav2009
         dhdv=(1.d0/(u**2*xmi**2))*((2.d0-2.d0*ynpopq-3.d0*v)*v*xmi**2-&
             u**2*(3.d0*v**2+2.d0*v*(-1.d0+ynpopq*(1.d0+xmi)&
             +2.d0*xmi*(-1.d0+ynzq))+&
@@ -561,7 +561,7 @@ contains
         dhdv2v=2.d0*v*dhdv !w*d(-H)/dv
         dhdu2u=2.d0*u*dhdu !w*d(-H)/du
         !c----------------------------------------------------
-  !est !sav2009
+        !est !sav2009
         if(inew.gt.0) then
             if(inew.eq.1) then
                 yny= - (yn2*co/g22q-yn3*si/g33q)
@@ -665,7 +665,7 @@ contains
             bst=bst+gdopt
             cst=cst+gdopt*(ynzq-e3)+gdop*ynzqt
         end if
-  !c---------------------------------------------------
+        !c---------------------------------------------------
   
         dhdr=asr*ynpopq**2+bsr*ynpopq+&
             as*two*ynpopq*ynpopqr+bs*ynpopqr+csr
@@ -675,10 +675,10 @@ contains
         dnz=ynpopq*(e1+e3)+two*(ynzq-e1)*e3
         dhdnr=dnx*two*(g22*xnr-g12*yn2)/xj
         dhdm=dnx*two*(yn2*g11-xnr*g12)/xj+(dnz-dnx)*two*ynz*si/g22q
-  !sav2009
+        !sav2009
         dhdn3=two*((yn3-ynz*co*g33q)*dnx+ynz*co*g33q*dnz)/g33 !sav2009
-  !c----------------------------------------------------------------
-  !est !sav2009
+        !c----------------------------------------------------------------
+        !est !sav2009
         if (inew.gt.0) then
             if(inew.eq.1) then
                 dny= - gpr*(ynpopq+ynzq-e3)
@@ -688,11 +688,11 @@ contains
             dhdm=dhdm+dny*co/g22q+two*ynz*yny*gpr*si/g22q
             dhdn3=dhdn3-dny*si/g33q+two*ynz*yny*gpr*co/g33q !sav2009
         end if
-  !c---------------------------------------------------
-  !sav2009
+        !c---------------------------------------------------
+        !sav2009
         ddn2=g11*dhdnr**2+g22*dhdm**2+2.d0*g12*dhdnr*dhdm+g33*dhdn3**2
         ddn=dsqrt(ddn2)
-  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        !
         if(idec.ne.0) then
             vt=fvt(pa)
             sl1=(ynzq-e1)*(ynzq+ynpopq-e1)-e2**2
@@ -705,10 +705,10 @@ contains
             if(itend0.gt.0) then
                 tmp=ft(pa)/0.16d-8
                 fcoll=.5d-13*pn*zalfa**2*xlog/xmalfa/tmp**1.5d0
-        !cc        ddens=dn1*pn
-        !cc        tdens=dn2*pn
-        !cc        tt=fti(pa)**0.33333d0    ! (ti, kev)^1/3
-        !cc        source=4d-12*factor*ddens*tdens*dexp(-20d0/tt)/tt**2
+                !cc        ddens=dn1*pn
+                !cc        tdens=dn2*pn
+                !cc        tt=fti(pa)**0.33333d0    ! (ti, kev)^1/3
+                !cc        source=4d-12*factor*ddens*tdens*dexp(-20d0/tt)/tt**2
                 call source_new(pa,source)
                 dek1=cnstal*pdec14*(1.d0-e3/ynpopq)**2/dsqrt(ynpopq)
                 dek2=source/(fcoll*pn)
@@ -728,21 +728,21 @@ contains
         parameter(zero=0.d0,h=1.d-6)
   
         call disp4(rho,theta,yn1,yn2)
-  
-  !!w*dH/dw=wdhdw:
+        
+        !!w*dH/dw=wdhdw:
         wdhdw=-(yn1*dhdnr+yn2*dhdm+yn3*dhdn3+dhdv2v+dhdu2u)
         znak=dsign(1.d0,wdhdw)
         znakstart=znak
-  !c      write(*,*)'formula: znak=',znak
-  !c      write(*,*)'wdhdw=',wdhdw,' H=',ham
-  !c      write(*,*)'rho=',rho,' teta=',theta
-  !c      write(*,*)'yn1=',yn1,' yn2=',yn2
-  !c      write(*,*)'dhdnr=',dhdnr,' dhdm=',dhdm
-  !c      write(*,*)'dhdr=',dhdr,' dhdtet=',dhdtet
-  !c      write(*,*)'dhdn3=',dhdn3,' yn3=',yn3
-  !c      write(*,*)'yn1*dhdnr=',yn1*dhdnr,' yn2*dhdm=',yn2*dhdm
-  !c      write(*,*)'yn1*dhdnr+yn2*dhdm=',yn1*dhdnr+yn2*dhdm
-  !cc      pause
+        !c      write(*,*)'formula: znak=',znak
+        !c      write(*,*)'wdhdw=',wdhdw,' H=',ham
+        !c      write(*,*)'rho=',rho,' teta=',theta
+        !c      write(*,*)'yn1=',yn1,' yn2=',yn2
+        !c      write(*,*)'dhdnr=',dhdnr,' dhdm=',dhdm
+        !c      write(*,*)'dhdr=',dhdr,' dhdtet=',dhdtet
+        !c      write(*,*)'dhdn3=',dhdn3,' yn3=',yn3
+        !c      write(*,*)'yn1*dhdnr=',yn1*dhdnr,' yn2*dhdm=',yn2*dhdm
+        !c      write(*,*)'yn1*dhdnr+yn2*dhdm=',yn1*dhdnr+yn2*dhdm
+        !cc      pause
   
         end    
 
