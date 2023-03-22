@@ -415,12 +415,14 @@ contains
             end if
         end if
         return
-    !   conversion
-    60    iconv=1
+
+        ! conversion
+60      iconv=1
         if (ivar.ne.0) ivar=-1
         return
-    !    reflection
-    70    irefl=1
+
+        !  reflection
+70      irefl=1
         if (ivar.gt.1.and.ivar.ne.10) then
             iw=-iw
             ivar=10
