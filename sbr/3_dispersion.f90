@@ -3,7 +3,7 @@ module dispersion_module
     implicit none
 
     real(wp) :: yn3
-    !! common /abefo/ yn3
+    !!common /abefo/ yn3
 
     integer :: ivar
     !!common /bdeo/ ivar   
@@ -51,10 +51,15 @@ module dispersion_module
     real(wp) :: pdec14,pdec24,pdec34,idec
     !!common /df/ pdec14,pdec24,pdec34,idec
 
-    real(wp) rsou(102),sou(102)
-    integer npta
+    real(wp) :: rsou(102),sou(102)
+    integer  :: npta
     !!common /asou/ rsou(102),sou(102),npta
-    !! используется в source_new
+    !! используется в source_new и ourlhcd2017
+
+    real(wp) :: dgdu(50,100)
+    integer  :: kzero(100)
+    !!common /arr/ dgdu(50,100),kzero(100)
+    !! используется в zatukh, ourlhcd2017 и alphas
 contains
     subroutine disp2(pa,yn2,ptet,xnro,prt,prm)
         use constants
@@ -787,8 +792,8 @@ contains
         integer,  intent(in) :: j, n
         dimension x(50),y(50),a(50),b(50)
         !common /a0befr/ pi,pi2
-        common /arr/ dgdu(50,100),kzero(100)
-        integer :: km, k, kzero, i, l
+        !common /arr/ dgdu(50,100),kzero(100)
+        integer :: km, k, i, l
         km = kzero(j)
         um = u(km,j)
         if(um.ge.one) then

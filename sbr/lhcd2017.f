@@ -164,7 +164,7 @@ cc*********************************************************************
       !common /asou/ rsou(102),sou(102),npta
       !common/gridv/vgrid(101,100),dfundv(101,100),nvpt
       !common /vvv2/ psum4
-      common /arr/ dgdu(50,100),kzero(100)
+      !common /arr/ dgdu(50,100),kzero(100)
       !common /ag/ inak,lenstor,lfree
       common /maxrho/ rmx_n,rmx_t,rmx_z,rmx_ti
       
@@ -1494,9 +1494,10 @@ c----------------------------------------------------------------
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       subroutine alphas(d,u,j,kmax,g)
+      use dispersion_module, only: dgdu, kzero
       implicit real*8 (a-h,o-z)
       dimension d(50,100),u(50,100),g(50,100)
-      common /arr/ dgdu(50,100),kzero(100)
+      !common /arr/ dgdu(50,100),kzero(100)
       parameter(zero=0.d0, one=1.d0, tiny=1.d-30)
         km=kzero(j)
         um=u(km,j)
