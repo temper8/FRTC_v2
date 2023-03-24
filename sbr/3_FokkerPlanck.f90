@@ -43,7 +43,7 @@ subroutine fokkerplanck_compute(time, TAU)
     time1 = sys_time()
 
     do j=1, nr
-        jindex=j  ! common/dddql/ 
+        jindex=j  !common/dddql/ 
         dtau=dtstep*fst(j)
         nt=1
         if(dtau.gt.dt0) then

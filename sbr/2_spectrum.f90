@@ -356,9 +356,9 @@ module spectrum1D
     real(wp) :: pm0(1001)
     !+ 
     real(wp) :: ynzm(1001), pm(1001)
-    !! бывший common /a0a1/ ynzm(1001),pm(1001)     
+    !!common /a0a1/ ynzm(1001),pm(1001)     
     real(wp) :: pabs
-    !! бывший common /a0gh/ pabs
+    !!common /a0gh/ pabs
 
     integer, parameter, private :: HEADER_LENGTH = 53
 
