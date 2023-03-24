@@ -21,16 +21,16 @@ module trajectory
     !common /bg/ im4
 
     integer nrefj(mpnt)
-    !! common/refl/nrefj(mpnt)
+    !!common/refl/nrefj(mpnt)
     real(wp) dland(length),dcoll(length),perpn(length),dalf(length)
     real(wp) vel(length),tetai(length)
     real(wp) xnpar(length)
     integer izz(length),iww(length),jrad(length)
-    !! бывший common/agh/xnpar,vel,dland,dcoll,dalf,perpn,tetai,jrad,iww,izz
+    !!common/agh/xnpar,vel,dland,dcoll,dalf,perpn,tetai,jrad,iww,izz
     integer mbeg(mpnt),mend(mpnt),mbad(mpnt)
     real(wp) rbeg(mpnt) !sav2008
     real(wp) tetbeg(mpnt),xnrbeg(mpnt),xmbeg(mpnt),yn3beg(mpnt)
-    !! common/viewdat/mbeg,mend,mbad,rbeg,tetbeg,xnrbeg,xmbeg,yn3beg   
+    !!common/viewdat/mbeg,mend,mbad,rbeg,tetbeg,xnrbeg,xmbeg,yn3beg   
     !data mbad /mpnt*0/
 contains
 
