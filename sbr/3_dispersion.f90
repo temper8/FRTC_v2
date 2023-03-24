@@ -27,7 +27,7 @@ module dispersion_module
     integer iconv, irefl
     !!common /cefn/ iconv,irefl
 
-    integer ipow,jfoundr
+    integer ipow, jfoundr
     !!common /ceg/ ipow,jfoundr
     integer  :: ifound
     real(wp) :: vfound
@@ -37,6 +37,11 @@ module dispersion_module
     !!common /eg2/ pdec1,pdec2,pdec3,pdecv,pdecal,dfdv,icf1,icf2
     real(wp) :: cf1,cf2,cf3,cf4,cf5,cf6
     !!common /eg3/ cf1,cf2,cf3,cf4,cf5,cf6
+
+    real(wp) :: dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
+    !!common/fj/dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
+    real(wp) :: znakstart
+    !common/direct/znakstart
 contains
     subroutine disp2(pa,yn2,ptet,xnro,prt,prm)
         use constants
@@ -65,11 +70,11 @@ contains
         !common /eg2/ pdec1,pdec2,pdec3,pdecv,pdecal,dfdv,icf1,icf2     
         !common /eg3/ cf1,cf2,cf3,cf4,cf5,cf6
 
-        real(wp) :: dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
-        common/fj/dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
+        
+        !common/fj/dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
 
-        real(wp) :: znakstart
-        common/direct/znakstart
+
+        !common/direct/znakstart
 
         real(wp) :: g11,g12,g22,g33,gg,g,si,co
         common/metrika/g11,g12,g22,g33,gg,g,si,co
@@ -452,7 +457,7 @@ contains
 
         common /df/ pdec14,pdec24,pdec34,idec
         common/metrika/g11,g12,g22,g33,gg,g,si,co
-        common/fj/dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
+        !common/fj/dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
         common/fjham/ham
         integer :: idec
         irefl=0
@@ -726,8 +731,8 @@ contains
         implicit real*8 (a-h,o-z)
         !common /a0ef2/ ww
         !common /abefo/ yn3
-        common/fj/dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
-        common/direct/znakstart
+        !common/fj/dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
+        !common/direct/znakstart
         parameter(zero=0.d0,h=1.d-6)
   
         call disp4(rho,theta,yn1,yn2)

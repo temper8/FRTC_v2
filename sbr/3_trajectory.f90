@@ -550,11 +550,11 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
     end  
 
     subroutine extd4(x,y,dydx)
-        use dispersion_module, only: disp4
+        use dispersion_module
         implicit real*8 (a-h,o-z)
         dimension y(*),dydx(*)
-        common/fj/dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
-        common/direct/znakstart
+        !common/fj/dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
+        !common/direct/znakstart
         znak=znakstart
         xxx=x
         ptet=y(1)
