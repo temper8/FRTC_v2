@@ -589,10 +589,10 @@ c------------------------------------------
       !common /ag/ inak,lenstor,lfree
       !common /bcg/ hrad
       !common /bg/ im4
-      common /ceg/ ipow,jfoundr
-      common /eg1/ vfound,ifound
-      common /eg2/ pdec1,pdec2,pdec3,pdecv,pdecal,dfdv,icf1,icf2
-      common /eg3/ cf1,cf2,cf3,cf4,cf5,cf6
+      !common /ceg/ ipow,jfoundr
+      !common /eg1/ vfound,ifound
+      !common /eg2/ pdec1,pdec2,pdec3,pdecv,pdecal,dfdv,icf1,icf2
+      !common /eg3/ cf1,cf2,cf3,cf4,cf5,cf6
       common /dg/ pintld4,pintcl4,pintal4
       parameter(clt=3.d10,zero=0.d0)
       powpr=pow
@@ -799,8 +799,8 @@ c---------------------------------------------
       !common /abcdg/ iabsorp
       !common /bcef/ ynz,ynpopq
       !common /bcg/ hrad
-      common /cefn/ iconv,irefl
-      common /ceg/ ipow,jfoundr
+      !common /cefn/ iconv,irefl
+      !common /ceg/ ipow,jfoundr
       common /cmn/ ind
       dimension ystart(2)
       parameter(nvar=2)
@@ -1236,6 +1236,7 @@ cu    uses derivs,mmid,pzextr
       end
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       subroutine mmid(y,dydx,nvar,xs,htot,nstep,yout,derivs)
+      use dispersion_module, only: iconv,irefl
       implicit none
       external derivs
       integer nstep,nvar,nmax
@@ -1244,8 +1245,9 @@ cu    uses derivs,mmid,pzextr
       integer i,n
       double precision h,h2,swap,x,ym(nmax),yn(nmax)
       double precision yz1,yz2
-      integer iconv,irefl,ind
-      common /cefn/ iconv,irefl
+      !integer iconv,irefl
+      !common /cefn/ iconv,irefl
+      integer ind
       common /cmn/ ind
       h=htot/nstep
       yz1=y(1) !sav#

@@ -14,16 +14,29 @@ module dispersion_module
     integer  :: iroot
     !!common /beo/ iroot
     integer  :: izn
-    !common /abcde/ izn
+    !!common /abcde/ izn
     integer  :: ider
-    !common /be2/ ider
+    !!common /be2/ ider
 
     real(wp) :: xnr1,xnr2,xnr3,xnr4
-    !common /be1/ xnr1,xnr2,xnr3,xnr4
+    !!common /be1/ xnr1,xnr2,xnr3,xnr4
 
     real(wp) ::ynz, ynpopq
-    !common /bcef/ ynz,ynpopq
+    !!common /bcef/ ynz,ynpopq
 
+    integer iconv, irefl
+    !!common /cefn/ iconv,irefl
+
+    integer ipow,jfoundr
+    !!common /ceg/ ipow,jfoundr
+    integer  :: ifound
+    real(wp) :: vfound
+    !!common /eg1/ vfound,ifound
+    real(wp) :: pdec1,pdec2,pdec3,pdecv,pdecal,dfdv
+    integer  :: icf1,icf2
+    !!common /eg2/ pdec1,pdec2,pdec3,pdecv,pdecal,dfdv,icf1,icf2
+    real(wp) :: cf1,cf2,cf3,cf4,cf5,cf6
+    !!common /eg3/ cf1,cf2,cf3,cf4,cf5,cf6
 contains
     subroutine disp2(pa,yn2,ptet,xnro,prt,prm)
         use constants
@@ -45,22 +58,12 @@ contains
         !common /aef2/ icall1,icall2
         !common /be1/ xnr1,xnr2,xnr3,xnr4
         !common /be2/ ider
-        integer iconv, irefl
-        common /cefn/ iconv,irefl
 
-        integer ipow,jfoundr
-        common /ceg/ ipow,jfoundr
-        
-        integer  :: ifound
-        real(wp) :: vfound
-        common /eg1/ vfound,ifound
-
-        real(wp) :: pdec1,pdec2,pdec3,pdecv,pdecal,dfdv
-        integer  :: icf1,icf2
-        common /eg2/ pdec1,pdec2,pdec3,pdecv,pdecal,dfdv,icf1,icf2
-        
-        real(wp) :: cf1,cf2,cf3,cf4,cf5,cf6
-        common /eg3/ cf1,cf2,cf3,cf4,cf5,cf6
+        !common /cefn/ iconv,irefl
+        !common /ceg/ ipow,jfoundr
+        !common /eg1/ vfound,ifound
+        !common /eg2/ pdec1,pdec2,pdec3,pdecv,pdecal,dfdv,icf1,icf2     
+        !common /eg3/ cf1,cf2,cf3,cf4,cf5,cf6
 
         real(wp) :: dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
         common/fj/dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
@@ -444,8 +447,8 @@ contains
         !common /bcef/ ynz,ynpopq
         !common /aef2/ icall1,icall2
 
-        integer :: irefl, iconv
-        common /cefn/ iconv,irefl
+        !integer :: irefl, iconv
+        !common /cefn/ iconv,irefl
 
         common /df/ pdec14,pdec24,pdec34,idec
         common/metrika/g11,g12,g22,g33,gg,g,si,co
