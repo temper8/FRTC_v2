@@ -249,8 +249,7 @@ contains
         use rt_parameters, only : inew
         use spectrum_mod
         !use trajectory
-        use dispersion_module, only: yn3, ivar, iroot
-        use dispersion_module, only: disp2
+        use dispersion_module
         implicit none
 
         type(spectrum_point), intent(in) :: point
@@ -264,8 +263,8 @@ contains
         !real(wp) :: ynz,ynpopq
         !common /bcef/ ynz,ynpopq
 
-        real(wp) :: g11,g12,g22,g33,gg,g,si,co
-        common/metrika/g11,g12,g22,g33,gg,g,si,co !sav2009
+        !real(wp) :: g11,g12,g22,g33,gg,g,si,co
+        !common/metrika/g11,g12,g22,g33,gg,g,si,co !sav2009
 
         real(wp) :: pa, prt, prm
         real(wp) :: f1,f2

@@ -41,7 +41,12 @@ module dispersion_module
     real(wp) :: dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
     !!common/fj/dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
     real(wp) :: znakstart
-    !common/direct/znakstart
+    !!common/direct/znakstart
+
+    real(wp) :: g11,g12,g22,g33,gg,g,si,co
+    !!common/metrika/g11,g12,g22,g33,gg,g,si,co
+    real(wp) :: ham
+    !!common/fjham/ham
 contains
     subroutine disp2(pa,yn2,ptet,xnro,prt,prm)
         use constants
@@ -76,11 +81,8 @@ contains
 
         !common/direct/znakstart
 
-        real(wp) :: g11,g12,g22,g33,gg,g,si,co
-        common/metrika/g11,g12,g22,g33,gg,g,si,co
-
-        real(wp) :: ham
-        common/fjham/ham
+        !common/metrika/g11,g12,g22,g33,gg,g,si,co
+        !common/fjham/ham
 
         integer  :: jr
         real(wp) :: xdl, xdlp, xly, xlyp
@@ -456,9 +458,9 @@ contains
         !common /cefn/ iconv,irefl
 
         common /df/ pdec14,pdec24,pdec34,idec
-        common/metrika/g11,g12,g22,g33,gg,g,si,co
+        !common/metrika/g11,g12,g22,g33,gg,g,si,co
         !common/fj/dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
-        common/fjham/ham
+        !common/fjham/ham
         integer :: idec
         irefl=0
         iconv=0
