@@ -161,7 +161,7 @@ cc*********************************************************************
       !common /bcef/ ynz,ynpopq
       common /a0ghp/ vlf,vrt,dflf,dfrt
       common/plosh/ zv1(100,2),zv2(100,2)!,sk(100)
-      common /asou/ rsou(102),sou(102),npta
+      !common /asou/ rsou(102),sou(102),npta
       !common/gridv/vgrid(101,100),dfundv(101,100),nvpt
       !common /vvv2/ psum4
       common /arr/ dgdu(50,100),kzero(100)
@@ -932,8 +932,7 @@ c---------------------------------------
       use plasma
       use rt_parameters
       use trajectory, only: irs, iabsorp
-      use dispersion_module, only: ivar, izn, ynz, ynpopq
-      use dispersion_module, only: disp2
+      use dispersion_module
       implicit real*8 (a-h,o-z)
       external derivs
       !common /abcd/ irs
@@ -941,7 +940,7 @@ c---------------------------------------
       !common /abcdg/ iabsorp
       !common /bdeo/ ivar
       !common /bcef/ ynz,ynpopq
-      common /df/ pdec14,pdec24,pdec34,idec
+      !common /df/ pdec14,pdec24,pdec34,idec
       common /dg/ pintld4,pintcl4,pintal4
       parameter(hbeg=1.d-4,iturns=1,maxat=3,nvar=4) !sav2008
       dimension ystart(4),yscal(nvar),y(nvar),dydx(nvar),yold(nvar)

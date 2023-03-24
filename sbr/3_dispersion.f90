@@ -47,6 +47,14 @@ module dispersion_module
     !!common/metrika/g11,g12,g22,g33,gg,g,si,co
     real(wp) :: ham
     !!common/fjham/ham
+
+    real(wp) :: pdec14,pdec24,pdec34,idec
+    !!common /df/ pdec14,pdec24,pdec34,idec
+
+    real(wp) rsou(102),sou(102)
+    integer npta
+    !!common /asou/ rsou(102),sou(102),npta
+    !! используется в source_new
 contains
     subroutine disp2(pa,yn2,ptet,xnro,prt,prm)
         use constants
@@ -457,7 +465,7 @@ contains
         !integer :: irefl, iconv
         !common /cefn/ iconv,irefl
 
-        common /df/ pdec14,pdec24,pdec34,idec
+        !common /df/ pdec14,pdec24,pdec34,idec
         !common/metrika/g11,g12,g22,g33,gg,g,si,co
         !common/fj/dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
         !common/fjham/ham
@@ -759,7 +767,7 @@ contains
     subroutine source_new(r,out)
         implicit real*8 (a-h,o-z)
         integer npta, klo, khi, ierr
-        common /asou/ rsou(102),sou(102),npta
+        !common /asou/ rsou(102),sou(102),npta
         call lock2(rsou,npta,r,klo,khi,ierr)
         if(ierr.ne.0) then
             write(*,*)'lock2 error in source_new'
