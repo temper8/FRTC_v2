@@ -549,38 +549,5 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
         irszz=irs
     end  
 
-    subroutine extd4(x,y,dydx)
-        use dispersion_module
-        implicit real*8 (a-h,o-z)
-        dimension y(*),dydx(*)
-        !common/fj/dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
-        !common/direct/znakstart
-        znak=znakstart
-        xxx=x
-        ptet=y(1)
-        yn2=y(2)
-        pa=y(3)
-        yn1=y(4)
-        call disp4(pa,ptet,yn1,yn2)
-  
-        !new variant
-        dydx(1)=-znak*dhdm/ddn
-        dydx(2)=znak*dhdtet/ddn
-        dydx(3)=-znak*dhdnr/ddn
-        dydx(4)=znak*dhdr/ddn
-        dydx(5)=-znak*dhdn3/ddn
-  
-        !c      dydx(1)=znak*dhdm/ddn
-        !c      dydx(2)=-znak*dhdtet/ddn
-        !c      dydx(3)=znak*dhdnr/ddn
-        !c      dydx(4)=-znak*dhdr/ddn
-        !c      dydx(5)=znak*dhdn3/ddn
-        
-        !old variant:
-        !      dydx(1)=dhdm/ddn
-        !      dydx(2)=-dhdtet/ddn
-        !      dydx(3)=dhdnr/ddn
-        !      dydx(4)=-dhdr/ddn
-        !      dydx(5)=dhdn3/ddn
-    end    
+
 end module trajectory
