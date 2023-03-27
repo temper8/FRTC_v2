@@ -59,16 +59,17 @@
 !!!!       write(*,*) i,outj(i)
       end do
 
-      cup  = positive_dc%cu
-      cum  = negative_dc%cu
-      cp   = positive_dc%c
-      cm   = negative_dc%c
-      cup0 = positive_dc%cu0
-      cum0 = negative_dc%cu0
-      cp0  = positive_dc%c0
-      cm0  = negative_dc%c0
+      !cup  = positive_dc%cu
+      !cum  = negative_dc%cu
+      !cp   = positive_dc%c
+      !cm   = negative_dc%c
+      !cup0 = positive_dc%cu0
+      !cum0 = negative_dc%cu0
+      !cp0  = positive_dc%c0
+      !cm0  = negative_dc%c0
 
-      rc_result = DrivenCurrentResult(cup= cup, cp= cp, cum= cum, cm=cm, cup0= cup0, cp0=cp0, cum0= cum0, cm0= cm0)
+      !rc_result = DrivenCurrentResult(cup= cup, cp= cp, cum= cum, cm=cm, cup0= cup0, cp0=cp0, cum0= cum0, cm0= cm0)
+      rc_result = DrivenCurrentResult(positive_dc, negative_dc)
       call rc_result%print(time)
       call rc_result%save(time)
 
@@ -80,6 +81,7 @@
       !subroutine lhcurrent(outj,ohj,cuj,cujoh,inpt,ispectr)
 !!      implicit real*8 (a-h,o-z)
       use plasma, only : rh, rh1, fn1,fn2, fvt, sk
+      
       use maxwell
       use rt_parameters, only : nr, inew
       use driven_current_module
@@ -114,7 +116,7 @@
       vt0=fvt(zero)
       ccur=pqe*vt0*0.333d-9
       curdir=-dble(ispectr)
-!
+
       cfull=zero
       cfull0=zero
       k=(3-ispectr)/2

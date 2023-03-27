@@ -47,6 +47,10 @@ module driven_current_module
 
     end type DrivenCurrentResult
 
+    interface DrivenCurrentResult
+        module procedure :: DrivenCurrentResult_constructor
+    end interface DrivenCurrentResult    
+    
 contains
 
     function DrivenCurrent_constructor(size) result(this)
@@ -92,6 +96,25 @@ contains
         end if
 
     end subroutine DrivenCurrent_evaluate
+
+
+    function DrivenCurrentResult_constructor(positive_dc, negative_dc) result(this)
+        !- конструктор для DrivenCurrentResult
+        implicit none
+        type(DrivenCurrent), intent(in) :: positive_dc
+        type(DrivenCurrent), intent(in) :: negative_dc
+        type(DrivenCurrentResult) :: this
+
+        this%cup  = positive_dc%cu
+        this%cum  = negative_dc%cu
+        this%cp   = positive_dc%c
+        this%cm   = negative_dc%c
+        this%cup0 = positive_dc%cu0
+        this%cum0 = negative_dc%cu0
+        this%cp0  = positive_dc%c0
+        this%cm0  = negative_dc%c0
+
+    end function DrivenCurrentResult_constructor
 
     subroutine driven_current_result_print(this, time)
         class(DrivenCurrentResult), intent(in) :: this
