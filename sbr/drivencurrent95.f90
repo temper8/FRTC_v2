@@ -25,7 +25,15 @@
       type(DrivenCurrentResult) :: rc_result
       type(DrivenCurrent) :: positive_dc
       type(DrivenCurrent) :: negative_dc
-!
+    
+      interface
+        subroutine lhcurrent(driven_current, ispectr)
+            use driven_current_module
+            implicit none
+            type(DrivenCurrent), intent(inout) :: driven_current
+            integer,             intent(in)    :: ispectr
+        end subroutine lhcurrent
+      end interface
       inpt=NA1
 
       do i=1,inpt
@@ -38,15 +46,15 @@
 
 !
 !!positive spectrum:
-      ispectr=1
+      !ispectr=1
       !call lhcurrent(outjp,ohjp,cup,cup0,inpt,ispectr)
-      call lhcurrent(positive_dc, ispectr)
+      call lhcurrent(positive_dc, ispectr= 1)
       call positive_dc%evaluate(ROC)
 
 !!negative spectrum:
-      ispectr=-1
+      !ispectr=-1
       !call lhcurrent(outjm,ohjm,cum,cum0,inpt,ispectr)
-      call lhcurrent(negative_dc, ispectr)
+      call lhcurrent(negative_dc, ispectr= -1)
       call negative_dc%evaluate(ROC)
 
 
@@ -77,12 +85,12 @@
       use driven_current_module
       implicit none
       type(DrivenCurrent), intent(inout) :: driven_current
-
+      integer,             intent(in)    :: ispectr
       !real*8 outj(*),ohj(*),
       real*8 cuj,cujoh,curs,curs0,curdir
       real*8 currn,vt0,ccur,cfull,cfull0
       real*8 r,pn,fnr,fnrr,vt,vto!,rh1
-      integer klo,khi,ierr,nrr,i,j,inpt,ispectr,ismthout
+      integer klo,khi,ierr,nrr,i,j,inpt,ismthout
       !common /a0ab/ nr
       !real*8 y2dn,y2tm,y2tmi
       !common /a0l3/ y2dn(501),y2tm(501),y2tmi(501)
