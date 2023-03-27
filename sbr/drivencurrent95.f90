@@ -59,16 +59,6 @@
 !!!!       write(*,*) i,outj(i)
       end do
 
-      !cup  = positive_dc%cu
-      !cum  = negative_dc%cu
-      !cp   = positive_dc%c
-      !cm   = negative_dc%c
-      !cup0 = positive_dc%cu0
-      !cum0 = negative_dc%cu0
-      !cp0  = positive_dc%c0
-      !cm0  = negative_dc%c0
-
-      !rc_result = DrivenCurrentResult(cup= cup, cp= cp, cum= cum, cm=cm, cup0= cup0, cp0=cp0, cum0= cum0, cm0= cm0)
       rc_result = DrivenCurrentResult(positive_dc, negative_dc)
       call rc_result%print(time)
       call rc_result%save(time)
@@ -166,14 +156,14 @@
       nrr=nr+2
       rxx(nrr)=1.d0
       currnt(nr+2)=zero
-!
+
       if(ismthout.ne.0) then
           do i=1,nrr
               wrk(i)=currnt(i)
           end do
           call fsmoth4(rxx,wrk,nrr,currnt)
       end if
-!
+
       rh(1)=rh1
       if(rh(inpt).gt.1d0) rh(inpt)=1.d0
       do j=1,inpt
@@ -201,14 +191,14 @@
       nrr=nr+2
       rxx(nrr)=1.d0
       currnt(nr+2)=zero
-!
+
       if(ismthout.ne.0) then
           do i=1,nrr
               wrk(i)=currnt(i)
           end do
           call fsmoth4(rxx,wrk,nrr,currnt)
       end if
-!
+
       rh(1)=rh1
       if(rh(inpt).gt.1d0) rh(inpt)=1.d0
       do j=1,inpt
@@ -223,7 +213,6 @@
           driven_current%ohj(j)=fout
       end do
       rh(1)=zero
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
       deallocate(vj,fj,fj0,cur,cur0,currnt,rxx,wrk)
       end
