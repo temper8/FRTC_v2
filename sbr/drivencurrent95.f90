@@ -225,26 +225,4 @@
 
       deallocate(vj,fj,fj0,cur,cur0,currnt,rxx,wrk)
       end
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-
-subroutine currlhcd_old(i0,v,f,f0,curs,curs0)
-      implicit none
-      integer i0,k
-      real*8 v(*),f(*),f0(*),curs,curs0
-      real*8 vl,vr,fl,fr,zero
-      parameter(zero=0.d0)
-      curs=zero
-      curs0=zero
-      do k=1,i0-1
-            vl=v(k)
-            vr=v(k+1)
-            fl=f(k)
-            fr=f(k+1)
-            curs=curs+(fl*vl+fr*vr)/2d0*(vr-vl)
-            fl=f0(k)
-            fr=f0(k+1)
-            curs0=curs0+(fl*vl+fr*vr)/2d0*(vr-vl)
-      end do
-end
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
