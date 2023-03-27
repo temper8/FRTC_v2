@@ -1,11 +1,11 @@
-      subroutine drivencurrent95(outj, sigmaj, UPL, NRD, NA1, TIME, TAU, ROC, RTOR, GP2)
-!! ******************************************************************
-!!   outj(i)  = LH driven current density, MA/m^2
-!!   dndt(i)  = d^2Jr1/dt^2/E, MA/m^2/sec^2/(V/m), ~runaway d(el.density)/dt/E
-!!   djdt(i)  = dJr2/dt, time drivative of runaway current Jr2, MA/m^2/sec
-!!   outjrun(i)  = LH driven runaway current density, MA/m^2
-!!   outnerun(i) = runaway electron density/10^19 m^-3
-!! ******************************************************************
+    subroutine drivencurrent95(outj, sigmaj, UPL, NRD, NA1, TIME, TAU, ROC, RTOR, GP2)
+    !! ******************************************************************
+    !!   outj(i)  = LH driven current density, MA/m^2
+    !!   dndt(i)  = d^2Jr1/dt^2/E, MA/m^2/sec^2/(V/m), ~runaway d(el.density)/dt/E
+    !!   djdt(i)  = dJr2/dt, time drivative of runaway current Jr2, MA/m^2/sec
+    !!   outjrun(i)  = LH driven runaway current density, MA/m^2
+    !!   outnerun(i) = runaway electron density/10^19 m^-3
+    !! ******************************************************************
       use FokkerPlanck_module
       use driven_current_module
       implicit none
@@ -19,100 +19,75 @@
 !
       real*8 outj(NRD),sigmaj(NRD),afld(NRD),dtau
       integer i,inpt,ispectr
-      real*8,dimension(:),allocatable:: outjp,outjm,ohjp,ohjm
+
       real*8 dt, cup,cup0,cum,cum0,cp,cm,cp0,cm0,aiint
       real*8, parameter :: zero=0.d0, eps=1.d-2 
-      type(DrivenCurrentResult) rc_result
+      type(DrivenCurrentResult) :: rc_result
+      type(DrivenCurrent) :: positive_dc
+      type(DrivenCurrent) :: negative_dc
 !
       inpt=NA1
-      allocate(outjp(inpt),outjm(inpt),ohjp(inpt),ohjm(inpt))
+
       do i=1,inpt
           afld(i)=UPL(i)/RTOR/GP2 !!variant
       end do
 !
 !!!!!!!!!!!!! starting LH current calculation !!!!!!!!!!!!!!!!!
-      outj=zero
-      outjp=zero
-      outjm=zero
-      ohjp=zero
-      ohjm=zero
-      cup=zero
-      cum=zero
-      cp=zero
-      cm=zero
-      cup0=zero
-      cum0=zero
-      cp0=zero
-      cm0=zero
+      positive_dc = DrivenCurrent(NA1)
+      negative_dc = DrivenCurrent(NA1)
+
 !
 !!positive spectrum:
       ispectr=1
-      call lhcurrent(outjp,ohjp,cup,cup0,inpt,ispectr)
-      if(cup0.ne.zero) then
-          cp0=aiint(ohjp,roc)
-          if(cp0.ne.zero) then
-          do i=1,inpt
-              ohjp(i)=cup0*ohjp(i)/cp0
-          end do
-          end if
-      end if
-      if(cup.ne.zero) then
-          cp=aiint(outjp,roc)
-          if(cp.ne.zero) then
-              do i=1,inpt
-                  outjp(i)=cup*outjp(i)/cp
-              end do
-          end if
-      end if
+      !call lhcurrent(outjp,ohjp,cup,cup0,inpt,ispectr)
+      call lhcurrent(positive_dc, ispectr)
+      call positive_dc%evaluate(ROC)
 
 !!negative spectrum:
       ispectr=-1
-      call lhcurrent(outjm,ohjm,cum,cum0,inpt,ispectr)
-      if(cum0.ne.zero) then
-          cm0=aiint(ohjm,roc)
-          if(cm0.ne.zero) then
-            do i=1,inpt
-                ohjm(i)=cum0*ohjm(i)/cm0
-          end do
-          end if
-      end if
-      if(cum.ne.zero) then
-          cm=aiint(outjm,roc)
-          if(cm.ne.zero) then
-              do i=1,inpt
-                  outjm(i)=cum*outjm(i)/cm
-              end do
-          end if
-      end if
+      !call lhcurrent(outjm,ohjm,cum,cum0,inpt,ispectr)
+      call lhcurrent(negative_dc, ispectr)
+      call negative_dc%evaluate(ROC)
+
 
       do i=1,inpt
-          outj(i)=outjp(i)+outjm(i)
+          outj(i) = positive_dc%outj(i) + negative_dc%outj(i)
           sigmaj(i)=zero
-          if(dabs(afld(i)).gt.eps) then
-              sigmaj(i)=(ohjp(i)+ohjm(i))/afld(i)
+          if (abs(afld(i)).gt.eps) then
+              sigmaj(i) = (positive_dc%ohj(i) + negative_dc%ohj(i))/afld(i)
           end if
 !!!!       write(*,*) i,outj(i)
       end do
-!
+
+      cup  = positive_dc%cu
+      cum  = negative_dc%cu
+      cp   = positive_dc%c
+      cm   = negative_dc%c
+      cup0 = positive_dc%cu0
+      cum0 = negative_dc%cu0
+      cp0  = positive_dc%c0
+      cm0  = negative_dc%c0
+
       rc_result = DrivenCurrentResult(cup= cup, cp= cp, cum= cum, cm=cm, cup0= cup0, cp0=cp0, cum0= cum0, cm0= cm0)
       call rc_result%print(time)
       call rc_result%save(time)
-!
+
       call fokkerplanck_compute(time, TAU)
-!
-      deallocate(outjp,outjm,ohjp,ohjm)
-!
+
       end
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-
-      subroutine lhcurrent(outj,ohj,cuj,cujoh,inpt,ispectr)
+      subroutine lhcurrent(driven_current, ispectr)
+      !subroutine lhcurrent(outj,ohj,cuj,cujoh,inpt,ispectr)
 !!      implicit real*8 (a-h,o-z)
       use plasma, only : rh, rh1, fn1,fn2, fvt, sk
       use maxwell
       use rt_parameters, only : nr, inew
+      use driven_current_module
       implicit none
-      real*8 outj(*),ohj(*),cuj,cujoh,curs,curs0,curdir
+      type(DrivenCurrent), intent(inout) :: driven_current
+
+      !real*8 outj(*),ohj(*),
+      real*8 cuj,cujoh,curs,curs0,curdir
       real*8 currn,vt0,ccur,cfull,cfull0
       real*8 r,pn,fnr,fnrr,vt,vto!,rh1
       integer klo,khi,ierr,nrr,i,j,inpt,ispectr,ismthout
@@ -130,10 +105,11 @@
       real*8,dimension(:),allocatable:: vj, fj, fj0, cur, cur0, currnt, rxx, wrk
       parameter(ismthout=1)
 
+      inpt = driven_current%grid_size
       allocate(vj(i0),fj(i0),fj0(i0),cur(nr),cur0(nr),currnt(nr+2),rxx(nr+2),wrk(nr+2))
-!---------------------------------------------------
-! initial constants
-!---------------------------------------------------
+    !---------------------------------------------------
+    ! initial constants
+    !---------------------------------------------------
       !pqe=4.803e-10
       vt0=fvt(zero)
       ccur=pqe*vt0*0.333d-9
@@ -163,8 +139,13 @@
           cur0(j)=curs0*pn*ccur*curdir*vto  !Ampere/cm2
           cfull0=cfull0+cur0(j)*sk(j)
       end do
-      cuj=cfull*1d-6   !driven current, MA
-      cujoh=cfull0*1d-6   !driven current, MA
+
+      !cuj=cfull*1d-6   !driven current, MA
+      driven_current%cu = cfull*1d-6
+
+      !cujoh=cfull0*1d-6   !driven current, MA
+      driven_current%cu0 = cfull0*1d-6 
+
 !!      write(*,*)
 !!      write(*,*)'ccur',ccur,' curdir=',curdir,' nr=',nr
 !!      write(*,*)'cu_out, MA=',cu_out,' cfull, A=',cfull
@@ -202,7 +183,7 @@
                pause
           end if
           call linf(rxx,currnt,rh(j),fout,klo,khi)
-          outj(j)=fout
+          driven_current%outj(j)=fout
       end do
       rh(1)=zero
 
@@ -237,7 +218,7 @@
               pause
           end if
           call linf(rxx,currnt,rh(j),fout,klo,khi)
-          ohj(j)=fout
+          driven_current%ohj(j)=fout
       end do
       rh(1)=zero
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
