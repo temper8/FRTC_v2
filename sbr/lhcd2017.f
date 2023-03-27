@@ -1842,8 +1842,8 @@ cu    uses derivs
         ys(j)=fdf(xx(1),cffs,m2,dys(j))
       go to 1
       end
+
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
       subroutine interpol(fj)
       implicit none
@@ -1853,14 +1853,14 @@ cu    uses derivs
       parameter(zero=0.d0,i0=1002)
       p=zero
       do i=1,i0
-      if (fj(i).gt.zero) then
-      if (p.gt.zero) then
-      p2=(fj(i)-fj(p))/(i-p)
-      do k=p+1,i-1
-      fj(k)=fj(p)+p2*(k-p)
-      end do
-      end if
-      p=i
-      end if
-      end do
+            if (fj(i).gt.zero) then
+                  if (p.gt.zero) then
+                        p2=(fj(i)-fj(p))/(i-p)
+                              do k=p+1,i-1
+                                    fj(k)=fj(p)+p2*(k-p)
+                              end do
+                        end if
+                  p=i
+                  end if
+            end do
       end
