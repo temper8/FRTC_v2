@@ -66,28 +66,36 @@ contains
         integer nmax, i
         parameter (nmax=10)
         dimension y(n),dydx(n),yout(n),yt(nmax),dyt(nmax),dym(nmax)
+
         hh=h*0.5d0
         h6=h/6.d0
         xh=x+hh
+
         do i=1,n
             yt(i)=y(i)+hh*dydx(i)
         enddo
+
         call derivs(xh,yt,dyt)
+
         dv1=dyt(3)
+
         do i=1,n
             yt(i)=y(i)+hh*dyt(i)
         enddo
+
         call derivs(xh,yt,dym)
+
         do i=1,n
             yt(i)=y(i)+h*dym(i)
             dym(i)=dyt(i)+dym(i)
         enddo
 
         call derivs(x+h,yt,dyt)
+
         do i=1,n
             yout(i)=y(i)+h6*(dydx(i)+dyt(i)+2.d0*dym(i))
         enddo
-        return
+
     end
 
 
