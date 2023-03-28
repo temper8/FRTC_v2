@@ -1,9 +1,9 @@
-module Runge_Kutta_module
+module runge_kutta_module
     implicit none
     
 contains
     
-!----------------------------------------------------------------
+    !----------------------------------------------------------------
 
     subroutine rkqc(y,dydx,n,x,htry,eps,yscal,hdid,hnext,derivs)
         implicit real*8 (a-h,o-z)
@@ -28,10 +28,10 @@ contains
         call rk4(ytemp,dydx,n,x,hh,y,derivs)
         x=xsav+h
         if(x.eq.xsav) then
-        write(*,*)' stepsize not significant in rkqc'
-        write(*,*)'xsav=',xsav,' h=',h,' htry=',htry
-        write(*,88) y,dydx
-        pause
+            write(*,*)' stepsize not significant in rkqc'
+            write(*,*)'xsav=',xsav,' h=',h,' htry=',htry
+            write(*,88) y,dydx
+            pause
         end if
 88      format(1x,10(e14.7,1x))
 
@@ -99,10 +99,10 @@ contains
     end
 
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!sav2008: below this line there are new subroutins and functions
- 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    !sav2008: below this line there are new subroutins and functions
+    
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     subroutine rkqs(y,dydx,n,x,htry,eps,yscal,hdid,hnext,derivs)
         integer n,nmax
         double precision eps,hdid,hnext,htry,x,dydx(n),y(n),yscal(n)
@@ -120,23 +120,23 @@ contains
         enddo
         errmax=errmax/eps
         if(errmax.gt.1.d0)then
-          htemp=safety*h*(errmax**pshrnk)
-          h=sign(max(abs(htemp),0.1d0*abs(h)),h)
-          xnew=x+h
-          if(xnew.eq.x)pause 'stepsize underflow in rkqs'
-          goto 1
+            htemp=safety*h*(errmax**pshrnk)
+            h=sign(max(abs(htemp),0.1d0*abs(h)),h)
+            xnew=x+h
+            if(xnew.eq.x)pause 'stepsize underflow in rkqs'
+            goto 1
         else
-          if(errmax.gt.errcon)then
-            hnext=safety*h*(errmax**pgrow)
-          else
-            hnext=5.d0*h
-          endif
-          hdid=h
-          x=x+h
-          do i=1,n
-            y(i)=ytemp(i)
-          enddo
-          return
+            if(errmax.gt.errcon)then
+                hnext=safety*h*(errmax**pgrow)
+            else
+                hnext=5.d0*h
+            endif
+            hdid=h
+            x=x+h
+            do i=1,n
+                y(i)=ytemp(i)
+            enddo
+            return
         endif
     end
   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -185,4 +185,4 @@ contains
         return
         end
   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!      
-end module Runge_Kutta_module
+end module runge_kutta_module

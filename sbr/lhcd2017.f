@@ -930,7 +930,7 @@ c---------------------------------------
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       subroutine driver4(ystart,x1,x2,rexi,hmin,derivs)
       use constants
-      use Runge_Kutta_module
+      use runge_kutta_module
       use plasma
       use rt_parameters
       use trajectory, only: irs, iabsorp
