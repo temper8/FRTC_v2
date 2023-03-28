@@ -148,6 +148,7 @@ cc*********************************************************************
       use current
       use iteration_result_mod
       use iterator_mod
+      use lock_module
       implicit real*8 (a-h,o-z)
       type(spectrum) spectr
       real*8 outpe,pe_out 
@@ -1368,6 +1369,7 @@ cu    uses derivs,mmid,pzextr
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       subroutine distr(vz,j,ifound,fder)
       use iterator_mod
+      use lock_module      
       implicit none
       real*8 vz,fder
       integer j,ifound,i,klo,khi,ierr,nvp
@@ -1564,77 +1566,7 @@ c----------------------------------------------------------------
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      subroutine linf(x,y,t,fout,klo,khi)
-      implicit real*8 (a-h,o-z)
-      dimension x(*),y(*)
-       dout=(y(khi)-y(klo))/(x(khi)-x(klo))
-       fout=y(klo)+dout*(t-x(klo))
-      end
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      subroutine lock(xa,n,x,klo,khi,ierr)
-      implicit real*8 (a-h,o-z)
-      dimension xa(*)
-      parameter(tiny=1.d-14)
-      klo=0
-      khi=0
-      dx1=x-xa(1)
-      dx2=x-xa(n)
-      if(dx1*dx2.ge.tiny) then
-       ierr=1
-       return
-      end if
-      ierr=0
-      klo=1
-      khi=n
-      do while(khi-klo.gt.1)
-       k=(khi+klo)/2
-       if(xa(k).gt.x)then
-         khi=k
-       else
-         klo=k
-       endif
-      end do
-      if(khi.eq.klo) ierr=1
-      end
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      subroutine lock2(xa,n,x,klo,khi,ierr)
-      implicit real*8 (a-h,o-z)
-      dimension xa(*)
-      parameter(zero=0.d0,tiny=1.d-7)
-      ierr=0
-      klo=0
-      khi=0
-      dx1=x-xa(1)
-      if(dabs(dx1).lt.tiny) then
-       klo=1
-       khi=2
-       return
-      else if(dx1.lt.zero) then
-       ierr=1
-       return
-      end if
-      dx2=x-xa(n)
-      if(dabs(dx2).lt.tiny) then
-       klo=n-1
-       khi=n
-       return
-      else if(dx2.gt.zero) then
-       ierr=2
-       return
-      end if
-      klo=1
-      khi=n
-      do while(khi-klo.gt.1)
-       k=(khi+klo)/2
-       if(xa(k).gt.x)then
-         khi=k
-       else
-         klo=k
-       endif
-      end do
-      if(khi.eq.klo) ierr=3
-      end
+
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !sav2008: below this line there are new subroutins and functions
  

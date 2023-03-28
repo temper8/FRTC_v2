@@ -370,6 +370,7 @@ contains
         use rt_parameters, only: nr, inew
         use spline_module
         use maxwell
+        use lock_module
         implicit none
         integer j, klo,khi,ierr
         real(wp) :: efld

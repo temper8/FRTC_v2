@@ -770,6 +770,7 @@ contains
         end    
 
     subroutine source_new(r,out)
+        use lock_module
         implicit real*8 (a-h,o-z)
         integer npta, klo, khi, ierr
         !common /asou/ rsou(102),sou(102),npta

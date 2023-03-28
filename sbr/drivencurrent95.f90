@@ -79,7 +79,7 @@
       !subroutine lhcurrent(outj,ohj,cuj,cujoh,inpt,ispectr)
 !!      implicit real*8 (a-h,o-z)
       use plasma, only : rh, rh1, fn1,fn2, fvt, sk
-      
+      use lock_module
       use maxwell
       use rt_parameters, only : nr, inew
       use driven_current_module

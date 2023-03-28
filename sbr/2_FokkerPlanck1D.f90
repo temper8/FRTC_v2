@@ -82,6 +82,7 @@ module FokkerPlanck1D_mod ! the module name defines the namespace
 
     subroutine FokkerPlanck1D_init_diffusion(this, dif)
         !- инициализация диффузии для схемы савельева
+        use lock_module
         implicit none
         class(FokkerPlanck1D), intent(inout) :: this
         integer :: n
@@ -136,6 +137,7 @@ module FokkerPlanck1D_mod ! the module name defines the namespace
       end subroutine FokkerPlanck1D_init_diffusion
 
     subroutine FokkerPlanck1D_solve_time_step(this, dt, nt)
+        use lock_module
         implicit none
         class(FokkerPlanck1D), intent(inout) :: this
         

@@ -91,6 +91,7 @@ subroutine fokkerplanck_compute(time, TAU)
 
  subroutine init_diffusion(h, n, vj, dj, d1, d2, d3)
     ! инициализация диффузии для схемы савельева
+    use lock_module
     implicit none
     integer, intent(in) :: n
     real(wp), intent(in) :: h

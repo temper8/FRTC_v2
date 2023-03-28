@@ -197,6 +197,7 @@ contains
     real(wp) function d(x)
         !! возможно одна из самых замедляющих функций
         use maxwell
+        use lock_module
         implicit none
         !integer i0
         !parameter(i0=1002)
