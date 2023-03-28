@@ -1,29 +1,30 @@
 module FokkerPlanck1D_mod ! the module name defines the namespace
+    !! модуль содержит функции для решения одномерного уравнения Фоккер-Планка
     use, intrinsic :: iso_fortran_env, only: sp=>real32, dp=>real64
     use savelyev_solver_module
     implicit none
     type FokkerPlanck1D 
-        !- solver of FP eq
+        !! solver of FP eq
         !integer          :: direction = 0
         !- direction
         real(dp)         :: enorm = 0
-        !- электрическое поле
+        !! электрическое поле
         real(dp)         :: v_lim = 0
-        !- верхняя граница скорости электронов
+        !! верхняя граница скорости электронов
         real(dp), allocatable         :: v(:)
-        !- сетка скоростей
+        !! сетка скоростей
         real(dp), allocatable         :: f(:)
-        !- распределение
+        !! распределение
         integer         :: i0 = 0 
-        !- size of distribution grid
+        !! size of distribution grid
         real(dp)        :: alfa2  = 0 
-        !- поле со знаком
+        !! поле со знаком
         integer         :: n = 0 
-        !- size of local grid        
+        !! size of local grid        
         real(dp)        :: h  = 0 
-        !- step of local grid 
+        !! step of local grid 
         real(dp), allocatable ::  d1(:), d2(:), d3(:)
-        !- диффузия
+        !! диффузия
     contains
         procedure :: print => FokkerPlanck1D_print
         procedure :: solve_time_step => FokkerPlanck1D_solve_time_step
@@ -38,7 +39,7 @@ module FokkerPlanck1D_mod ! the module name defines the namespace
     contains
 
     function FokkerPlanck1D_constructor(e, v_lim, v, f) result(this)
-        !- конструктор для FokkerPlanck1D
+        !! конструктор для FokkerPlanck1D
         implicit none
         type(FokkerPlanck1D) :: this
         real(dp), value :: e, v_lim, v(:), f(:)
@@ -81,7 +82,7 @@ module FokkerPlanck1D_mod ! the module name defines the namespace
 
 
     subroutine FokkerPlanck1D_init_diffusion(this, dif)
-        !- инициализация диффузии для схемы савельева
+        !! инициализация диффузии для схемы савельева
         use lock_module
         implicit none
         class(FokkerPlanck1D), intent(inout) :: this
@@ -212,7 +213,7 @@ module FokkerPlanck1D_mod ! the module name defines the namespace
 
 
     subroutine burying_procedure(v, f0, df0)
-        ! процедура закапывания
+        !! процедура закапывания
         implicit none
         real*8,  intent(in)     :: v(:)        
         real*8,  intent(inout)  :: f0(:)
@@ -269,8 +270,8 @@ module FokkerPlanck1D_mod ! the module name defines the namespace
             if (present(df0)) then
                 df0(ibeg:i0) = df(ibeg:i0)*fout1/fout2
             end if            
-    !!      write(*,*)'#1 j,k,ibeg=',j,k,ibeg
-    !!      write(*,*)'#1 v(ibeg)=',vj(ibeg),' f1/f2=',fout1/fout2
+    !      write(*,*)'#1 j,k,ibeg=',j,k,ibeg
+    !      write(*,*)'#1 v(ibeg)=',vj(ibeg),' f1/f2=',fout1/fout2
         end if
     
         deallocate(f,df)
