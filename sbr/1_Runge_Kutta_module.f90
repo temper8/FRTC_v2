@@ -6,88 +6,88 @@ contains
 !----------------------------------------------------------------
 
     subroutine rkqc(y,dydx,n,x,htry,eps,yscal,hdid,hnext,derivs)
-      implicit real*8 (a-h,o-z)
-      integer, intent(in) :: n
-      integer nmax, i
-      parameter (nmax=10,fcor=.0666666667d0, &
-         one=1.d0,safety=0.9d0,errcon=6.d-4)
-      external derivs
-      dimension y(n),dydx(n),yscal(n),ytemp(nmax),ysav(nmax),dysav(nmax)
-      pgrow=-0.20d0
-      pshrnk=-0.25d0
-      xsav=x
-      do 11 i=1,n
-        ysav(i)=y(i)
-        dysav(i)=dydx(i)
-11    continue
-      h=htry
-1     hh=0.5d0*h
-      call rk4(ysav,dysav,n,xsav,hh,ytemp,derivs)
-      x=xsav+hh
-      call derivs(x,ytemp,dydx)
-      call rk4(ytemp,dydx,n,x,hh,y,derivs)
-      x=xsav+h
-      if(x.eq.xsav) then
-       write(*,*)' stepsize not significant in rkqc'
-       write(*,*)'xsav=',xsav,' h=',h,' htry=',htry
-       write(*,88) y,dydx
-       pause
-      end if
-88    format(1x,10(e14.7,1x))
+        implicit real*8 (a-h,o-z)
+        integer, intent(in) :: n
+        integer nmax, i
+        parameter (nmax=10,fcor=.0666666667d0, &
+            one=1.d0,safety=0.9d0,errcon=6.d-4)
+        external derivs
+        dimension y(n),dydx(n),yscal(n),ytemp(nmax),ysav(nmax),dysav(nmax)
+        pgrow=-0.20d0
+        pshrnk=-0.25d0
+        xsav=x
+        do  i=1,n
+            ysav(i)=y(i)
+            dysav(i)=dydx(i)
+        enddo
+        h=htry
+1       hh=0.5d0*h
+        call rk4(ysav,dysav,n,xsav,hh,ytemp,derivs)
+        x=xsav+hh
+        call derivs(x,ytemp,dydx)
+        call rk4(ytemp,dydx,n,x,hh,y,derivs)
+        x=xsav+h
+        if(x.eq.xsav) then
+        write(*,*)' stepsize not significant in rkqc'
+        write(*,*)'xsav=',xsav,' h=',h,' htry=',htry
+        write(*,88) y,dydx
+        pause
+        end if
+88      format(1x,10(e14.7,1x))
 
-      call rk4(ysav,dysav,n,xsav,h,ytemp,derivs)
-      errmax=0.d0
-      do 12 i=1,n
-        v=ytemp(i)
-        ytemp(i)=y(i)-ytemp(i)
-        errmax=dmax1(errmax,dabs(ytemp(i)/yscal(i)))
-12    continue
-      errmax=errmax/eps
-      if(errmax.gt.one) then
-        h=safety*h*(errmax**pshrnk)
-        goto 1
-      else
-        hdid=h
-        if(errmax.gt.errcon)then
-          hnext=safety*h*(errmax**pgrow)
+        call rk4(ysav,dysav,n,xsav,h,ytemp,derivs)
+        errmax=0.d0
+        do i=1,n
+            v=ytemp(i)
+            ytemp(i)=y(i)-ytemp(i)
+            errmax=dmax1(errmax,dabs(ytemp(i)/yscal(i)))
+        enddo
+        errmax=errmax/eps
+        if(errmax.gt.one) then
+            h=safety*h*(errmax**pshrnk)
+            goto 1
         else
-          hnext=4.d0*h
+            hdid=h
+            if(errmax.gt.errcon)then
+                hnext=safety*h*(errmax**pgrow)
+            else
+                hnext=4.d0*h
+            endif
         endif
-      endif
-      do 13 i=1,n
-        y(i)=y(i)+ytemp(i)*fcor
-13    continue
-      return
+        do i=1,n
+            y(i)=y(i)+ytemp(i)*fcor
+        enddo
+        return
      end
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     subroutine rk4(y,dydx,n,x,h,yout,derivs)
-      implicit real*8 (a-h,o-z)
-      integer, intent(in) :: n
-      integer nmax, i
-      parameter (nmax=10)
-      dimension y(n),dydx(n),yout(n),yt(nmax),dyt(nmax),dym(nmax)
-      hh=h*0.5d0
-      h6=h/6.d0
-      xh=x+hh
-      do 11 i=1,n
-        yt(i)=y(i)+hh*dydx(i)
-11    continue
-      call derivs(xh,yt,dyt)
+        implicit real*8 (a-h,o-z)
+        integer, intent(in) :: n
+        integer nmax, i
+        parameter (nmax=10)
+        dimension y(n),dydx(n),yout(n),yt(nmax),dyt(nmax),dym(nmax)
+        hh=h*0.5d0
+        h6=h/6.d0
+        xh=x+hh
+        do i=1,n
+            yt(i)=y(i)+hh*dydx(i)
+        enddo
+        call derivs(xh,yt,dyt)
         dv1=dyt(3)
-      do 12 i=1,n
-        yt(i)=y(i)+hh*dyt(i)
-12    continue
-      call derivs(xh,yt,dym)
-      do 13 i=1,n
-        yt(i)=y(i)+h*dym(i)
-        dym(i)=dyt(i)+dym(i)
-13    continue
+        do i=1,n
+            yt(i)=y(i)+hh*dyt(i)
+        enddo
+        call derivs(xh,yt,dym)
+        do i=1,n
+            yt(i)=y(i)+h*dym(i)
+            dym(i)=dyt(i)+dym(i)
+        enddo
 
-      call derivs(x+h,yt,dyt)
-      do 14 i=1,n
-        yout(i)=y(i)+h6*(dydx(i)+dyt(i)+2.d0*dym(i))
-14    continue
-      return
+        call derivs(x+h,yt,dyt)
+        do i=1,n
+            yout(i)=y(i)+h6*(dydx(i)+dyt(i)+2.d0*dym(i))
+        enddo
+        return
     end
 
 
