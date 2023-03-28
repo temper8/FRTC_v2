@@ -1,77 +1,72 @@
     subroutine drivencurrent95(outj, sigmaj, UPL, NRD, NA1, TIME, TAU, ROC, RTOR, GP2)
-    !! ******************************************************************
-    !!   outj(i)  = LH driven current density, MA/m^2
-    !!   dndt(i)  = d^2Jr1/dt^2/E, MA/m^2/sec^2/(V/m), ~runaway d(el.density)/dt/E
-    !!   djdt(i)  = dJr2/dt, time drivative of runaway current Jr2, MA/m^2/sec
-    !!   outjrun(i)  = LH driven runaway current density, MA/m^2
-    !!   outnerun(i) = runaway electron density/10^19 m^-3
-    !! ******************************************************************
-      use FokkerPlanck_module
-      use driven_current_module
-      implicit none
- ! variables imported from ASTRA
-      integer NRD
-      ! NRD     501 - Maximum size of the radial grid
-      integer NA1
-      ! NA1     Edge grid point number: ROC=RHO(NA1)      
-      double precision TIME, TAU, RTOR, ROC, GP2
-      double precision UPL(NRD)
-!
-      real*8 outj(NRD),sigmaj(NRD),afld(NRD),dtau
-      integer i,inpt,ispectr
+        !! ******************************************************************
+        !!   outj(i)  = LH driven current density, MA/m^2
+        !!   dndt(i)  = d^2Jr1/dt^2/E, MA/m^2/sec^2/(V/m), ~runaway d(el.density)/dt/E
+        !!   djdt(i)  = dJr2/dt, time drivative of runaway current Jr2, MA/m^2/sec
+        !!   outjrun(i)  = LH driven runaway current density, MA/m^2
+        !!   outnerun(i) = runaway electron density/10^19 m^-3
+        !! ******************************************************************
+        use FokkerPlanck_module
+        use driven_current_module
+        implicit none
+    ! variables imported from ASTRA
+        integer NRD
+        ! NRD     501 - Maximum size of the radial grid
+        integer NA1
+        ! NA1     Edge grid point number: ROC=RHO(NA1)      
+        double precision TIME, TAU, RTOR, ROC, GP2
+        double precision UPL(NRD)
+    !
+        real*8 outj(NRD),sigmaj(NRD),afld(NRD),dtau
+        integer i,inpt,ispectr
 
-      real*8 dt, cup,cup0,cum,cum0,cp,cm,cp0,cm0,aiint
-      real*8, parameter :: zero=0.d0, eps=1.d-2 
-      type(DrivenCurrentResult) :: rc_result
-      type(DrivenCurrent) :: positive_dc
-      type(DrivenCurrent) :: negative_dc
+        real*8 dt, cup,cup0,cum,cum0,cp,cm,cp0,cm0,aiint
+        real*8, parameter :: zero=0.d0, eps=1.d-2 
+        type(DrivenCurrentResult) :: rc_result
+        type(DrivenCurrent) :: positive_dc
+        type(DrivenCurrent) :: negative_dc
     
-      interface
-        subroutine lhcurrent(driven_current, ispectr)
-            use driven_current_module
-            implicit none
-            type(DrivenCurrent), intent(inout) :: driven_current
-            integer,             intent(in)    :: ispectr
-        end subroutine lhcurrent
-      end interface
-      inpt=NA1
+        interface
+            subroutine lhcurrent(driven_current, ispectr)
+                use driven_current_module
+                implicit none
+                type(DrivenCurrent), intent(inout) :: driven_current
+                integer,             intent(in)    :: ispectr
+            end subroutine lhcurrent
+        end interface
+        inpt=NA1
 
-      do i=1,inpt
-          afld(i)=UPL(i)/RTOR/GP2 !!variant
-      end do
-!
-!!!!!!!!!!!!! starting LH current calculation !!!!!!!!!!!!!!!!!
-      positive_dc = DrivenCurrent(NA1)
-      negative_dc = DrivenCurrent(NA1)
+        do i=1,inpt
+            afld(i)=UPL(i)/RTOR/GP2 !!variant
+        end do
 
-!
-!!positive spectrum:
-      !ispectr=1
-      !call lhcurrent(outjp,ohjp,cup,cup0,inpt,ispectr)
-      call lhcurrent(positive_dc, ispectr= 1)
-      call positive_dc%evaluate(ROC)
+        ! ---- starting LH current calculation 
+        positive_dc = DrivenCurrent(NA1)
+        negative_dc = DrivenCurrent(NA1)
 
-!!negative spectrum:
-      !ispectr=-1
-      !call lhcurrent(outjm,ohjm,cum,cum0,inpt,ispectr)
-      call lhcurrent(negative_dc, ispectr= -1)
-      call negative_dc%evaluate(ROC)
+        ! ---- positive spectrum:
+        call lhcurrent(positive_dc, ispectr= 1)
+        call positive_dc%evaluate(ROC)
+
+        ! ---- negative spectrum:
+        call lhcurrent(negative_dc, ispectr= -1)
+        call negative_dc%evaluate(ROC)
 
 
-      do i=1,inpt
-          outj(i) = positive_dc%outj(i) + negative_dc%outj(i)
-          sigmaj(i)=zero
-          if (abs(afld(i)).gt.eps) then
-              sigmaj(i) = (positive_dc%ohj(i) + negative_dc%ohj(i))/afld(i)
-          end if
-!!!!       write(*,*) i,outj(i)
-      end do
+        do i=1,inpt
+            outj(i) = positive_dc%outj(i) + negative_dc%outj(i)
+            sigmaj(i)=zero
+            if (abs(afld(i)).gt.eps) then
+                sigmaj(i) = (positive_dc%ohj(i) + negative_dc%ohj(i))/afld(i)
+            end if
+            !!!!       write(*,*) i,outj(i)
+        end do
 
-      rc_result = DrivenCurrentResult(positive_dc, negative_dc)
-      call rc_result%print(time)
-      call rc_result%save(time)
+        rc_result = DrivenCurrentResult(positive_dc, negative_dc)
+        call rc_result%print(time)
+        call rc_result%save(time)
 
-      call fokkerplanck_compute(time, TAU)
+        call fokkerplanck_compute(time, TAU)
 
       end
 
