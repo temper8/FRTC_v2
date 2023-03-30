@@ -146,16 +146,16 @@ contains
         procedure(Iderivs_func) :: derivs
         !external derivs
 
-        integer,  parameter :: nmax = 50
+        !integer,  parameter :: nmax = 50
         real(wp), parameter :: safety=0.9d0, pgrow=-.2d0, pshrnk=-.25d0, errcon=1.89d-4
 
-        integer i
-        real(wp)  :: ytemp(nmax), ysav(nmax), dysav(nmax), yerr(nmax)
+        integer   :: i
+        real(wp)  :: ytemp(n), ysav(n), dysav(n), yerr(n)
         real(wp)  :: xsav
         real(wp)  :: h, htemp, errmax, xnew
 
         h=htry
-  1     call rkck(y,dydx,n,x,h,ytemp,yerr,derivs)
+  1     call rkck(y, dydx, n, x, h, ytemp, yerr, derivs)
         errmax=0.d0
         do i=1,n
           errmax=max(errmax,abs(yerr(i)/yscal(i)))
@@ -181,17 +181,26 @@ contains
             return
         endif
     end
-  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  
     subroutine rkck(y,dydx,n,x,h,yout,yerr, derivs)
-        integer n,nmax
-        double precision h,x,dydx(n),y(n),yerr(n),yout(n)
+        !!  метод рунге-кутта, нужны подробности
+        implicit none
+        real(wp), intent(in)    :: y(n)
+        real(wp), intent(in)    :: dydx(n)
+        integer,  intent(in)    :: n
+        real(wp), intent(in)    :: x
+        real(wp), intent(in)    :: h
+
+        real(wp), intent(out)   :: yerr(n)
+        real(wp), intent(out)   :: yout(n)
+
         procedure(Iderivs_func) :: derivs
         !external derivs
-        parameter (nmax=50)
+        !parameter (nmax=50)
   !cu    uses derivs
         integer i
-        double precision ak2(nmax),ak3(nmax),ak4(nmax),ak5(nmax),ak6(nmax) &
-            ,ytemp(nmax),a2,a3,a4,a5,a6,b21,b31,b32,b41,b42,b43,b51,b52,b53, &
+        real(wp) ak2(n),ak3(n),ak4(n),ak5(n),ak6(n),ytemp(n)
+        real(wp) a2,a3,a4,a5,a6,b21,b31,b32,b41,b42,b43,b51,b52,b53, &
             b54,b61,b62,b63,b64,b65,c1,c3,c4,c6,dc1,dc3,dc4,dc5,dc6
         parameter (a2=.2d0,a3=.3d0,a4=.6d0, a5=1.d0, a6=.875d0, b21=.2d0, b31=3.d0/40.d0, &
             b32=9.d0/40.d0,b41=.3d0,b42=-.9d0,b43=1.2d0,b51=-11.d0/54.d0, b52=2.5d0, &
