@@ -17,8 +17,6 @@ print_creation_date: true
 creation_date: %Y-%m-%d %H:%M %z
 ---
 
-This is my Fortran project!
-
 Код FRTC
 
 Тут что-то про него надо написать
