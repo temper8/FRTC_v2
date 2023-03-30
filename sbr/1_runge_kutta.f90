@@ -1,18 +1,45 @@
 module runge_kutta_module
+    use kind_module
     implicit none
-    
+
+    abstract interface
+    !    subroutine extd4(x,y,dydx)
+    !    dimension y(*),dydx(*)
+    subroutine Iderivs_func(x,y,dydx) 
+        import :: wp
+        implicit none
+
+        real(wp), intent(in) :: x
+        real(wp), intent(in) :: y(*)
+        real(wp), intent(in) :: dydx(*)
+
+    end subroutine 
+ end interface
 contains
     
     !----------------------------------------------------------------
 
-    subroutine rkqc(y,dydx,n,x,htry,eps,yscal,hdid,hnext,derivs)
-        implicit real*8 (a-h,o-z)
-        integer, intent(in) :: n
-        integer nmax, i
-        parameter (nmax=10,fcor=.0666666667d0, &
-            one=1.d0,safety=0.9d0,errcon=6.d-4)
-        external derivs
-        dimension y(n),dydx(n),yscal(n),ytemp(nmax),ysav(nmax),dysav(nmax)
+    subroutine rkqc(y, dydx, n, x, htry, eps, yscal, hdid, hnext, derivs)
+        use constants, only: one
+
+        real(wp), intent(inout)  :: y(n)
+        real(wp), intent(in)     :: dydx(n)
+        integer,  intent(in)     :: n
+        real(wp), intent(inout)  :: x
+        real(wp), intent(in)     :: htry, eps
+        real(wp), intent(in)     :: yscal(n)
+        real(wp), intent(inout)  :: hdid, hnext
+        procedure(Iderivs_func), pointer :: derivs
+        !external derivs
+
+        integer,  parameter :: nmax = 10
+        real(wp), parameter :: fcor=.0666666667d0, safety=0.9d0, errcon=6.d-4
+
+        integer   :: i        
+        real(wp)  :: ytemp(nmax),ysav(nmax),dysav(nmax)
+        real(wp)  :: pgrow, pshrnk, xsav
+        real(wp)  :: h, hh, errmax, v
+
         pgrow=-0.20d0
         pshrnk=-0.25d0
         xsav=x
