@@ -831,13 +831,17 @@ contains
         zatukh=sum
         return
     end    
-
+    
     subroutine extd4(x,y,dydx)
         !use dispersion_module
-        implicit real*8 (a-h,o-z)
-        dimension y(*),dydx(*)
+        implicit none
+        !implicit real(wp) (a-h,o-z)
+        real(wp), intent(in)    :: x
+        real(wp), intent(in)    :: y(:)
+        real(wp), intent(inout) :: dydx(:)
         !common/fj/dhdm,dhdnr,dhdtet,dhdr,ddn,dhdn3,dhdv2v,dhdu2u
         !common/direct/znakstart
+        real(wp) :: znak, xxx, ptet, yn2, pa, yn1
         znak=znakstart
         xxx=x
         ptet=y(1)
@@ -845,13 +849,12 @@ contains
         pa=y(3)
         yn1=y(4)
         call disp4(pa,ptet,yn1,yn2)
-  
         !new variant
         dydx(1)=-znak*dhdm/ddn
         dydx(2)=znak*dhdtet/ddn
         dydx(3)=-znak*dhdnr/ddn
         dydx(4)=znak*dhdr/ddn
-        dydx(5)=-znak*dhdn3/ddn
+        !dydx(5)=-znak*dhdn3/ddn !! возможен выход за границы массива
   
         !c      dydx(1)=znak*dhdm/ddn
         !c      dydx(2)=-znak*dhdtet/ddn
@@ -865,5 +868,5 @@ contains
         !      dydx(3)=dhdnr/ddn
         !      dydx(4)=-dhdr/ddn
         !      dydx(5)=dhdn3/ddn
-    end         
+    end   
 end module dispersion_module

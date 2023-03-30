@@ -5,16 +5,16 @@ module runge_kutta_module
     abstract interface
     !    subroutine extd4(x,y,dydx)
     !    dimension y(*),dydx(*)
-    subroutine Iderivs_func(x,y,dydx) 
-        import :: wp
-        implicit none
+        subroutine Iderivs_func(x ,y, dydx) 
+            import :: wp
+            implicit none
 
-        real(wp), intent(in) :: x
-        real(wp), intent(in) :: y(*)
-        real(wp), intent(in) :: dydx(*)
+            real(wp), intent(in)    :: x
+            real(wp), intent(in)    :: y(:)
+            real(wp), intent(inout) :: dydx(:)
 
-    end subroutine 
- end interface
+        end subroutine 
+    end  interface
 contains
     
     !----------------------------------------------------------------
@@ -23,13 +23,13 @@ contains
         use constants, only: one
 
         real(wp), intent(inout)  :: y(n)
-        real(wp), intent(in)     :: dydx(n)
+        real(wp), intent(inout)  :: dydx(n)
         integer,  intent(in)     :: n
         real(wp), intent(inout)  :: x
         real(wp), intent(in)     :: htry, eps
         real(wp), intent(in)     :: yscal(n)
         real(wp), intent(inout)  :: hdid, hnext
-        procedure(Iderivs_func), pointer :: derivs
+        procedure(Iderivs_func) :: derivs
         !external derivs
 
         integer,  parameter :: nmax = 10
@@ -40,6 +40,7 @@ contains
         real(wp)  :: pgrow, pshrnk, xsav
         real(wp)  :: h, hh, errmax, v
 
+        print *, 'start rkqc'
         pgrow=-0.20d0
         pshrnk=-0.25d0
         xsav=x
@@ -87,9 +88,10 @@ contains
         return
      end
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    subroutine rk4(y,dydx,n,x,h,yout,derivs)
+    subroutine rk4(y,dydx,n,x,h,yout, derivs)
         implicit real*8 (a-h,o-z)
         integer, intent(in) :: n
+        procedure(Iderivs_func) :: derivs
         integer nmax, i
         parameter (nmax=10)
         dimension y(n),dydx(n),yout(n),yt(nmax),dyt(nmax),dym(nmax)
@@ -126,19 +128,32 @@ contains
     end
 
 
-    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     !sav2008: below this line there are new subroutins and functions
-    
-    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    subroutine rkqs(y,dydx,n,x,htry,eps,yscal,hdid,hnext,derivs)
-        integer n,nmax
-        double precision eps,hdid,hnext,htry,x,dydx(n),y(n),yscal(n)
-        external derivs
-        parameter (nmax=50)
-  !cu    uses derivs,rkck
+
+    ! пришлось переименовать из rkqs - почему-то криво линковался
+    subroutine runge_kutta_qs(y, dydx, n, x, htry, eps, yscal, hdid, hnext, derivs)
+        !! метод рунге-кутта         
+        implicit none
+        real(wp), intent(inout)  :: y(n)
+        real(wp), intent(inout)  :: dydx(n)
+        integer,  intent(in)     :: n
+        real(wp), intent(inout)  :: x
+        real(wp), intent(in)     :: htry, eps
+        real(wp), intent(in)     :: yscal(n)
+        real(wp), intent(inout)  :: hdid, hnext
+
+        procedure(Iderivs_func) :: derivs
+        !external derivs
+
+        integer,  parameter :: nmax = 50
+        real(wp), parameter :: safety=0.9d0, pgrow=-.2d0, pshrnk=-.25d0, errcon=1.89d-4
+
         integer i
-        double precision errmax,h,htemp,xnew,yerr(nmax),ytemp(nmax),safety,pgrow,pshrnk,errcon
-        parameter (safety=0.9d0,pgrow=-.2d0,pshrnk=-.25d0,errcon=1.89d-4)
+        real(wp)  :: ytemp(nmax), ysav(nmax), dysav(nmax), yerr(nmax)
+        real(wp)  :: xsav
+        real(wp)  :: h, htemp, errmax, xnew
+
         h=htry
   1     call rkck(y,dydx,n,x,h,ytemp,yerr,derivs)
         errmax=0.d0
@@ -167,10 +182,11 @@ contains
         endif
     end
   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    subroutine rkck(y,dydx,n,x,h,yout,yerr,derivs)
+    subroutine rkck(y,dydx,n,x,h,yout,yerr, derivs)
         integer n,nmax
         double precision h,x,dydx(n),y(n),yerr(n),yout(n)
-        external derivs
+        procedure(Iderivs_func) :: derivs
+        !external derivs
         parameter (nmax=50)
   !cu    uses derivs
         integer i
@@ -210,6 +226,6 @@ contains
           yerr(i)=h*(dc1*dydx(i)+dc3*ak3(i)+dc4*ak4(i)+dc5*ak5(i)+dc6*ak6(i))
         enddo
         return
-        end
-  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!      
+    end
+   
 end module runge_kutta_module
