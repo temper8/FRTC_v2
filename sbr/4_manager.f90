@@ -20,7 +20,7 @@ contains
         use dispersion_module, only: icall1, icall2, yn3, ivar, izn,  iroot
         implicit none
         type (spectrum) spectr
-        type (spectrum_point) point
+        type (SpectrumPoint) point
         real(wp) pabs
         integer iznzap(mpnt),iwzap(mpnt),irszap(mpnt)
         real(wp) rzap(mpnt),tetzap(mpnt),xmzap(mpnt),yn3zap(mpnt)
@@ -252,7 +252,7 @@ contains
         use dispersion_module
         implicit none
 
-        type(spectrum_point), intent(in) :: point
+        type(SpectrumPoint), intent(in) :: point
         real(wp), intent(inout)          :: xm, xnr
         real(wp), intent(in)             :: tet,  hr
         integer, intent(inout)           :: ifail

@@ -2,7 +2,7 @@ module spectrum_mod
     use kind_module
     implicit none    
 
-    type spectrum_point
+    type SpectrumPoint
         !real(wp) nz и ny не нужны
         ! 
         !real(wp) ny
@@ -15,7 +15,7 @@ module spectrum_mod
         !! power
 
     contains
-    end type spectrum_point
+    end type SpectrumPoint
 
     type spectrum
         integer size
@@ -30,7 +30,7 @@ module spectrum_mod
         !! суммарная power        
         integer direction
         !! направление спектра   +1 или -1 или 0 - полный
-        type(spectrum_point), allocatable ::  data(:)
+        type(SpectrumPoint), allocatable ::  data(:)
         !! 
     contains
         procedure :: get_positive_part => get_positive_part_method
@@ -59,7 +59,7 @@ contains
         use rt_parameters, only : ntet
         implicit none
         class(spectrum),  intent(inout) :: this
-        type(spectrum_point) :: p           
+        type(SpectrumPoint) :: p           
         real(wp) max_power, pnorm
         integer i
         max_power = 0
@@ -82,7 +82,7 @@ contains
         implicit none
         class(spectrum), intent(in) :: this
         type(spectrum) :: spectr, tmp_spectr
-        type(spectrum_point) :: p        
+        type(SpectrumPoint) :: p        
         integer i, n
         print *, 'read positive'
         tmp_spectr = spectrum(this%size)
@@ -119,7 +119,7 @@ contains
         implicit none
         class(spectrum), intent(in) :: this
         type(spectrum) :: spectr, tmp_spectr
-        type(spectrum_point) :: p
+        type(SpectrumPoint) :: p
         integer i, n
         print *, 'negative positive'
         tmp_spectr = spectrum(this%size)
@@ -204,7 +204,7 @@ contains
         type(spectrum), intent(in)  :: spectr
         type(spectrum), intent(out) :: pos_spectr, neg_spectr
         type(spectrum):: tmp_spectr
-        type(spectrum_point) :: p
+        type(SpectrumPoint) :: p
         integer i, pos_n, neg_n
 
         pos_spectr = spectrum(spectr%size)
@@ -331,7 +331,7 @@ contains
             !pabs=pabs0*pmax/1.d2
             appx_spectr = spectrum(nnz)
             do i= 1, nnz
-                appx_spectr%data(i) = spectrum_point(power = pm(i), Ntor = ynzm(i), Npol = 0)
+                appx_spectr%data(i) = SpectrumPoint(power = pm(i), Ntor = ynzm(i), Npol = 0)
             end do
             appx_spectr%input_power = plaun
             appx_spectr%max_power = pmax
@@ -494,7 +494,7 @@ module spectrum1D
         use spectrum_mod
         implicit none
         type(spectrum) :: spectr
-        type(spectrum_point) ::p
+        type(SpectrumPoint) ::p
         integer i
         do i= 1, spectr%size
             p = spectr%data(i)
@@ -510,13 +510,13 @@ module spectrum1D
         use rt_parameters, only: nnz
         implicit none
         type(spectrum) :: spectr
-        type(spectrum_point) :: p
+        type(SpectrumPoint) :: p
         integer i 
         real(wp) :: pmax
         pmax = 0
         spectr = spectrum(nnz)
         do i= 1, nnz
-            p = spectrum_point(power = pm(i), Ntor = ynzm(i), Npol = 0)
+            p = SpectrumPoint(power = pm(i), Ntor = ynzm(i), Npol = 0)
             if (pm(i) > pmax) pmax=pm(i)
             spectr%data(i) = p
         end do
