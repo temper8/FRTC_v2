@@ -19,7 +19,7 @@ contains
         use iterator_mod,only: plost, pnab
         use dispersion_module, only: icall1, icall2, yn3, ivar, izn,  iroot
         implicit none
-        type (spectrum) spectr
+        type (Spectrum) spectr
         type (SpectrumPoint) point
         real(wp) pabs
         integer iznzap(mpnt),iwzap(mpnt),irszap(mpnt)
