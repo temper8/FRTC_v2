@@ -94,129 +94,129 @@
         real*8 zv1,zv2,fout
         common/plosh/ zv1(100,2),zv2(100,2)!,sk(100)
         integer k
-      !parameter(i0=1002)
-      !real*8 vij,fij0,fij,dfij,dij,enorm,fst
-      !common/lh/ vij(i0,100), fij0(i0,100,2), fij(i0,100,2), dfij(i0,100,2), dij(i0,100,2), enorm(100), fst(100)
-      real*8,dimension(:),allocatable:: vj, fj, fj0, cur, cur0, currnt, rxx, wrk
-      parameter(ismthout=1)
+        !parameter(i0=1002)
+        !real*8 vij,fij0,fij,dfij,dij,enorm,fst
+        !common/lh/ vij(i0,100), fij0(i0,100,2), fij(i0,100,2), dfij(i0,100,2), dij(i0,100,2), enorm(100), fst(100)
+        real*8,dimension(:),allocatable:: vj, fj, fj0, cur, cur0, currnt, rxx, wrk
+        parameter(ismthout=1)
 
-      inpt = driven_current%grid_size
-      allocate(vj(i0),fj(i0),fj0(i0),cur(nr),cur0(nr),currnt(nr+2),rxx(nr+2),wrk(nr+2))
-    !---------------------------------------------------
-    ! initial constants
-    !---------------------------------------------------
-      !pqe=4.803e-10
-      vt0=fvt(zero)
-      ccur=pqe*vt0*0.333d-9
-      curdir=-dble(ispectr)
+        inpt = driven_current%grid_size
+        allocate(vj(i0),fj(i0),fj0(i0),cur(nr),cur0(nr),currnt(nr+2),rxx(nr+2),wrk(nr+2))
+        !---------------------------------------------------
+        ! initial constants
+        !---------------------------------------------------
+        !pqe=4.803e-10
+        vt0=fvt(zero)
+        ccur=pqe*vt0*0.333d-9
+        curdir=-dble(ispectr)
 
-      cfull=zero
-      cfull0=zero
-      k=(3-ispectr)/2
-      do j=1,nr
-          do i=1,i0
-              vj(i)=vij(i,j) !Vpar/Vt
-              fj0(i)=fij0(i,j,k)
-              fj(i)=fij(i,j,k)-fij0(i,j,k)
-          end do
-          r=dble(j)/dble(nr+1)
-          if(inew.eq.0) then !vardens
-              pn=fn1(r,fnr)
-          else
-              pn=fn2(r,fnr,fnrr)
-          end if
-          vt=fvt(r)
-          vto=vt/vt0
-          curs  = currlhcd(vj,fj)
-          cur(j)=curs*pn*ccur*curdir*vto  !Ampere/cm2
-          cfull=cfull+cur(j)*sk(j)
-          curs0 = currlhcd(vj,fj0)          
-          cur0(j)=curs0*pn*ccur*curdir*vto  !Ampere/cm2
-          cfull0=cfull0+cur0(j)*sk(j)
-      end do
+        cfull=zero
+        cfull0=zero
+        k=(3-ispectr)/2
+        do j=1,nr
+            do i=1,i0
+                vj(i)=vij(i,j) !Vpar/Vt
+                fj0(i)=fij0(i,j,k)
+                fj(i)=fij(i,j,k)-fij0(i,j,k)
+            end do
+            r=dble(j)/dble(nr+1)
+            if(inew.eq.0) then !vardens
+                pn=fn1(r,fnr)
+            else
+                pn=fn2(r,fnr,fnrr)
+            end if
+            vt=fvt(r)
+            vto=vt/vt0
+            curs  = currlhcd(vj,fj)
+            cur(j)=curs*pn*ccur*curdir*vto  !Ampere/cm2
+            cfull=cfull+cur(j)*sk(j)
+            curs0 = currlhcd(vj,fj0)          
+            cur0(j)=curs0*pn*ccur*curdir*vto  !Ampere/cm2
+            cfull0=cfull0+cur0(j)*sk(j)
+        end do
 
-      !cuj=cfull*1d-6   !driven current, MA
-      driven_current%cu = cfull*1d-6
+        !cuj=cfull*1d-6   !driven current, MA
+        driven_current%cu = cfull*1d-6
 
-      !cujoh=cfull0*1d-6   !driven current, MA
-      driven_current%cu0 = cfull0*1d-6 
+        !cujoh=cfull0*1d-6   !driven current, MA
+        driven_current%cu0 = cfull0*1d-6 
 
-!!      write(*,*)
-!!      write(*,*)'ccur',ccur,' curdir=',curdir,' nr=',nr
-!!      write(*,*)'cu_out, MA=',cu_out,' cfull, A=',cfull
-!!           close(111)
-!      pause
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        !!      write(*,*)
+        !!      write(*,*)'ccur',ccur,' curdir=',curdir,' nr=',nr
+        !!      write(*,*)'cu_out, MA=',cu_out,' cfull, A=',cfull
+        !!           close(111)
+        !      pause
 
-      currn=cur(1)                   ! Jstoped, A/cm^2
-      currnt(1)=currn*1.d-2          ! Jstoped, MA/m^2
-      rxx(1)=zero
-      do j=1,nr
-          rxx(j+1)=dble(j)/dble(nr+1)
-          currn=cur(j)                   ! Jstopped, A/cm^2
-          currnt(j+1)=currn*1.d-2        ! Jstoped, MA/m^2
-      end do
-      nrr=nr+2
-      rxx(nrr)=1.d0
-      currnt(nr+2)=zero
 
-      if(ismthout.ne.0) then
-          do i=1,nrr
-              wrk(i)=currnt(i)
-          end do
-          call fsmoth4(rxx,wrk,nrr,currnt)
-      end if
+        currn=cur(1)                   ! Jstoped, A/cm^2
+        currnt(1)=currn*1.d-2          ! Jstoped, MA/m^2
+        rxx(1)=zero
+        do j=1,nr
+            rxx(j+1)=dble(j)/dble(nr+1)
+            currn=cur(j)                   ! Jstopped, A/cm^2
+            currnt(j+1)=currn*1.d-2        ! Jstoped, MA/m^2
+        end do
+        nrr=nr+2
+        rxx(nrr)=1.d0
+        currnt(nr+2)=zero
 
-      rh(1)=rh1
-      if(rh(inpt).gt.1d0) rh(inpt)=1.d0
-      do j=1,inpt
-          call lock2(rxx,nrr,rh(j),klo,khi,ierr)
-          if(ierr.ne.0) then
-               write(*,*)'lock2 error in current profile for ASTRA'
-               write(*,*)'ierr=',ierr,' j=',j,' rh(j)=',rh(j)
-               write(*,*)'rxx(1)=',rxx(1),' rxx(nrr)=',rxx(nrr)
-               pause
-          end if
-          call linf(rxx,currnt,rh(j),fout,klo,khi)
-          driven_current%outj(j)=fout
-      end do
-      rh(1)=zero
+        if(ismthout.ne.0) then
+            do i=1,nrr
+                wrk(i)=currnt(i)
+            end do
+            call fsmoth4(rxx,wrk,nrr,currnt)
+        end if
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      currn=cur0(1)                   ! Jstoped, A/cm^2
-      currnt(1)=currn*1.d-2          ! Jstoped, MA/m^2
-      rxx(1)=zero
-      do j=1,nr
-          rxx(j+1)=dble(j)/dble(nr+1)
-          currn=cur0(j)                   ! Jstopped, A/cm^2
-          currnt(j+1)=currn*1.d-2        ! Jstoped, MA/m^2
-      end do
-      nrr=nr+2
-      rxx(nrr)=1.d0
-      currnt(nr+2)=zero
+        rh(1)=rh1
+        if(rh(inpt).gt.1d0) rh(inpt)=1.d0
+        do j=1,inpt
+            call lock2(rxx,nrr,rh(j),klo,khi,ierr)
+            if(ierr.ne.0) then
+                write(*,*)'lock2 error in current profile for ASTRA'
+                write(*,*)'ierr=',ierr,' j=',j,' rh(j)=',rh(j)
+                write(*,*)'rxx(1)=',rxx(1),' rxx(nrr)=',rxx(nrr)
+                pause
+            end if
+            call linf(rxx,currnt,rh(j),fout,klo,khi)
+            driven_current%outj(j)=fout
+        end do
+        rh(1)=zero
 
-      if(ismthout.ne.0) then
-          do i=1,nrr
-              wrk(i)=currnt(i)
-          end do
-          call fsmoth4(rxx,wrk,nrr,currnt)
-      end if
+        !------------------------------------------------------
+        currn=cur0(1)                   ! Jstoped, A/cm^2
+        currnt(1)=currn*1.d-2           ! Jstoped, MA/m^2
+        rxx(1)=zero
+        do j=1,nr
+            rxx(j+1)=dble(j)/dble(nr+1)
+            currn=cur0(j)                  ! Jstopped, A/cm^2
+            currnt(j+1)=currn*1.d-2        ! Jstoped, MA/m^2
+        end do
+        nrr=nr+2
+        rxx(nrr)=1.d0
+        currnt(nr+2)=zero
 
-      rh(1)=rh1
-      if(rh(inpt).gt.1d0) rh(inpt)=1.d0
-      do j=1,inpt
-          call lock2(rxx,nrr,rh(j),klo,khi,ierr)
-          if(ierr.ne.0) then
-              write(*,*)'#2 lock2 error in current profile for ASTRA'
-              write(*,*)'ierr=',ierr,' j=',j,' rh(j)=',rh(j)
-              write(*,*)'rxx(1)=',rxx(1),' rxx(nrr)=',rxx(nrr)
-              pause
-          end if
-          call linf(rxx,currnt,rh(j),fout,klo,khi)
-          driven_current%ohj(j)=fout
-      end do
-      rh(1)=zero
+        if(ismthout.ne.0) then
+            do i=1,nrr
+                wrk(i)=currnt(i)
+            end do
+            call fsmoth4(rxx,wrk,nrr,currnt)
+        end if
 
-      deallocate(vj,fj,fj0,cur,cur0,currnt,rxx,wrk)
+        rh(1)=rh1
+        if(rh(inpt).gt.1d0) rh(inpt)=1.d0
+        do j=1,inpt
+            call lock2(rxx,nrr,rh(j),klo,khi,ierr)
+            if(ierr.ne.0) then
+                write(*,*)'#2 lock2 error in current profile for ASTRA'
+                write(*,*)'ierr=',ierr,' j=',j,' rh(j)=',rh(j)
+                write(*,*)'rxx(1)=',rxx(1),' rxx(nrr)=',rxx(nrr)
+                pause
+            end if
+            call linf(rxx,currnt,rh(j),fout,klo,khi)
+            driven_current%ohj(j)=fout
+        end do
+        rh(1)=zero
+
+        deallocate(vj,fj,fj0,cur,cur0,currnt,rxx,wrk)
       end
 
