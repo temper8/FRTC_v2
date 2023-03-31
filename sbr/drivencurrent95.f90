@@ -9,14 +9,14 @@
         use FokkerPlanck_module
         use driven_current_module
         implicit none
-    ! variables imported from ASTRA
+        ! variables imported from ASTRA
         integer NRD
         ! NRD     501 - Maximum size of the radial grid
         integer NA1
         ! NA1     Edge grid point number: ROC=RHO(NA1)      
         double precision TIME, TAU, RTOR, ROC, GP2
         double precision UPL(NRD)
-    !
+
         real*8 outj(NRD),sigmaj(NRD),afld(NRD),dtau
         integer i,inpt,ispectr
 
@@ -68,32 +68,32 @@
 
         call fokkerplanck_compute(time, TAU)
 
-      end
+    end
 
-      subroutine lhcurrent(driven_current, ispectr)
-      !subroutine lhcurrent(outj,ohj,cuj,cujoh,inpt,ispectr)
-!!      implicit real*8 (a-h,o-z)
-      use plasma, only : rh, rh1, fn1,fn2, fvt, sk
-      use lock_module
-      use maxwell
-      use rt_parameters, only : nr, inew
-      use driven_current_module
-      implicit none
-      type(DrivenCurrent), intent(inout) :: driven_current
-      integer,             intent(in)    :: ispectr
-      !real*8 outj(*),ohj(*),
-      real*8 cuj,cujoh,curs,curs0,curdir
-      real*8 currn,vt0,ccur,cfull,cfull0
-      real*8 r,pn,fnr,fnrr,vt,vto!,rh1
-      integer klo,khi,ierr,nrr,i,j,inpt,ismthout
-      !common /a0ab/ nr
-      !real*8 y2dn,y2tm,y2tmi
-      !common /a0l3/ y2dn(501),y2tm(501),y2tmi(501)
-      !integer inew
-      !common /cnew/ inew !est !sav2008
-      real*8 zv1,zv2,fout
-      common/plosh/ zv1(100,2),zv2(100,2)!,sk(100)
-      integer k
+    subroutine lhcurrent(driven_current, ispectr)
+        !subroutine lhcurrent(outj,ohj,cuj,cujoh,inpt,ispectr)
+        !!      implicit real*8 (a-h,o-z)
+        use plasma, only : rh, rh1, fn1,fn2, fvt, sk
+        use lock_module
+        use maxwell
+        use rt_parameters, only : nr, inew
+        use driven_current_module
+        implicit none
+        type(DrivenCurrent), intent(inout) :: driven_current
+        integer,             intent(in)    :: ispectr
+        !real*8 outj(*),ohj(*),
+        real*8 cuj,cujoh,curs,curs0,curdir
+        real*8 currn,vt0,ccur,cfull,cfull0
+        real*8 r,pn,fnr,fnrr,vt,vto!,rh1
+        integer klo,khi,ierr,nrr,i,j,inpt,ismthout
+        !common /a0ab/ nr
+        !real*8 y2dn,y2tm,y2tmi
+        !common /a0l3/ y2dn(501),y2tm(501),y2tmi(501)
+        !integer inew
+        !common /cnew/ inew !est !sav2008
+        real*8 zv1,zv2,fout
+        common/plosh/ zv1(100,2),zv2(100,2)!,sk(100)
+        integer k
       !parameter(i0=1002)
       !real*8 vij,fij0,fij,dfij,dij,enorm,fst
       !common/lh/ vij(i0,100), fij0(i0,100,2), fij(i0,100,2), dfij(i0,100,2), dij(i0,100,2), enorm(100), fst(100)
