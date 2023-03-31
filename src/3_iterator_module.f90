@@ -54,6 +54,7 @@ contains
         use plasma, only: vt0, fvt, cltn
         use current, only: vzmin, vzmax
         use maxwell, only: i0, vij, dfij
+        use lock_module        
         implicit none
         integer, intent(in) :: ispectr
         

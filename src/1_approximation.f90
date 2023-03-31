@@ -169,19 +169,22 @@ subroutine lubksb(a,n,np,indx,b)
     return
 end    
 
-real(wp) function fdf(x,c,n,df)
-    real(wp) x,c(n),df
-    integer n,j
-    real(wp) p, dp
-    p=c(n)
-    dp=0.d0
-    do j=n-1,1,-1
-        dp=dp*x+p
-        p=p*x+c(j)
-    end do
-    fdf=p
-    df=dp
-end
+    function fdf(x, c, n, df) result(p)
+        !! вычисление значения полинома и его производной
+        real(wp), intent(in)  :: x
+        real(wp), intent(in)  :: c(n)
+        integer,  intent(in)  :: n
+        real(wp), intent(out) :: df
+        integer               :: j
+        real(wp)              :: p, dp
+        p=c(n)
+        dp=0.d0
+        do j=n-1,1,-1
+            dp=dp*x+p
+            p=p*x+c(j)
+        end do
+        df=dp
+    end
 
 real(wp) function fdfddf(x,c,n,df,ddf)
     real(wp) x,c(n),df, ddf

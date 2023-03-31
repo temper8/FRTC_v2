@@ -52,6 +52,7 @@
             <li><a href="../lists/files.html">Source Files</a></li>
             <li><a href="../lists/modules.html">Modules</a></li>
             <li><a href="../lists/procedures.html">Procedures</a></li>
+            <li><a href="../lists/absint.html">Abstract Interfaces</a></li>
                    <li><a href="../lists/types.html">Derived Types</a></li>
        
             </ul>
@@ -60,6 +61,7 @@
 <li class="visible-xs hidden-sm visible-lg"><a href="../lists/files.html">Source Files</a></li>
 <li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
 <li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/absint.html">Abstract Interfaces</a></li>
                              <li class="visible-xs hidden-sm visible-lg"><a href="../lists/types.html">Derived Types</a></li>
           </ul>
         <form action="../search.html" class="navbar-form navbar-right" role="search">
@@ -88,16 +90,16 @@
           <li id="statements"><i class="fa fa-list-ol"></i>
             <a data-toggle="tooltip"
                data-placement="bottom" data-html="true"
-               title=" 9.1% of total for modules and submodules.">293 statements</a>
+               title="13.1% of total for modules and submodules.">585 statements</a>
           </li>
 
             <li id="source-file">
               <i class="fa fa-code"></i>
-              <a href="../src/2_trajectory.f90"> Source File</a>
+              <a href="../src/3_trajectory.f90"> Source File</a>
             </li>
         </ul>
         <ol class="breadcrumb in-well text-right">
-              <li><a href='../sourcefile/2_trajectory.f90.html'>2_trajectory.f90</a></li>
+              <li><a href='../sourcefile/3_trajectory.f90.html'>3_trajectory.f90</a></li>
           <li class="active">trajectory</li>
         </ol>
       </div>
@@ -126,6 +128,16 @@
         <div class="list-group">
             <a class="list-group-item" href="../module/trajectory.html#variable-length">length</a>
             <a class="list-group-item" href="../module/trajectory.html#variable-mpnt">mpnt</a>
+            <a class="list-group-item" href="../module/trajectory.html#variable-irs">irs</a>
+            <a class="list-group-item" href="../module/trajectory.html#variable-iabsorp">iabsorp</a>
+            <a class="list-group-item" href="../module/trajectory.html#variable-rzz">rzz</a>
+            <a class="list-group-item" href="../module/trajectory.html#variable-tetzz">tetzz</a>
+            <a class="list-group-item" href="../module/trajectory.html#variable-xmzz">xmzz</a>
+            <a class="list-group-item" href="../module/trajectory.html#variable-iznzz">iznzz</a>
+            <a class="list-group-item" href="../module/trajectory.html#variable-iwzz">iwzz</a>
+            <a class="list-group-item" href="../module/trajectory.html#variable-irszz">irszz</a>
+            <a class="list-group-item" href="../module/trajectory.html#variable-hrad">hrad</a>
+            <a class="list-group-item" href="../module/trajectory.html#variable-im4">im4</a>
             <a class="list-group-item" href="../module/trajectory.html#variable-nrefj">nrefj</a>
             <a class="list-group-item" href="../module/trajectory.html#variable-dland">dland</a>
             <a class="list-group-item" href="../module/trajectory.html#variable-dcoll">dcoll</a>
@@ -169,6 +181,8 @@
         <div class="list-group">
             <a class="list-group-item" href="../module/trajectory.html#proc-init_trajectory">init_trajectory</a>
             <a class="list-group-item" href="../module/trajectory.html#proc-view">view</a>
+            <a class="list-group-item" href="../module/trajectory.html#proc-traj">traj</a>
+            <a class="list-group-item" href="../module/trajectory.html#proc-driver4">driver4</a>
         </div>
       </div>
     </div>
@@ -186,7 +200,7 @@
     </div>
     
     <div class="col-md-9" id='text'>
-    <p>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</p>
+    
 <br>        <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Uses</h3>
@@ -216,6 +230,16 @@
         <div class="list-group">
             <a class="list-group-item" href="../module/trajectory.html#variable-length">length</a>
             <a class="list-group-item" href="../module/trajectory.html#variable-mpnt">mpnt</a>
+            <a class="list-group-item" href="../module/trajectory.html#variable-irs">irs</a>
+            <a class="list-group-item" href="../module/trajectory.html#variable-iabsorp">iabsorp</a>
+            <a class="list-group-item" href="../module/trajectory.html#variable-rzz">rzz</a>
+            <a class="list-group-item" href="../module/trajectory.html#variable-tetzz">tetzz</a>
+            <a class="list-group-item" href="../module/trajectory.html#variable-xmzz">xmzz</a>
+            <a class="list-group-item" href="../module/trajectory.html#variable-iznzz">iznzz</a>
+            <a class="list-group-item" href="../module/trajectory.html#variable-iwzz">iwzz</a>
+            <a class="list-group-item" href="../module/trajectory.html#variable-irszz">irszz</a>
+            <a class="list-group-item" href="../module/trajectory.html#variable-hrad">hrad</a>
+            <a class="list-group-item" href="../module/trajectory.html#variable-im4">im4</a>
             <a class="list-group-item" href="../module/trajectory.html#variable-nrefj">nrefj</a>
             <a class="list-group-item" href="../module/trajectory.html#variable-dland">dland</a>
             <a class="list-group-item" href="../module/trajectory.html#variable-dcoll">dcoll</a>
@@ -259,6 +283,8 @@
         <div class="list-group">
             <a class="list-group-item" href="../module/trajectory.html#proc-init_trajectory">init_trajectory</a>
             <a class="list-group-item" href="../module/trajectory.html#proc-view">view</a>
+            <a class="list-group-item" href="../module/trajectory.html#proc-traj">traj</a>
+            <a class="list-group-item" href="../module/trajectory.html#proc-driver4">driver4</a>
         </div>
       </div>
     </div>
@@ -316,7 +342,177 @@ parameter
             <td>::</td>
             <td><strong>mpnt</strong></td>
 <td> =</td>
-                <td>10000</td>
+                <td>100000</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-irs"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>irs</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-iabsorp"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>iabsorp</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-rzz"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>rzz</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                <p>common /abc/ rzz,tetzz,xmzz    </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-tetzz"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>tetzz</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                <p>common /abc/ rzz,tetzz,xmzz    </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xmzz"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xmzz</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                <p>common /abc/ rzz,tetzz,xmzz    </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-iznzz"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>iznzz</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                <p>common /abc/ iznzz,iwzz,irszz</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-iwzz"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>iwzz</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                <p>common /abc/ iznzz,iwzz,irszz</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-irszz"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>irszz</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                <p>common /abc/ iznzz,iwzz,irszz</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-hrad"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>hrad</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-im4"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>im4</strong></td>
+                <td></td>
+                <td></td>
             <td>
                 
             </td>
@@ -471,7 +667,7 @@ parameter
                 <td></td>
                 <td></td>
             <td>
-                <p>бывший common/agh/xnpar,vel,dland,dcoll,dalf,perpn,tetai,jrad,iww,izz</p>
+                <p>common/agh/xnpar,vel,dland,dcoll,dalf,perpn,tetai,jrad,iww,izz</p>
             </td>
         </tr>
         <tr>
@@ -488,7 +684,7 @@ parameter
                 <td></td>
                 <td></td>
             <td>
-                <p>бывший common/agh/xnpar,vel,dland,dcoll,dalf,perpn,tetai,jrad,iww,izz</p>
+                <p>common/agh/xnpar,vel,dland,dcoll,dalf,perpn,tetai,jrad,iww,izz</p>
             </td>
         </tr>
         <tr>
@@ -505,7 +701,7 @@ parameter
                 <td></td>
                 <td></td>
             <td>
-                <p>бывший common/agh/xnpar,vel,dland,dcoll,dalf,perpn,tetai,jrad,iww,izz</p>
+                <p>common/agh/xnpar,vel,dland,dcoll,dalf,perpn,tetai,jrad,iww,izz</p>
             </td>
         </tr>
         <tr>
@@ -757,6 +953,282 @@ parameter
     </div>
   </div>
 
+      <div class="panel panel-default">
+    <div class="panel-heading codesum"><span class="anchor" id="proc-traj"></span><h3>public  subroutine <a href='../proc/traj.html'>traj</a>(xm0, tet0, xbeg, nmax, nb1, nb2, nomth, nomnz, pabs)  
+</h3></div>
+    <div class="panel-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th>Type</th>
+<th>Intent</th><th>Optional</th>        <th>Attributes</th>
+        <th></th>
+        <th>Name</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xm0</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>tet0</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xbeg</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nmax</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nb1</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nb2</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nomth</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nomnz</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>pabs</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+      <div class="panel panel-default">
+    <div class="panel-heading codesum"><span class="anchor" id="proc-driver4"></span><h3>public  subroutine <a href='../proc/driver4.html'>driver4</a>(ystart, x1, x2, rexi, hmin, derivs)  
+</h3></div>
+    <div class="panel-body">
+          
+  <p>var        if(dabs(dydx(3)).ne.zero) h=dabs(hmin1/dydx(3))/hdrob1
+    if(dabs(y(3)-rexi).gt.rrange.or.nstp.eq.maxstep4) then  ! exit !sav2008</p>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th>Type</th>
+<th>Intent</th><th>Optional</th>        <th>Attributes</th>
+        <th></th>
+        <th>Name</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ystart</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>x1</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>x2</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>rexi</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>hmin</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              procedure(<a href='../interface/iderivs_func.html'>Iderivs_func</a>)
+            </td>
+<td></td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>derivs</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
     </section>
     <br>
 
@@ -777,7 +1249,7 @@ parameter
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
- on 2023-03-16 00:52            </p>
+ on 2023-03-31 03:34            </p>
         </div>
       </div>
       <br>

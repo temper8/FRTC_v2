@@ -52,6 +52,7 @@
             <li><a href="../lists/files.html">Source Files</a></li>
             <li><a href="../lists/modules.html">Modules</a></li>
             <li><a href="../lists/procedures.html">Procedures</a></li>
+            <li><a href="../lists/absint.html">Abstract Interfaces</a></li>
                    <li><a href="../lists/types.html">Derived Types</a></li>
        
             </ul>
@@ -60,6 +61,7 @@
 <li class="visible-xs hidden-sm visible-lg"><a href="../lists/files.html">Source Files</a></li>
 <li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
 <li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/absint.html">Abstract Interfaces</a></li>
                              <li class="visible-xs hidden-sm visible-lg"><a href="../lists/types.html">Derived Types</a></li>
           </ul>
         <form action="../search.html" class="navbar-form navbar-right" role="search">
@@ -88,16 +90,16 @@
           <li id="statements"><i class="fa fa-list-ol"></i>
             <a data-toggle="tooltip"
                data-placement="bottom" data-html="true"
-               title=" 8.4% of total for procedures.">255 statements</a>
+               title=" 6.1% of total for procedures.">255 statements</a>
           </li>
 
             <li id="source-file">
               <i class="fa fa-code"></i>
-              <a href="../src/2_trajectory.f90"> Source File</a>
+              <a href="../src/3_trajectory.f90"> Source File</a>
             </li>
         </ul>
         <ol class="breadcrumb in-well text-right">
-              <li><a href='../sourcefile/2_trajectory.f90.html'>2_trajectory.f90</a></li>
+              <li><a href='../sourcefile/3_trajectory.f90.html'>3_trajectory.f90</a></li>
               <li><a href='../module/trajectory.html'>trajectory</a></li>
           <li class="active">view</li>
         </ol>
@@ -124,7 +126,6 @@
       </div>
       <div id="common-0" class="panel-collapse collapse">
         <div class="list-group">
-            <a class="list-group-item" href="../proc/view.html#common-bcef">bcef</a>
             <a class="list-group-item" href="../proc/view.html#common-vth">vth</a>
             <a class="list-group-item" href="../proc/view.html#common-a0ghp">a0ghp</a>
         </div>
@@ -165,11 +166,12 @@
       <ul class="list-group">
           <li class="list-group-item">
             <ul class="list-inline">
-                <li><a href='../module/plasma.html'>plasma</a></li>
-                <li><a href='../module/constants.html'>constants</a></li>
                 <li><a href='../module/spectrum1d.html'>spectrum1D</a></li>
-                <li><a href='../module/approximation.html'>approximation</a></li>
+                <li><a href='../module/dispersion_module.html'>dispersion_module</a></li>
                 <li><a href='../module/rt_parameters.html'>rt_parameters</a></li>
+                <li><a href='../module/constants.html'>constants</a></li>
+                <li><a href='../module/plasma.html'>plasma</a></li>
+                <li><a href='../module/approximation.html'>approximation</a></li>
             </ul>
           </li>
       </ul>
@@ -266,7 +268,6 @@
       </div>
       <div id="common-1" class="panel-collapse collapse">
         <div class="list-group">
-            <a class="list-group-item" href="../proc/view.html#common-bcef">bcef</a>
             <a class="list-group-item" href="../proc/view.html#common-vth">vth</a>
             <a class="list-group-item" href="../proc/view.html#common-a0ghp">a0ghp</a>
         </div>
@@ -298,63 +299,6 @@
 
     <section>
       <h2>Common Blocks</h2>
-        <div class="panel panel-default">
-    <div class="panel-heading codesum"><span class="anchor" id="common-bcef"></span><h3>
-        <a data-toggle="popover" data-html="true" tabindex="0"
-           data-trigger="focus"
-           data-content="<h4>Used Elsewhere:</h4><a href='../proc/rini.html#common-bcef~2'>rini</a> (function)<br>">common /bcef/</a>
-           
-    </h3></div>
-    <div class="panel-body">
-      
-          <table class="table table-striped varlist">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Attributes</th>
-        <th></th>
-        <th>Name</th>
-<th></th><th>Initial</th>        <th></th>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-ynz"></span>
-              real
-            </td>
-            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>ynz</strong></td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-ynpopq"></span>
-              real
-            </td>
-            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>ynpopq</strong></td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-    </tbody>
-  </table>
-
-    </div>
-  </div>
-
         <div class="panel panel-default">
     <div class="panel-heading codesum"><span class="anchor" id="common-vth"></span><h3>
         <a data-toggle="popover" data-html="true" tabindex="0"
@@ -433,7 +377,7 @@
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-vlf"></span>
+              <span class="anchor" id="variable-vlf~2"></span>
               real
             </td>
             <td>
@@ -449,7 +393,7 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-vrt"></span>
+              <span class="anchor" id="variable-vrt~2"></span>
               real
             </td>
             <td>
@@ -533,7 +477,7 @@
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
- on 2023-03-16 00:52            </p>
+ on 2023-03-31 03:34            </p>
         </div>
       </div>
       <br>

@@ -52,6 +52,7 @@
             <li><a href="../lists/files.html">Source Files</a></li>
             <li><a href="../lists/modules.html">Modules</a></li>
             <li><a href="../lists/procedures.html">Procedures</a></li>
+            <li><a href="../lists/absint.html">Abstract Interfaces</a></li>
                    <li><a href="../lists/types.html">Derived Types</a></li>
        
             </ul>
@@ -60,6 +61,7 @@
 <li class="visible-xs hidden-sm visible-lg"><a href="../lists/files.html">Source Files</a></li>
 <li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
 <li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/absint.html">Abstract Interfaces</a></li>
                              <li class="visible-xs hidden-sm visible-lg"><a href="../lists/types.html">Derived Types</a></li>
           </ul>
         <form action="../search.html" class="navbar-form navbar-right" role="search">
@@ -88,7 +90,7 @@
           <li id="statements"><i class="fa fa-list-ol"></i>
             <a data-toggle="tooltip"
                data-placement="bottom" data-html="true"
-               title=" 6.6% of total for modules and submodules.">212 statements</a>
+               title=" 4.8% of total for modules and submodules.">214 statements</a>
           </li>
 
             <li id="source-file">
@@ -193,7 +195,7 @@
     </div>
     
     <div class="col-md-9" id='text'>
-    
+    <p>модуль содержит функции для решения одномерного уравнения Фоккер-Планка</p>
 <br>        <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Uses</h3>
@@ -201,8 +203,8 @@
       <ul class="list-group">
           <li class="list-group-item">
             <ul class="list-inline">
-                <li><a href='../module/savelyev_solver_module.html'>savelyev_solver_module</a></li>
                 <li><a href="http://fortranwiki.org/fortran/show/iso_fortran_env">iso_fortran_env</a></li>
+                <li><a href='../module/savelyev_solver_module.html'>savelyev_solver_module</a></li>
             </ul>
           </li>
       </ul>
@@ -307,7 +309,7 @@
 
     </h3>
     
-  
+  <p>конструктор для FokkerPlanck1D</p>
 
   <h4>Arguments</h4>
       <table class="table table-striped varlist">
@@ -409,7 +411,7 @@
       </h3>
     </div>
     <div class="panel-body">
-      
+      <p>solver of FP eq</p>
 
         <h4>Components</h4>
           <table class="table table-striped varlist">
@@ -424,7 +426,7 @@
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-enorm~2"></span>
+              <span class="anchor" id="variable-enorm"></span>
               real(kind=dp),
             </td>
               <td>public</td>
@@ -436,7 +438,7 @@
 <td> =</td>
                 <td>0</td>
             <td>
-
+<p>электрическое поле</p>
             </td>
         </tr>
         <tr>
@@ -453,7 +455,7 @@
 <td> =</td>
                 <td>0</td>
             <td>
-
+<p>верхняя граница скорости электронов</p>
             </td>
         </tr>
         <tr>
@@ -470,7 +472,7 @@
                 <td></td>
                 <td></td>
             <td>
-
+<p>сетка скоростей</p>
             </td>
         </tr>
         <tr>
@@ -487,7 +489,7 @@
                 <td></td>
                 <td></td>
             <td>
-
+<p>распределение</p>
             </td>
         </tr>
         <tr>
@@ -504,7 +506,7 @@
 <td> =</td>
                 <td>0</td>
             <td>
-
+<p>size of distribution grid</p>
             </td>
         </tr>
         <tr>
@@ -521,7 +523,7 @@
 <td> =</td>
                 <td>0</td>
             <td>
-
+<p>поле со знаком</p>
             </td>
         </tr>
         <tr>
@@ -538,7 +540,7 @@
 <td> =</td>
                 <td>0</td>
             <td>
-
+<p>size of local grid        </p>
             </td>
         </tr>
         <tr>
@@ -555,7 +557,7 @@
 <td> =</td>
                 <td>0</td>
             <td>
-
+<p>step of local grid </p>
             </td>
         </tr>
         <tr>
@@ -572,7 +574,7 @@
                 <td></td>
                 <td></td>
             <td>
-
+<p>диффузия</p>
             </td>
         </tr>
         <tr>
@@ -589,7 +591,7 @@
                 <td></td>
                 <td></td>
             <td>
-
+<p>диффузия</p>
             </td>
         </tr>
         <tr>
@@ -606,7 +608,7 @@
                 <td></td>
                 <td></td>
             <td>
-
+<p>диффузия</p>
             </td>
         </tr>
     </tbody>
@@ -626,7 +628,7 @@
                     <strong><a href='../proc/fokkerplanck1d_constructor.html'>FokkerPlanck1D_constructor</a></strong>
                     (e, v_lim, v, f)
                   </td>
-                  <td></td>
+                  <td><p>конструктор для FokkerPlanck1D</p></td>
                 </tr>
           </tbody>
         </table>
@@ -691,7 +693,7 @@
 </h3></div>
     <div class="panel-body">
           
-  
+  <p>конструктор для FokkerPlanck1D</p>
 
   <h4>Arguments</h4>
       <table class="table table-striped varlist">
@@ -866,7 +868,7 @@
 </h3></div>
     <div class="panel-body">
           
-  
+  <p>инициализация диффузии для схемы савельева</p>
 
   <h4>Arguments</h4>
       <table class="table table-striped varlist">
@@ -991,8 +993,7 @@
 </h3></div>
     <div class="panel-body">
           
-  <p>write(<em>,</em>)'#1 j,k,ibeg=',j,k,ibeg
-write(<em>,</em>)'#1 v(ibeg)=',vj(ibeg),' f1/f2=',fout1/fout2</p>
+  <p>процедура закапывания</p>
 
   <h4>Arguments</h4>
       <table class="table table-striped varlist">
@@ -1077,7 +1078,7 @@ write(<em>,</em>)'#1 v(ibeg)=',vj(ibeg),' f1/f2=',fout1/fout2</p>
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
- on 2023-03-16 00:52            </p>
+ on 2023-03-31 03:34            </p>
         </div>
       </div>
       <br>

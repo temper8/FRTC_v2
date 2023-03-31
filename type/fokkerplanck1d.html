@@ -52,6 +52,7 @@
             <li><a href="../lists/files.html">Source Files</a></li>
             <li><a href="../lists/modules.html">Modules</a></li>
             <li><a href="../lists/procedures.html">Procedures</a></li>
+            <li><a href="../lists/absint.html">Abstract Interfaces</a></li>
                    <li><a href="../lists/types.html">Derived Types</a></li>
        
             </ul>
@@ -60,6 +61,7 @@
 <li class="visible-xs hidden-sm visible-lg"><a href="../lists/files.html">Source Files</a></li>
 <li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
 <li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/absint.html">Abstract Interfaces</a></li>
                              <li class="visible-xs hidden-sm visible-lg"><a href="../lists/types.html">Derived Types</a></li>
           </ul>
         <form action="../search.html" class="navbar-form navbar-right" role="search">
@@ -88,7 +90,7 @@
           <li id="statements"><i class="fa fa-list-ol"></i>
             <a data-toggle="tooltip"
                data-placement="bottom" data-html="true"
-               title="<p>22.6% of total for derived types.</p>Including implementation: 131 statements, 37.9% of total for derived types.">16 statements</a>
+               title="<p>18.8% of total for derived types.</p>Including implementation: 133 statements, 34.6% of total for derived types.">16 statements</a>
           </li>
 
             <li id="source-file">
@@ -125,7 +127,7 @@
       </div>
       <div id="vars-0" class="panel-collapse collapse">
         <div class="list-group">
-            <a class="list-group-item" href="../type/fokkerplanck1d.html#variable-enorm~2">enorm</a>
+            <a class="list-group-item" href="../type/fokkerplanck1d.html#variable-enorm">enorm</a>
             <a class="list-group-item" href="../type/fokkerplanck1d.html#variable-v_lim">v_lim</a>
             <a class="list-group-item" href="../type/fokkerplanck1d.html#variable-v">v</a>
             <a class="list-group-item" href="../type/fokkerplanck1d.html#variable-f">f</a>
@@ -192,7 +194,7 @@
     
     <div class="col-md-9" id='text'>
       <h2>type, public :: FokkerPlanck1D</h2>
-    
+    <p>solver of FP eq</p>
     <br>
 
     <section class="visible-xs visible-sm hidden-md">
@@ -206,7 +208,7 @@
       </div>
       <div id="vars-1" class="panel-collapse collapse">
         <div class="list-group">
-            <a class="list-group-item" href="../type/fokkerplanck1d.html#variable-enorm~2">enorm</a>
+            <a class="list-group-item" href="../type/fokkerplanck1d.html#variable-enorm">enorm</a>
             <a class="list-group-item" href="../type/fokkerplanck1d.html#variable-v_lim">v_lim</a>
             <a class="list-group-item" href="../type/fokkerplanck1d.html#variable-v">v</a>
             <a class="list-group-item" href="../type/fokkerplanck1d.html#variable-f">f</a>
@@ -284,7 +286,7 @@
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-enorm~2"></span>
+              <span class="anchor" id="variable-enorm"></span>
               real(kind=dp),
             </td>
               <td>public</td>
@@ -296,7 +298,7 @@
 <td> =</td>
                 <td>0</td>
             <td>
-                
+                <p>электрическое поле</p>
             </td>
         </tr>
         <tr>
@@ -313,7 +315,7 @@
 <td> =</td>
                 <td>0</td>
             <td>
-                
+                <p>верхняя граница скорости электронов</p>
             </td>
         </tr>
         <tr>
@@ -330,7 +332,7 @@
                 <td></td>
                 <td></td>
             <td>
-                
+                <p>сетка скоростей</p>
             </td>
         </tr>
         <tr>
@@ -347,7 +349,7 @@
                 <td></td>
                 <td></td>
             <td>
-                
+                <p>распределение</p>
             </td>
         </tr>
         <tr>
@@ -364,7 +366,7 @@
 <td> =</td>
                 <td>0</td>
             <td>
-                
+                <p>size of distribution grid</p>
             </td>
         </tr>
         <tr>
@@ -381,7 +383,7 @@
 <td> =</td>
                 <td>0</td>
             <td>
-                
+                <p>поле со знаком</p>
             </td>
         </tr>
         <tr>
@@ -398,7 +400,7 @@
 <td> =</td>
                 <td>0</td>
             <td>
-                
+                <p>size of local grid        </p>
             </td>
         </tr>
         <tr>
@@ -415,7 +417,7 @@
 <td> =</td>
                 <td>0</td>
             <td>
-                
+                <p>step of local grid </p>
             </td>
         </tr>
         <tr>
@@ -432,7 +434,7 @@
                 <td></td>
                 <td></td>
             <td>
-                
+                <p>диффузия</p>
             </td>
         </tr>
         <tr>
@@ -449,7 +451,7 @@
                 <td></td>
                 <td></td>
             <td>
-                
+                <p>диффузия</p>
             </td>
         </tr>
         <tr>
@@ -466,7 +468,7 @@
                 <td></td>
                 <td></td>
             <td>
-                
+                <p>диффузия</p>
             </td>
         </tr>
     </tbody>
@@ -490,7 +492,7 @@
 
     </h3>
     
-  
+  <p>конструктор для FokkerPlanck1D</p>
 
   <h4>Arguments</h4>
       <table class="table table-striped varlist">
@@ -756,7 +758,7 @@
     public  subroutine <a href='../proc/fokkerplanck1d_init_diffusion.html'>FokkerPlanck1D_init_diffusion</a>(this, dif)  
 </h3>
     
-  
+  <p>инициализация диффузии для схемы савельева</p>
 
   <h4>Arguments</h4>
       <table class="table table-striped varlist">
@@ -825,7 +827,7 @@
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
- on 2023-03-16 00:52            </p>
+ on 2023-03-31 03:34            </p>
         </div>
       </div>
       <br>

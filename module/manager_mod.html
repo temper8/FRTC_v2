@@ -52,6 +52,7 @@
             <li><a href="../lists/files.html">Source Files</a></li>
             <li><a href="../lists/modules.html">Modules</a></li>
             <li><a href="../lists/procedures.html">Procedures</a></li>
+            <li><a href="../lists/absint.html">Abstract Interfaces</a></li>
                    <li><a href="../lists/types.html">Derived Types</a></li>
        
             </ul>
@@ -60,6 +61,7 @@
 <li class="visible-xs hidden-sm visible-lg"><a href="../lists/files.html">Source Files</a></li>
 <li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
 <li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/absint.html">Abstract Interfaces</a></li>
                              <li class="visible-xs hidden-sm visible-lg"><a href="../lists/types.html">Derived Types</a></li>
           </ul>
         <form action="../search.html" class="navbar-form navbar-right" role="search">
@@ -88,16 +90,16 @@
           <li id="statements"><i class="fa fa-list-ol"></i>
             <a data-toggle="tooltip"
                data-placement="bottom" data-html="true"
-               title=" 7.7% of total for modules and submodules.">249 statements</a>
+               title=" 5.3% of total for modules and submodules.">238 statements</a>
           </li>
 
             <li id="source-file">
               <i class="fa fa-code"></i>
-              <a href="../src/3_manager.f90"> Source File</a>
+              <a href="../src/4_manager.f90"> Source File</a>
             </li>
         </ul>
         <ol class="breadcrumb in-well text-right">
-              <li><a href='../sourcefile/3_manager.f90.html'>3_manager.f90</a></li>
+              <li><a href='../sourcefile/4_manager.f90.html'>4_manager.f90</a></li>
           <li class="active">manager_mod</li>
         </ol>
       </div>
@@ -124,9 +126,10 @@
       </div>
       <div id="vars-0" class="panel-collapse collapse">
         <div class="list-group">
-            <a class="list-group-item" href="../module/manager_mod.html#variable-yn3">yn3</a>
-            <a class="list-group-item" href="../module/manager_mod.html#variable-iroot">iroot</a>
-            <a class="list-group-item" href="../module/manager_mod.html#variable-ivar">ivar</a>
+            <a class="list-group-item" href="../module/manager_mod.html#variable-pow">pow</a>
+            <a class="list-group-item" href="../module/manager_mod.html#variable-inak">inak</a>
+            <a class="list-group-item" href="../module/manager_mod.html#variable-lenstor">lenstor</a>
+            <a class="list-group-item" href="../module/manager_mod.html#variable-lfree">lfree</a>
         </div>
       </div>
     </div>
@@ -207,9 +210,10 @@
       </div>
       <div id="vars-1" class="panel-collapse collapse">
         <div class="list-group">
-            <a class="list-group-item" href="../module/manager_mod.html#variable-yn3">yn3</a>
-            <a class="list-group-item" href="../module/manager_mod.html#variable-iroot">iroot</a>
-            <a class="list-group-item" href="../module/manager_mod.html#variable-ivar">ivar</a>
+            <a class="list-group-item" href="../module/manager_mod.html#variable-pow">pow</a>
+            <a class="list-group-item" href="../module/manager_mod.html#variable-inak">inak</a>
+            <a class="list-group-item" href="../module/manager_mod.html#variable-lenstor">lenstor</a>
+            <a class="list-group-item" href="../module/manager_mod.html#variable-lfree">lfree</a>
         </div>
       </div>
     </div>
@@ -275,7 +279,7 @@
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-yn3"></span>
+              <span class="anchor" id="variable-pow"></span>
               real(kind=wp),
             </td>
               <td>public</td>
@@ -283,16 +287,16 @@
               
             </td>
             <td>::</td>
-            <td><strong>yn3</strong></td>
+            <td><strong>pow</strong></td>
                 <td></td>
                 <td></td>
             <td>
-                <p>common /abefo/ yn3</p>
+                <p>common /acg/ pow</p>
             </td>
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-iroot"></span>
+              <span class="anchor" id="variable-inak"></span>
               integer,
             </td>
               <td>public</td>
@@ -300,16 +304,16 @@
               
             </td>
             <td>::</td>
-            <td><strong>iroot</strong></td>
+            <td><strong>inak</strong></td>
                 <td></td>
                 <td></td>
             <td>
-                <p>common /beo/ iroot</p>
+                
             </td>
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-ivar"></span>
+              <span class="anchor" id="variable-lenstor"></span>
               integer,
             </td>
               <td>public</td>
@@ -317,11 +321,28 @@
               
             </td>
             <td>::</td>
-            <td><strong>ivar</strong></td>
+            <td><strong>lenstor</strong></td>
                 <td></td>
                 <td></td>
             <td>
-                <p>common /bdeo/ ivar    </p>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-lfree"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>lfree</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
             </td>
         </tr>
     </tbody>
@@ -359,9 +380,9 @@ yn3=yn*dsqrt(g33)       !if given Nfi at Nteta=0</p>
         <tr>
             <td>
               <span class="anchor" ></span>
-              real(kind=wp)
+              real(kind=wp),
             </td>
-<td></td>
+<td>intent(inout)</td>
               <td></td>            <td>
               
             </td>
@@ -374,9 +395,9 @@ yn3=yn*dsqrt(g33)       !if given Nfi at Nteta=0</p>
         <tr>
             <td>
               <span class="anchor" ></span>
-              real(kind=wp)
+              real(kind=wp),
             </td>
-<td></td>
+<td>intent(in)</td>
               <td></td>            <td>
               
             </td>
@@ -389,9 +410,9 @@ yn3=yn*dsqrt(g33)       !if given Nfi at Nteta=0</p>
         <tr>
             <td>
               <span class="anchor" ></span>
-              real(kind=wp)
+              real(kind=wp),
             </td>
-<td></td>
+<td>intent(inout)</td>
               <td></td>            <td>
               
             </td>
@@ -404,9 +425,9 @@ yn3=yn*dsqrt(g33)       !if given Nfi at Nteta=0</p>
         <tr>
             <td>
               <span class="anchor" ></span>
-              type(<a href='../type/spectrum_point.html'>spectrum_point</a>)
+              type(<a href='../type/spectrumpoint.html'>SpectrumPoint</a>),
             </td>
-<td></td>
+<td>intent(in)</td>
               <td></td>            <td>
               
             </td>
@@ -419,9 +440,9 @@ yn3=yn*dsqrt(g33)       !if given Nfi at Nteta=0</p>
         <tr>
             <td>
               <span class="anchor" ></span>
-              real(kind=wp)
+              real(kind=wp),
             </td>
-<td></td>
+<td>intent(in)</td>
               <td></td>            <td>
               
             </td>
@@ -434,9 +455,9 @@ yn3=yn*dsqrt(g33)       !if given Nfi at Nteta=0</p>
         <tr>
             <td>
               <span class="anchor" ></span>
-              integer
+              integer,
             </td>
-<td></td>
+<td>intent(inout)</td>
               <td></td>            <td>
               
             </td>
@@ -529,7 +550,7 @@ yn3=yn*dsqrt(g33)       !if given Nfi at Nteta=0</p>
         <tr>
             <td>
               <span class="anchor" ></span>
-              type(<a href='../type/spectrum.html'>spectrum</a>)
+              type(<a href='../type/spectrum.html'>Spectrum</a>)
             </td>
 <td></td>
               <td></td>            <td>
@@ -568,7 +589,7 @@ yn3=yn*dsqrt(g33)       !if given Nfi at Nteta=0</p>
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
- on 2023-03-16 00:52            </p>
+ on 2023-03-31 03:34            </p>
         </div>
       </div>
       <br>

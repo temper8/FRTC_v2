@@ -16,17 +16,17 @@ module plasma
     real(wp), dimension(:),allocatable:: rh,rha,drhodr,delta,ell,gamm,amy
 
     real(wp) tet1, tet2
-    !! бывший common /a0a2/ 
+    !!common /a0a2/ 
 
     real(wp) xmi,cnye,cnyi,xsz,vt0 
-    ! common /a0ef3/ xmi,cnye,cnyi,xsz,vt0 
+    !!/a0ef3/ xmi,cnye,cnyi,xsz,vt0 
     real(wp) cnstvc
 
     real(wp) ww
-    ! common /a0ef2/ ww
+    !!common /a0ef2/ ww
 
     real(wp) cltn
-    ! common /a0ef1/ cltn    
+    !!common /a0ef1/ cltn    
 
     real(wp) vperp(50,100),cnstal,zza,zze,valfa!,kv
     !common /a0i5/ vperp(50,100),cnstal,zza,zze,valfa!,kv
@@ -43,13 +43,13 @@ module plasma
 
 
     real(wp) y2dn(501),y2tm(501),y2tmi(501)
-    !! бывший common /a0l3/
+    !!common /a0l3/
     real(wp) y2zeff(501)
-    !! бывший common /a0l5/ 
+    !!common /a0l5/ 
 
     integer ncheb
     real(wp) chebne(50),chebdne(50),chebddne(50)    
-    !! бывший common/ne_cheb
+    !!common/ne_cheb
 
     real(wp) enorm(100), fst(100)
     !! em поле и еще что-то
@@ -370,6 +370,7 @@ contains
         use rt_parameters, only: nr, inew
         use spline_module
         use maxwell
+        use lock_module
         implicit none
         integer j, klo,khi,ierr
         real(wp) :: efld
