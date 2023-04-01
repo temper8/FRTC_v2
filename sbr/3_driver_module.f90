@@ -465,27 +465,27 @@ contains
         h=htot/nstep
         yz1=y(1) !sav#
         yz2=y(2) !sav#
-        do 11 i=1,nvar
+        do i=1,nvar
             ym(i)=y(i)
             yn(i)=y(i)+h*dydx(i)
-  11    continue
+        enddo
         x=xs+h
         call derivs(x,yn,yout)
         if (iconv+irefl.ne.0) goto 10 !sav#
         h2=2.d0*h
-        do 13 n=2,nstep
-            do 12 i=1,nvar
+        do n=2,nstep
+            do i=1,nvar
                 swap=ym(i)+h2*yout(i)
                 ym(i)=yn(i)
                 yn(i)=swap
-  12        continue
+            enddo
             x=x+h
             call derivs(x,yn,yout)
             if (iconv+irefl.ne.0) goto 10 !sav#
-  13    continue
-        do 14 i=1,nvar
+        enddo
+        do i=1,nvar
             yout(i)=0.5d0*(ym(i)+yn(i)+h*yout(i))
-  14    continue
+        enddo
         ind=0 !sav#
         return
   10    ind=1 !sav#
@@ -504,37 +504,37 @@ contains
         save d,x
         x(iest)=xest
         if(iest.eq.1) then
-            do 11 j=1,nv
+            do j=1,nv
                 yz(j)=yest(j)
                 d(j,1)=yest(j)
                 dy(j)=yest(j)
-    11      continue
+            enddo
         else
-            do 12 k=1,iest-1
+            do k=1,iest-1
                 fx(k+1)=x(iest-k)/xest
-    12      continue
-            do 14 j=1,nv
+            enddo
+            do j=1,nv
                 yy=yest(j)
                 v=d(j,1)
                 c=yy
                 d(j,1)=yy
-                do 13 k=2,iest
-                b1=fx(k)*v
-                b=b1-c
-                if(b.ne.0.d0) then
-                    b=(c-v)/b
-                    ddy=c*b
-                    c=b1*b
-                else
-                    ddy=v
-                endif
-                if (k.ne.iest) v=d(j,k)
-                d(j,k)=ddy
-                yy=yy+ddy
-    13        continue
+                do k=2,iest
+                    b1=fx(k)*v
+                    b=b1-c
+                    if(b.ne.0.d0) then
+                        b=(c-v)/b
+                        ddy=c*b
+                        c=b1*b
+                    else
+                        ddy=v
+                    endif
+                    if (k.ne.iest) v=d(j,k)
+                    d(j,k)=ddy
+                    yy=yy+ddy
+                enddo
                 dy(j)=ddy
                 yz(j)=yy
-    14      continue
+            enddo
         endif
         return
     end
@@ -549,34 +549,34 @@ contains
         double precision delta,f1,f2,q,d(nmax),qcol(nmax,imax),x(imax)
         save qcol,x
         x(iest)=xest
-        do 11 j=1,nv
+        do j=1,nv
             dy(j)=yest(j)
             yz(j)=yest(j)
-  11    continue
+        enddo
         if(iest.eq.1) then
-            do 12 j=1,nv
+            do j=1,nv
                 qcol(j,1)=yest(j)
-    12      continue
+            enddo
         else
-            do 13 j=1,nv
+            do j=1,nv
                 d(j)=yest(j)
-    13      continue
-            do 15 k1=1,iest-1
+            enddo
+            do k1=1,iest-1
                 delta=1.d0/(x(iest-k1)-xest)
                 f1=xest*delta
                 f2=x(iest-k1)*delta
-                do 14 j=1,nv
-                q=qcol(j,k1)
-                qcol(j,k1)=dy(j)
-                delta=d(j)-q
-                dy(j)=f1*delta
-                d(j)=f2*delta
-                yz(j)=yz(j)+dy(j)
-    14        continue
-    15      continue
-            do 16 j=1,nv
+                do j=1,nv
+                    q=qcol(j,k1)
+                    qcol(j,k1)=dy(j)
+                    delta=d(j)-q
+                    dy(j)=f1*delta
+                    d(j)=f2*delta
+                    yz(j)=yz(j)+dy(j)
+                enddo
+            enddo
+            do j=1,nv
                 qcol(j,iest)=dy(j)
-    16      continue
+            enddo
         endif
         return
     end
