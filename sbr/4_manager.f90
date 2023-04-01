@@ -314,6 +314,7 @@ contains
         use current
         use plasma, only: vperp
         use iterator_mod, only: psum4
+        use driver_module !, only: jrad, iww, length        
         implicit real*8 (a-h,o-z)
         integer, intent(inout) :: ib, ie
         integer, intent(inout) :: iout

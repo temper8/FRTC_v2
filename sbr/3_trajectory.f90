@@ -1,24 +1,13 @@
 module trajectory
     use kind_module
     implicit none
-    integer, parameter :: length = 5000000
+
     integer, parameter :: mpnt = 100000
 
 
-
-
-
-
-    integer  :: im4
-    !common /bg/ im4
-
     integer nrefj(mpnt)
     !!common/refl/nrefj(mpnt)
-    real(wp) dland(length),dcoll(length),perpn(length),dalf(length)
-    real(wp) vel(length),tetai(length)
-    real(wp) xnpar(length)
-    integer izz(length),iww(length),jrad(length)
-    !!common/agh/xnpar,vel,dland,dcoll,dalf,perpn,tetai,jrad,iww,izz
+
     integer mbeg(mpnt),mend(mpnt),mbad(mpnt)
     real(wp) rbeg(mpnt) !sav2008
     real(wp) tetbeg(mpnt),xnrbeg(mpnt),xmbeg(mpnt),yn3beg(mpnt)
@@ -28,6 +17,7 @@ contains
 
 subroutine init_trajectory
     use constants
+    use driver_module
     implicit none
     nrefj = 0
     
@@ -62,7 +52,8 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
     use dispersion_module, only: zatukh
     use rt_parameters, only :  nr, itend0, kv, nmaxm    
     use spectrum1D, only: ynzm, pm 
-    use dispersion_module     
+    use dispersion_module
+    use driver_module !, only: jrad, iww, izz, length
     implicit real(wp) (a-h,o-z)
     real(wp), intent(in) :: tview
 
