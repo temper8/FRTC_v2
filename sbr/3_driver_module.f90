@@ -206,9 +206,9 @@ contains
         use plasma, only : fvt, vperp
         use current
         use dispersion_module
-        implicit real*8 (a-h,o-z)
-        real*8 pabs
-        real*8 radth
+        !implicit real*8 (a-h,o-z)
+        real(wp), intent(in) :: pabs
+        real(wp)    :: radth
         !dimension an1(length),an2(length)
         !common /xn1xn2/ an1,an2
         !common /vth/ vthc(length),poloidn(length)
@@ -223,7 +223,12 @@ contains
         !common /eg2/ pdec1,pdec2,pdec3,pdecv,pdecal,dfdv,icf1,icf2
         !common /eg3/ cf1,cf2,cf3,cf4,cf5,cf6
         !common /dg/ pintld4,pintcl4,pintal4
-        integer :: i, j, npoloid, ifast, idir
+        integer     :: i, j, npoloid, ifast, idir
+        real(wp)    :: powpr,  hdis, vz, refr, tet_i
+        real(wp)    :: xparn, xan1, xan2, dek3, dfsr
+        real(wp)    :: vsr, pintld, pintcl, argum, valfa
+        real(wp)    :: pintal, dcv, powd, powccc, powcol, powal
+        real(wp)    :: pil, pic, pia
         powpr=pow
         iabsorp=0
         hdis=hrad
