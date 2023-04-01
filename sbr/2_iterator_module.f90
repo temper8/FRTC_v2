@@ -12,8 +12,7 @@ module iterator_mod
     integer  :: nvpt
     !!common/gridv/nvpt
     integer :: ipt1, ipt2, ipt
-    
-    integer, parameter :: kpt1=20, kpt3=20
+
 
     integer  :: iterat
     real(wp) :: psum4
