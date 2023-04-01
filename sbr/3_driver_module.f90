@@ -37,9 +37,11 @@ module driver_module
     integer     :: inak, lenstor, lfree
     !common /ag/ inak,lenstor,lfree
 
-    real(wp) pintld4,pintcl4,pintal4
+    real(wp)    :: pintld4,pintcl4,pintal4
     !common /dg/ pintld4,pintcl4,pintal4
 
+    real(wp)    ::  vthc(length),poloidn(length)
+    !common /vth/ vthc(length),poloidn(length)
 contains
 
     subroutine driver2(ystart,x1,x2,xsav,hmin,h1, pabs) !sav2008
@@ -216,7 +218,7 @@ contains
         real*8 radth
         !dimension an1(length),an2(length)
         !common /xn1xn2/ an1,an2
-        common /vth/ vthc(length),poloidn(length)
+        !common /vth/ vthc(length),poloidn(length)
         !common /a0ghp/ vlf,vrt,dflf,dfrt
         !common /abcdg/ iabsorp
         !common /acg/ pow

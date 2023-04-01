@@ -59,7 +59,7 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
 
     integer, intent(in) :: iview, nnz, ntet  !sav#
     !common /bcef/ ynz,ynpopq
-    common /vth/ vthc(length),poloidn(length)
+    !common /vth/ vthc(length),poloidn(length)
     real(wp) vthcg,npoli
     !common /a0ghp/ vlf,vrt,dflf,dfrt
     
