@@ -5,13 +5,9 @@ module trajectory
     integer, parameter :: mpnt = 100000
 
 
-    real(wp) :: rzz,tetzz,xmzz
-    !!common /abc/ rzz,tetzz,xmzz    
-    integer  :: iznzz,iwzz,irszz
-    !!common /abc/ iznzz,iwzz,irszz
 
-    real(wp) :: hrad
-    !common /bcg/ hrad
+
+
 
     integer  :: im4
     !common /bg/ im4
