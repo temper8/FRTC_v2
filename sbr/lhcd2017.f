@@ -180,22 +180,3 @@ cc*********************************************************************
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-      subroutine interpol(fj)
-      implicit none
-      integer p,k,i0,i
-      real*8 p2,zero
-      double precision fj(1002)
-      parameter(zero=0.d0,i0=1002)
-      p=zero
-      do i=1,i0
-            if (fj(i).gt.zero) then
-                  if (p.gt.zero) then
-                        p2=(fj(i)-fj(p))/(i-p)
-                              do k=p+1,i-1
-                                    fj(k)=fj(p)+p2*(k-p)
-                              end do
-                        end if
-                  p=i
-                  end if
-            end do
-      end
