@@ -1,9 +1,10 @@
 module manager_mod
+    !! модуль определяет начальные значения лучей и запускает трассировку
     use kind_module
     implicit none
 
 contains
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     subroutine manager(iterat,iw0, ntet, spectr)
         use constants            
         use plasma
