@@ -60,6 +60,7 @@ contains
         use rt_parameters
         use spline_module
         use chebyshev
+        use math_module
         implicit none
         integer, intent(in)  :: NA1
         real(wp), intent(in) :: ABC, BTOR, RTOR, UPDWN, GP2

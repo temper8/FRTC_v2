@@ -78,6 +78,7 @@
         use maxwell
         use rt_parameters, only : nr, inew
         use driven_current_module
+        use math_module        
         implicit none
         type(DrivenCurrent), intent(inout) :: driven_current
         integer,             intent(in)    :: ispectr

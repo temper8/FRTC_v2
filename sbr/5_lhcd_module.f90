@@ -20,6 +20,7 @@ contains
         use iteration_result_mod
         use iterator_mod
         use lock_module
+        use math_module
         implicit real*8 (a-h,o-z)
         type(Spectrum) spectr
         real*8 outpe,pe_out 

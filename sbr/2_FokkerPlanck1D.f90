@@ -214,6 +214,7 @@ module FokkerPlanck1D_mod ! the module name defines the namespace
 
     subroutine burying_procedure(v, f0, df0)
         !! процедура закапывания
+        use math_module
         implicit none
         real*8,  intent(in)     :: v(:)        
         real*8,  intent(inout)  :: f0(:)
