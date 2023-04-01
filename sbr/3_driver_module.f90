@@ -322,28 +322,44 @@ contains
         if(ipow.eq.1) dcoll(inak)=1d0
     end
 
-    subroutine difeq(y,dydx,nv,x,htry,eps,yscal,hdid,hnext,derivs)
+    subroutine difeq(y, dydx, nv,x, htry, eps, yscal, hdid, hnext, derivs)
         use rt_parameters, only : hmin1
         implicit none
         external derivs
-        integer nv,nmax,kmaxx,imax
-        double precision eps,hdid,hnext,htry,x,dydx(nv),y(nv),yscal(nv), & 
-            safe1,safe2,redmax,redmin,tiny,scalmx, &
-            dysav(nv) !sav#
-        parameter(nmax=50,kmaxx=8,imax=kmaxx+1,safe1=.25d0,safe2=.7d0, &
-            redmax=1.d-5,redmin=.7d0,tiny=1.d-30,scalmx=.1d0)
+        real(wp), intent(inout) :: y(nv)
+        real(wp), intent(in)    :: dydx(nv)
+        integer, intent(in)     :: nv
+        real(wp), intent(inout) :: x
+        real(wp), intent(in)    :: htry
+        real(wp), intent(in)    :: eps
+        real(wp), intent(inout) :: yscal(nv)
+        real(wp), intent(inout) :: hdid
+        real(wp), intent(inout) :: hnext
+
+        real(wp)            :: dysav(nv) !sav#
+
+        integer, parameter  :: nmax=50,kmaxx=8,imax=kmaxx+1
+        real(wp),parameter  :: safe1=.25d0, safe2=.7d0 
+        real(wp),parameter  :: redmax=1.d-5, redmin=.7d0
+        real(wp),parameter  :: tiny=1.d-30, scalmx=.1d0
+
         !cu    uses derivs,mmid,pzextr
-        integer i,iq,k,kk,km,kmax,kopt,nseq(imax)
-        double precision eps1,epsold,errmax,fact,h,red,scale,work,wrkmin, &
-            xest,xnew,a(imax),alf(kmaxx,kmaxx),err(kmaxx), &
-            yerr(nmax),ysav(nmax),yseq(nmax)
-        logical first,reduct
-        save a,alf,epsold,first,kmax,kopt,nseq,xnew
-        double precision dyd
-        integer ii
+        integer  :: i,iq,k,kk,km,kmax,kopt,nseq(imax)
+        real(wp) :: eps1,epsold,errmax,fact,h,red,scale,work,wrkmin
+        real(wp) :: xest, xnew
+        real(wp) :: a(imax),alf(kmaxx,kmaxx),err(kmaxx)
+        real(wp) :: yerr(nmax),ysav(nmax),yseq(nmax)
+        logical  :: first, reduct
+
+        save a,alf,epsold,first,kmax,kopt,nseq,xnew !!! зачем save ?????
+        
+        real(wp) :: dyd
+        integer  :: ii
+
         !common /cmn/ ind
         data first/.true./,epsold/-1.d0/
         data nseq /2,4,6,8,10,12,14,16,18/
+
         if(eps.ne.epsold)then
             hnext=-1.d29
             xnew=-1.d29
