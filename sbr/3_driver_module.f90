@@ -439,6 +439,52 @@ contains
         return
     end
 
+    subroutine mmid(y,dydx,nvar,xs,htot,nstep,yout,derivs)
+        use dispersion_module, only: iconv,irefl
+        implicit none
+        external derivs
+        integer nstep,nvar,nmax
+        double precision htot,xs,dydx(nvar),y(nvar),yout(nvar)
+        parameter (nmax=50)
+        integer i,n
+        double precision h,h2,swap,x,ym(nmax),yn(nmax)
+        double precision yz1,yz2
+        !integer iconv,irefl
+        !common /cefn/ iconv,irefl
+        integer ind
+        common /cmn/ ind
+        h=htot/nstep
+        yz1=y(1) !sav#
+        yz2=y(2) !sav#
+        do 11 i=1,nvar
+            ym(i)=y(i)
+            yn(i)=y(i)+h*dydx(i)
+  11    continue
+        x=xs+h
+        call derivs(x,yn,yout)
+        if (iconv+irefl.ne.0) goto 10 !sav#
+        h2=2.d0*h
+        do 13 n=2,nstep
+            do 12 i=1,nvar
+                swap=ym(i)+h2*yout(i)
+                ym(i)=yn(i)
+                yn(i)=swap
+  12        continue
+            x=x+h
+            call derivs(x,yn,yout)
+            if (iconv+irefl.ne.0) goto 10 !sav#
+  13    continue
+        do 14 i=1,nvar
+            yout(i)=0.5d0*(ym(i)+yn(i)+h*yout(i))
+  14    continue
+        ind=0 !sav#
+        return
+  10    ind=1 !sav#
+        yout(1)=yz1 !sav#
+        yout(2)=yz2 !sav#
+        return !sav#
+    end    
+
 !------------------------------------------------------------------------------------------------
 subroutine driver4(ystart,x1,x2,rexi,hmin, derivs)
     use constants
