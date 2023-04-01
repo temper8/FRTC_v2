@@ -60,6 +60,9 @@ module dispersion_module
     integer  :: kzero(100)
     !!common /arr/ dgdu(50,100),kzero(100)
     !! используется в zatukh, ourlhcd2017 и alphas
+
+    real(wp) :: vlf,vrt,dflf,dfrt
+    !common /a0ghp/ vlf,vrt,dflf,dfrt
 contains
     subroutine disp2(pa,yn2,ptet,xnro,prt,prm)
         use constants
@@ -879,8 +882,9 @@ contains
         real*8 vz,fder
         integer i,klo,khi,ierr,nvp
         real*8,dimension(:),allocatable:: vzj,dfdvj
-        real*8 vlf,vrt,dflf,dfrt,dfout
-        common /a0ghp/ vlf,vrt,dflf,dfrt
+        real(wp) :: dfout
+        !real*8 vlf,vrt,dflf,dfrt
+        !common /a0ghp/ vlf,vrt,dflf,dfrt
         !common/gridv/vgrid(101,100),dfundv(101,100),nvpt
 
         nvp=nvpt

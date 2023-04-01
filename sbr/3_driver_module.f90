@@ -214,7 +214,7 @@ contains
         !dimension an1(length),an2(length)
         !common /xn1xn2/ an1,an2
         common /vth/ vthc(length),poloidn(length)
-        common /a0ghp/ vlf,vrt,dflf,dfrt
+        !common /a0ghp/ vlf,vrt,dflf,dfrt
         !common /abcdg/ iabsorp
         !common /acg/ pow
         !common /ag/ inak,lenstor,lfree

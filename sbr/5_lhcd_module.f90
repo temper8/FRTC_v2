@@ -38,7 +38,7 @@ contains
         !dimension vmid(100),vz1(100),vz2(100),ibeg(100),iend(100)
         !common /a0a4/ plost,pnab
         !common /bcef/ ynz,ynpopq
-        common /a0ghp/ vlf,vrt,dflf,dfrt
+        !common /a0ghp/ vlf,vrt,dflf,dfrt
         common/plosh/ zv1(100,2),zv2(100,2)!,sk(100)
         !common /asou/ rsou(102),sou(102),npta
         !common/gridv/vgrid(101,100),dfundv(101,100),nvpt

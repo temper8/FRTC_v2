@@ -61,7 +61,7 @@ subroutine view(tview,iview,nnz,ntet) !sav2008
     !common /bcef/ ynz,ynpopq
     common /vth/ vthc(length),poloidn(length)
     real(wp) vthcg,npoli
-    common /a0ghp/ vlf,vrt,dflf,dfrt
+    !common /a0ghp/ vlf,vrt,dflf,dfrt
     
     integer i, n, itr, ntraj
     integer jrc,nturn,ib,ie,jr,ifast,idir,iv
