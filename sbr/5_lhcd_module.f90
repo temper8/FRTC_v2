@@ -1,5 +1,6 @@
 module lhcd_module
     !! LHCD модуль
+    use kind_module
     implicit none
     
 contains
@@ -526,4 +527,61 @@ contains
             vz2(j)=v2
         end do
     end subroutine    
+
+    subroutine alphas(d,u,j,kmax,g)
+        use dispersion_module, only: dgdu, kzero
+        use constants, only : zero, one
+        implicit real*8 (a-h,o-z)
+        integer, intent(in) :: j, kmax
+        dimension d(50,100),u(50,100),g(50,100)
+        !common /arr/ dgdu(50,100),kzero(100)
+        real(wp), parameter :: tiny=1.d-30
+        integer :: k, km
+        km=kzero(j)
+        um=u(km,j)
+        if(um.ge.one) then
+            do k=1,kmax
+                if(u(k,j).lt.one) then
+                    uk=u(k,j)
+                    uk2=uk**2
+                    w=dsqrt(one-uk2)
+                    g(k,j)=w/uk2
+                    dgdu(k,j)=-one/(w*uk)-2.d0*w/(uk*uk2)
+                else
+                    g(k,j)=zero
+                    dgdu(k,j)=zero
+                end if
+            end do
+            return
+        end if
+  
+        do k=1,km
+            uk=u(k,j)
+            uk2=uk**2
+            w=dsqrt(one-uk2)
+            g(k,j)=w/uk2
+            dgdu(k,j)=-one/(w*uk)-2.d0*w/(uk*uk2)
+        end do
+  
+        do k=km+1,kmax
+            du=u(k,j)-u(k-1,j)
+            if(u(k,j).lt.one) then
+                beta=u(k,j)*dsqrt(one-u(k,j)**2)
+            else
+                beta=zero
+            end if
+            alfa=u(k,j)**3
+            g(k,j)=(d(k,j)*g(k-1,j)+beta*du)/(d(k,j)+alfa*du)
+            if(d(k,j).ne.zero) then
+                dgdu(k,j)=(beta-alfa*g(k,j))/d(k,j)
+            else
+                dgdu(k,j)=(g(k,j)-g(k-1,j))/du
+            end if
+        end do
+        do k=1,kmax
+            if(g(k,j).lt.tiny) g(k,j)=zero
+            if(dabs(dgdu(k,j)).lt.tiny) dgdu(k,j)=zero
+        end do
+        return
+    end    
 end module lhcd_module
