@@ -88,9 +88,9 @@ subroutine dfind(j,i,v,powpr,pil,pic,pia,df,decv,refr,vlf,vrt,ifast)
     powdamped=1.d0-dexp(-2.d0*denom)
     domin=powpr*powdamped
     if(denom.ne.zero) then
-!!       pchgl=powpr*(1.d0-dexp(-2d0*pil))
-!!       pchgc=powpr*dexp(-2d0*pil)*dabs(-2d0*pic)
-!!       pchga=powpr*dexp(-2d0*pil)*dabs(-2d0*pia)
+        !!       pchgl=powpr*(1.d0-dexp(-2d0*pil))
+        !!       pchgc=powpr*dexp(-2d0*pil)*dabs(-2d0*pic)
+        !!       pchga=powpr*dexp(-2d0*pil)*dabs(-2d0*pia)
         fff=domin/denom
         pchgl=dabs(pil*fff)
         pchgc=dabs(pic*fff)
@@ -126,8 +126,8 @@ subroutine dfind(j,i,v,powpr,pil,pic,pia,df,decv,refr,vlf,vrt,ifast)
         dvz=vrt-vlf
         dnpar=cltn*dvz/v**2
         weight=(refr**2-eta(j))**2/(refr**2*parn**3)
-!!!        adde=zze*(dd/dens(j))*weight
-!!!        e2perp(i,j)=e2perp(i,j)+adde
+        !!!        adde=zze*(dd/dens(j))*weight
+        !!!        e2perp(i,j)=e2perp(i,j)+adde
         addd=zza*(dd/dens(j))*weight/fcoll(j)/refr**3
         arg=clt/(refr*valfa)
         do k=1,kv
