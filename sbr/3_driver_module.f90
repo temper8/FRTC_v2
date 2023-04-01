@@ -9,29 +9,29 @@ module driver_module
     integer izz(length),iww(length),jrad(length)
     !!common/agh/xnpar,vel,dland,dcoll,dalf,perpn,tetai,jrad,iww,izz
 
-    integer  :: irs
+    integer     :: irs
     !common /abcd/ irs
-    integer  :: iabsorp
+    integer     :: iabsorp
     !common /abcdg/ iabsorp
 
-    real(wp) :: rzz,tetzz,xmzz
+    real(wp)    :: rzz, tetzz, xmzz
     !!common /abc/ rzz,tetzz,xmzz    
-    integer  :: iznzz,iwzz,irszz
+    integer     :: iznzz, iwzz, irszz
     !!common /abc/ iznzz,iwzz,irszz
 
-    real(wp) :: hrad
+    real(wp)    :: hrad
     !common /bcg/ hrad    
 
-    integer :: ind
+    integer     :: ind
     !common /cmn/ ind    
 
-    integer  :: im4
+    integer     :: im4
     !common /bg/ im4    
 
-    real(wp) pow
+    real(wp)    :: pow
     !!common /acg/ pow
 
-    integer inak,lenstor,lfree
+    integer     :: inak, lenstor, lfree
     !common /ag/ inak,lenstor,lfree
 
 contains
