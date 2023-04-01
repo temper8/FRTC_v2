@@ -37,6 +37,9 @@ module driver_module
     integer     :: inak, lenstor, lfree
     !common /ag/ inak,lenstor,lfree
 
+    real(wp) pintld4,pintcl4,pintal4
+    !common /dg/ pintld4,pintcl4,pintal4
+
 contains
 
     subroutine driver2(ystart,x1,x2,xsav,hmin,h1, pabs) !sav2008
@@ -224,7 +227,7 @@ contains
         !common /eg1/ vfound,ifound
         !common /eg2/ pdec1,pdec2,pdec3,pdecv,pdecal,dfdv,icf1,icf2
         !common /eg3/ cf1,cf2,cf3,cf4,cf5,cf6
-        common /dg/ pintld4,pintcl4,pintal4
+        !common /dg/ pintld4,pintcl4,pintal4
         integer :: i, j, npoloid, ifast, idir
         powpr=pow
         iabsorp=0
@@ -606,8 +609,8 @@ contains
         !common /bdeo/ ivar
         !common /bcef/ ynz,ynpopq
         !common /df/ pdec14,pdec24,pdec34,idec
-        real(wp) pintld4,pintcl4,pintal4
-        common /dg/ pintld4,pintcl4,pintal4
+        !real(wp) pintld4,pintcl4,pintal4
+        !common /dg/ pintld4,pintcl4,pintal4
         integer,  parameter :: iturns=1, maxat=3, nvar=4
         real(wp), parameter ::  hbeg=1.d-4 !sav2008
         real(wp)  :: x, xnr, prt, prm, dyd, hnext
