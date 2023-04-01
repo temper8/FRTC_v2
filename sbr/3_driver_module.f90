@@ -49,9 +49,13 @@ contains
         use plasma
         use rt_parameters
         use dispersion_module
-        implicit real*8 (a-h,o-z)
+        !implicit real*8 (a-h,o-z)
         !external extd2
-        real*8 pabs
+        real(wp), intent(inout) :: ystart(2)
+        real(wp), intent(in)    :: x1
+        real(wp), intent(inout) :: x2, xsav
+        real(wp), intent(in)    :: hmin,h1
+        real(wp), intent(in)    :: pabs
         !common /abc/ rzz,tetzz,xmzz,iznzz,iwzz,irszz
         !common /abcd/ irs
         !common /abcde/ izn!,iw
@@ -62,10 +66,13 @@ contains
         !common /ceg/ ipow,jfoundr
         !integer :: ind
         !common /cmn/ ind
-        dimension ystart(2)
         integer, parameter :: nvar=2
-        dimension yscal(nvar),y(nvar),dydx(nvar),yold(nvar),dyold(nvar)
-        integer :: i, ii, irep, nstp
+        real(wp) :: yscal(nvar),y(nvar),dydx(nvar),yold(nvar),dyold(nvar)
+        real(wp) :: x, xold
+        real(wp) :: h, hsav, hdid, hnext
+        real(wp) :: dstsav, dyd, dst3, dst2, dst1
+        real(wp) :: ynz0 !!!!!! проверить значение
+        integer  :: i, ii, irep, nstp
         x=x1
         h=dsign(h1,x2-x1)
         ind=0
