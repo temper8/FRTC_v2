@@ -444,4 +444,86 @@ contains
         !
         deallocate(vvj,vdfj)
     end    
+
+    subroutine gridvel(v1,v2,vmax,cdel,ni1,ni2,ipt1,kpt3,vrj)
+        implicit none
+        integer ni1,ni2,ipt1,kpt1,kpt2,kpt3,k
+        double precision vrj(*),v1,v2,v12,vmax,cdel
+        kpt1=ipt1-1
+        kpt2=ni1+ni2+1
+        do k=1,kpt1  !0<=v<v1
+            vrj(k)=dble(k-1)*v1/dble(kpt1)
+        end do
+        v12=v1+(v2-v1)*cdel
+        do k=1,ni1+1 !v1<=v<=v12
+            vrj(k+kpt1)=v1+dble(k-1)*(v12-v1)/dble(ni1)
+        end do
+        do k=2,ni2+1 !!v12<v<=v2
+            vrj(k+kpt1+ni1)=v12+dble(k-1)*(v2-v12)/dble(ni2)
+        end do     
+        do k=1,kpt3  !v2<v<=vmax
+            vrj(k+kpt1+kpt2)=v2+dble(k)*(vmax-v2)/dble(kpt3)
+        end do
+    end    
+
+    subroutine recalculate_f_for_a_new_mesh(ispectr)
+        !!   recalculate f' for a new mesh
+        use constants, only : zero
+        use rt_parameters, only : nr, ni1,ni2
+        use plasma, only: vt0, fvt, cltn
+        use current, only: vzmin, vzmax
+        use maxwell, only: i0, vij, dfij
+        use lock_module        
+        use iterator_mod
+        implicit none
+        integer, intent(in) :: ispectr
+        
+        integer i, j, k
+        real(wp) :: cdel, dfout
+
+        integer :: klo,khi,ierr
+        real(wp) :: r, hr, vt, vto, vmax
+        real(wp) :: v1, v2, vp1, vp2
+        hr = 1.d0/dble(nr+1)
+        k=(3-ispectr)/2
+        do j=1,nr
+            r=hr*dble(j)
+            vt=fvt(r)
+            vto=vt/vt0
+            if(iterat.gt.0) then
+                v1=dmin1(vzmin(j),vz1(j))
+                v2=dmax1(vzmax(j),vz2(j))
+            else
+                v1=vzmin(j)
+                v2=vzmax(j)
+            end if
+            vmax=cltn/vto
+            vp1=v1/vto
+            vp2=v2/vto
+            call gridvel(vp1,vp2,vmax,cdel,ni1,ni2,ipt1,kpt3,vrj)
+            do i=1,i0
+                vvj(i)=vij(i,j)
+                vdfj(i)=dfij(i,j,k) !=dfundv(i,j)*vto**2
+            end do
+            do i=1,ipt
+                call lock(vvj,i0,vrj(i),klo,khi,ierr)
+                if(ierr.eq.1) then
+            !!!         if(vrj(i).gt.vvj(i0)) exit
+                    write(*,*)'lock error in new v-mesh'
+                    write(*,*)'j=',j,' i0=',i0
+                    write(*,*)'vvj(1)=',vvj(1),' vvj(i0)=',vvj(i0)
+                    write(*,*)'i=',i,' vrj(i)=',vrj(i)
+                    write(*,*)
+                    pause'next key = stop'
+                    stop
+                end if
+                call linf(vvj,vdfj,vrj(i),dfout,klo,khi)
+                vgrid(i,j)=vrj(i)*vto
+                dfundv(i,j)=dfout/vto**2
+                if(dfundv(i,j).gt.zero) dfundv(i,j)=zero
+            end do
+            vz1(j)=v1
+            vz2(j)=v2
+        end do
+    end subroutine    
 end module lhcd_module
