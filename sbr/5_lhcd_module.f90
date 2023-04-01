@@ -27,6 +27,7 @@ contains
         use lock_module
         use math_module
         use driver_module, only : lfree
+        use driven_current_module, only : zv1, zv2
         implicit real*8 (a-h,o-z)
         type(Spectrum) spectr
         real*8 outpe,pe_out 
@@ -39,7 +40,7 @@ contains
         !common /a0a4/ plost,pnab
         !common /bcef/ ynz,ynpopq
         !common /a0ghp/ vlf,vrt,dflf,dfrt
-        common/plosh/ zv1(100,2),zv2(100,2)!,sk(100)
+        !common/plosh/ zv1(100,2),zv2(100,2)!,sk(100)
         !common /asou/ rsou(102),sou(102),npta
         !common/gridv/vgrid(101,100),dfundv(101,100),nvpt
         !common /vvv2/ psum4

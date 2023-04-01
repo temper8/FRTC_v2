@@ -92,8 +92,10 @@
         !common /a0l3/ y2dn(501),y2tm(501),y2tmi(501)
         !integer inew
         !common /cnew/ inew !est !sav2008
-        real*8 zv1,zv2,fout
-        common/plosh/ zv1(100,2),zv2(100,2)!,sk(100)
+        real(wp) :: fout
+
+        !real*8 zv1,zv2
+        !common/plosh/ zv1(100,2),zv2(100,2)!,sk(100)
         integer k
         !parameter(i0=1002)
         !real*8 vij,fij0,fij,dfij,dij,enorm,fst

@@ -3,6 +3,9 @@ module driven_current_module
     use kind_module
     implicit none
 
+    real(wp)  :: zv1(100,2), zv2(100,2)
+    !common/plosh/ zv1(100,2),zv2(100,2)!,sk(100)
+    
     type DrivenCurrent
     real(wp) :: cu 
     !! ??  может лучше cuj
@@ -21,7 +24,7 @@ module driven_current_module
 
     real(wp), dimension(:), allocatable :: ohj
     !! 
-    integer  :: grid_size
+    integer   :: grid_size
 
     contains
         procedure :: evaluate => DrivenCurrent_evaluate
