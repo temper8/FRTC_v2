@@ -144,6 +144,7 @@ cc*********************************************************************
       use trajectory
       use dispersion_module
       use manager_mod, only: pow, inak, lenstor, lfree
+      use driver_module, only:  iabsorp
       implicit real*8 (a-h,o-z)
       real*8 pabs
       real*8 radth
@@ -259,6 +260,7 @@ c----------------------------------
       use manager_mod
       use trajectory
       use dispersion_module
+      use driver_module
       implicit real*8 (a-h,o-z)
       external extd2
       real*8 pabs

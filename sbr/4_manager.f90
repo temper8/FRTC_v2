@@ -18,6 +18,7 @@ contains
         use spectrum_mod
         use iterator_mod,only: plost, pnab
         use dispersion_module, only: icall1, icall2, yn3, ivar, izn,  iroot
+        use driver_module, only: irs, iabsorp
         implicit none
         type (Spectrum) spectr
         type (SpectrumPoint) point
