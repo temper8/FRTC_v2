@@ -7,21 +7,19 @@ module iterator_mod
     real(wp) :: vrj(101),dj(101),djnew(1001)
     real(wp) :: dj2(101),d2j(101)
 
-    real(wp), dimension(:), allocatable:: vvj, vdfj
-
     real(wp) :: vgrid(101,100), dfundv(101,100)
     !!common/gridv/vgrid(101,100),dfundv(101,100)
     integer  :: nvpt
     !!common/gridv/nvpt
     integer :: ipt1, ipt2, ipt
+    
     integer, parameter :: kpt1=20, kpt3=20
 
-    integer :: iterat
+    integer  :: iterat
     real(wp) :: psum4
     !!common /vvv2/ psum4
-    real(wp) plost,pnab
+    real(wp) ::plost,pnab
     !!common /a0a4/ plost,pnab
 contains
-
 
 end module iterator_mod

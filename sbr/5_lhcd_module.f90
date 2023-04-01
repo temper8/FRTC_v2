@@ -3,6 +3,8 @@ module lhcd_module
     use kind_module
     implicit none
     
+    real(wp), dimension(:), allocatable:: vvj, vdfj
+
 contains
     subroutine ourlhcd2017(spectr, outpe, pe_out)      
         use constants
@@ -513,6 +515,7 @@ contains
         integer :: klo,khi,ierr
         real(wp) :: r, hr, vt, vto, vmax
         real(wp) :: v1, v2, vp1, vp2
+        
         hr = 1.d0/dble(nr+1)
         k=(3-ispectr)/2
         do j=1,nr
