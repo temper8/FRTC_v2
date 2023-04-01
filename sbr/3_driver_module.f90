@@ -196,13 +196,17 @@ contains
 
     end
 
-    subroutine extd2(x,y,dydx)
+    subroutine extd2(x, y, dydx)
         use dispersion_module, only: disp2
-        implicit real*8 (a-h,o-z)
-        dimension y(*),dydx(*)
+        implicit none
+        real(wp), intent(in)    :: x
+        real(wp), intent(in)    :: y(:)
+        real(wp), intent(inout) :: dydx(:)
+        real(wp) :: tt, xm
+        real(wp) :: xnr, prt, prm
         tt=y(1)
         xm=y(2)
-        call disp2(x,xm,tt,xnr,prt,prm)
+        call disp2(x, xm, tt, xnr, prt, prm)
         dydx(1)=-prm
         dydx(2)=prt
     end
@@ -324,18 +328,20 @@ contains
 
     subroutine difeq(y, dydx, nv,x, htry, eps, yscal, hdid, hnext, derivs)
         use rt_parameters, only : hmin1
+        use runge_kutta_module, only: Iderivs_func
         implicit none
-        external derivs
         real(wp), intent(inout) :: y(nv)
         real(wp), intent(in)    :: dydx(nv)
-        integer, intent(in)     :: nv
+        integer,  intent(in)    :: nv
         real(wp), intent(inout) :: x
         real(wp), intent(in)    :: htry
         real(wp), intent(in)    :: eps
         real(wp), intent(inout) :: yscal(nv)
         real(wp), intent(inout) :: hdid
         real(wp), intent(inout) :: hnext
-
+        !external derivs
+        procedure(Iderivs_func) :: derivs
+        
         real(wp)            :: dysav(nv) !sav#
 
         integer, parameter  :: nmax=50,kmaxx=8,imax=kmaxx+1
@@ -479,8 +485,10 @@ contains
 
     subroutine mmid(y,dydx,nvar,xs,htot,nstep,yout,derivs)
         use dispersion_module, only: iconv,irefl
+        use runge_kutta_module, only: Iderivs_func
         implicit none
-        external derivs
+        !external derivs
+        procedure(Iderivs_func) :: derivs
         integer nstep,nvar,nmax
         double precision htot,xs,dydx(nvar),y(nvar),yout(nvar)
         parameter (nmax=50)
