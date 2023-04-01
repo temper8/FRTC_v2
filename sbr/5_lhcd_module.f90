@@ -46,6 +46,7 @@ contains
         !common /vvv2/ psum4
         !common /arr/ dgdu(50,100),kzero(100)
         !common /ag/ inak,lenstor,lfree
+        real(wp) ::  rmx_n, rmx_t, rmx_z, rmx_ti
         ! встречает только один раз common /maxrho/ rmx_n,rmx_t,rmx_z,rmx_ti
       
         type(IterationResult) :: iteration_result
@@ -55,8 +56,9 @@ contains
         !double precision vrj(101),dj(101),djnew(1001)
         !double precision dj2(101),d2j(101)
 
-        integer iptnew
-        real*8 dijk, vrjnew, plaun
+        integer     :: iptnew
+        real(wp)    :: plaun
+        real(wp)    :: dijk(101,100,2), vrjnew(101,100,2)
         !встречает только один раз common/t01/dijk(101,100,2), vrjnew(101,100,2), iptnew
         integer ispectr
         integer :: nrr, i, j, k  
