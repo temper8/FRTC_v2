@@ -341,7 +341,7 @@ contains
         real(wp), intent(inout) :: hnext
         !external derivs
         procedure(Iderivs_func) :: derivs
-        
+
         real(wp)            :: dysav(nv) !sav#
 
         integer, parameter  :: nmax=50,kmaxx=8,imax=kmaxx+1
@@ -487,14 +487,20 @@ contains
         use dispersion_module, only: iconv,irefl
         use runge_kutta_module, only: Iderivs_func
         implicit none
+        real(wp), intent(in)    :: y(nvar)
+        real(wp), intent(in)    :: dydx(nvar)
+        integer,  intent(in)    :: nvar
+        real(wp), intent(in)    :: xs
+        real(wp), intent(in)    :: htot
+        integer,  intent(in)    :: nstep
+        real(wp), intent(inout) :: yout(nvar)
         !external derivs
         procedure(Iderivs_func) :: derivs
-        integer nstep,nvar,nmax
-        double precision htot,xs,dydx(nvar),y(nvar),yout(nvar)
-        parameter (nmax=50)
-        integer i,n
-        double precision h,h2,swap,x,ym(nmax),yn(nmax)
-        double precision yz1,yz2
+
+        integer, parameter :: nmax=50
+        integer  :: i,n
+        real(wp) :: h,h2,swap,x,ym(nmax),yn(nmax)
+        real(wp) :: yz1,yz2
         !integer iconv,irefl
         !common /cefn/ iconv,irefl
         !integer ind
