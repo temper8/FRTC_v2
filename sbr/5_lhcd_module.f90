@@ -447,6 +447,33 @@ contains
         deallocate(vvj,vdfj)
     end    
 
+    subroutine init_iteration
+        use constants, only : zero
+        use rt_parameters, only : itend0
+        use current
+        use iterator_mod
+        use plasma, only: cltn
+        implicit none
+        ppv1=zero
+        ppv2=zero
+        psum4=zero
+        pnab=zero
+        plost=zero
+        dql=zero
+        dq1=zero
+        dq2=zero
+        dncount=zero
+        vzmin=cltn
+        vzmax=-cltn
+        pdl=zero
+        pdc=zero
+        pda=zero
+        pdfast=zero
+        if(itend0.gt.0) then
+              dqi0=zero
+        end if
+    end 
+
     subroutine gridvel(v1,v2,vmax,cdel,ni1,ni2,ipt1,kpt3,vrj)
         implicit none
         integer ni1,ni2,ipt1,kpt1,kpt2,kpt3,k

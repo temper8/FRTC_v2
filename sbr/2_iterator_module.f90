@@ -22,30 +22,6 @@ module iterator_mod
     real(wp) plost,pnab
     !!common /a0a4/ plost,pnab
 contains
-    subroutine init_iteration
-        use constants, only : zero
-        use rt_parameters, only : itend0
-        use current
-        use plasma, only: cltn
-        implicit none
-        ppv1=zero
-        ppv2=zero
-        psum4=zero
-        pnab=zero
-        plost=zero
-        dql=zero
-        dq1=zero
-        dq2=zero
-        dncount=zero
-        vzmin=cltn
-        vzmax=-cltn
-        pdl=zero
-        pdc=zero
-        pda=zero
-        pdfast=zero
-        if(itend0.gt.0) then
-              dqi0=zero
-        end if
-    end 
+
 
 end module iterator_mod
