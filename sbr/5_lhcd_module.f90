@@ -46,7 +46,7 @@ contains
         !common /vvv2/ psum4
         !common /arr/ dgdu(50,100),kzero(100)
         !common /ag/ inak,lenstor,lfree
-        common /maxrho/ rmx_n,rmx_t,rmx_z,rmx_ti
+        ! встречает только один раз common /maxrho/ rmx_n,rmx_t,rmx_z,rmx_ti
       
         type(IterationResult) :: iteration_result
         real*8 kofpar,timecof
@@ -57,7 +57,7 @@ contains
 
         integer iptnew
         real*8 dijk, vrjnew, plaun
-        common/t01/dijk(101,100,2), vrjnew(101,100,2), iptnew
+        !встречает только один раз common/t01/dijk(101,100,2), vrjnew(101,100,2), iptnew
         integer ispectr
         integer :: nrr, i, j, k  
         integer :: klo,khi,ierr
