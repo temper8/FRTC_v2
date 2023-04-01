@@ -48,10 +48,7 @@ contains
         use constants
         use plasma
         use rt_parameters
-        !use manager_mod
-        !use trajectory
         use dispersion_module
-        !use driver_module
         implicit real*8 (a-h,o-z)
         !external extd2
         real*8 pabs
@@ -208,11 +205,7 @@ contains
         use rt_parameters
         use plasma, only : fvt, vperp
         use current
-        !use spectrum1D, only: pabs
-        !use trajectory
         use dispersion_module
-        !use manager_mod, only: pow, inak, lenstor, lfree
-        !use driver_module !, only:  iabsorp
         implicit real*8 (a-h,o-z)
         real*8 pabs
         real*8 radth
@@ -595,14 +588,11 @@ contains
         use runge_kutta_module
         use plasma
         use rt_parameters
-        !use trajectory, only: irs, iabsorp
         use dispersion_module
         implicit none
         real(wp), intent(inout)  :: ystart(:)
         real(wp), intent(inout)  :: x1,x2
-        real(wp), intent(in)  :: rexi, hmin
-        !implicit real*8 (a-h,o-z)
-        !procedure (Iderivs_func), pointer, intent(in) :: derivs 
+        real(wp), intent(in)     :: rexi, hmin
         procedure (Iderivs_func) :: derivs 
         !external derivs
         !common /abcd/ irs
@@ -614,7 +604,7 @@ contains
         !real(wp) pintld4,pintcl4,pintal4
         !common /dg/ pintld4,pintcl4,pintal4
         integer,  parameter :: iturns=1, maxat=3, nvar=4
-        real(wp), parameter ::  hbeg=1.d-4 !sav2008
+        real(wp), parameter :: hbeg=1.d-4 !sav2008
         real(wp)  :: x, xnr, prt, prm, dyd, hnext
         real(wp)  :: yscal(nvar),y(nvar),dydx(nvar),yold(nvar)
         real(wp)  :: eps1, rbord1, hdid, xold, rmm, h
