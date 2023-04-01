@@ -9,6 +9,9 @@ module driver_module
     integer izz(length),iww(length),jrad(length)
     !!common/agh/xnpar,vel,dland,dcoll,dalf,perpn,tetai,jrad,iww,izz
 
+    real(wp)    :: an1(length),an2(length)
+    !common /xn1xn2/ an1,an2
+
     integer     :: irs
     !common /abcd/ irs
     integer     :: iabsorp
@@ -208,8 +211,8 @@ contains
         implicit real*8 (a-h,o-z)
         real*8 pabs
         real*8 radth
-        dimension an1(length),an2(length)
-        common /xn1xn2/ an1,an2
+        !dimension an1(length),an2(length)
+        !common /xn1xn2/ an1,an2
         common /vth/ vthc(length),poloidn(length)
         common /a0ghp/ vlf,vrt,dflf,dfrt
         !common /abcdg/ iabsorp

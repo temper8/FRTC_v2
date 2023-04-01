@@ -314,8 +314,8 @@ contains
         implicit real*8 (a-h,o-z)
         integer, intent(inout) :: ib, ie
         integer, intent(inout) :: iout
-        dimension an1(length),an2(length)
-        common /xn1xn2/ an1,an2
+        !dimension an1(length),an2(length)
+        !common /xn1xn2/ an1,an2
         common /a0ghp/ vlf,vrt,dflf,dfrt
         !common /vvv2/ psum4
         integer :: i, iv,  jr, ifast, jchek
