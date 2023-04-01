@@ -485,6 +485,93 @@ contains
         return !sav#
     end    
 
+    subroutine rzextr(iest,xest,yest,yz,dy,nv)
+        !! rational extrapolation
+        integer iest,nv,imax,nmax
+        double precision xest,dy(nv),yest(nv),yz(nv)
+        parameter (imax=13,nmax=50)
+        integer j,k
+        double precision b,b1,c,ddy,v,yy,d(nmax,imax),fx(imax),x(imax)
+        save d,x
+        x(iest)=xest
+        if(iest.eq.1) then
+            do 11 j=1,nv
+                yz(j)=yest(j)
+                d(j,1)=yest(j)
+                dy(j)=yest(j)
+    11      continue
+        else
+            do 12 k=1,iest-1
+                fx(k+1)=x(iest-k)/xest
+    12      continue
+            do 14 j=1,nv
+                yy=yest(j)
+                v=d(j,1)
+                c=yy
+                d(j,1)=yy
+                do 13 k=2,iest
+                b1=fx(k)*v
+                b=b1-c
+                if(b.ne.0.d0) then
+                    b=(c-v)/b
+                    ddy=c*b
+                    c=b1*b
+                else
+                    ddy=v
+                endif
+                if (k.ne.iest) v=d(j,k)
+                d(j,k)=ddy
+                yy=yy+ddy
+    13        continue
+                dy(j)=ddy
+                yz(j)=yy
+    14      continue
+        endif
+        return
+    end
+
+    
+    subroutine pzextr(iest,xest,yest,yz,dy,nv)
+        !! polynomial extrapolation
+        integer iest,nv,imax,nmax
+        double precision xest,dy(nv),yest(nv),yz(nv)
+        parameter (imax=13,nmax=50)
+        integer j,k1
+        double precision delta,f1,f2,q,d(nmax),qcol(nmax,imax),x(imax)
+        save qcol,x
+        x(iest)=xest
+        do 11 j=1,nv
+            dy(j)=yest(j)
+            yz(j)=yest(j)
+  11    continue
+        if(iest.eq.1) then
+            do 12 j=1,nv
+                qcol(j,1)=yest(j)
+    12      continue
+        else
+            do 13 j=1,nv
+                d(j)=yest(j)
+    13      continue
+            do 15 k1=1,iest-1
+                delta=1.d0/(x(iest-k1)-xest)
+                f1=xest*delta
+                f2=x(iest-k1)*delta
+                do 14 j=1,nv
+                q=qcol(j,k1)
+                qcol(j,k1)=dy(j)
+                delta=d(j)-q
+                dy(j)=f1*delta
+                d(j)=f2*delta
+                yz(j)=yz(j)+dy(j)
+    14        continue
+    15      continue
+            do 16 j=1,nv
+                qcol(j,iest)=dy(j)
+    16      continue
+        endif
+        return
+    end
+
 !------------------------------------------------------------------------------------------------
 subroutine driver4(ystart,x1,x2,rexi,hmin, derivs)
     use constants
