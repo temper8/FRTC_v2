@@ -880,8 +880,9 @@ contains
         integer i,klo,khi,ierr,nvp
         real*8,dimension(:),allocatable:: vzj,dfdvj
         real*8 vlf,vrt,dflf,dfrt,dfout
-        !common/gridv/vgrid(101,100),dfundv(101,100),nvpt
         common /a0ghp/ vlf,vrt,dflf,dfrt
+        !common/gridv/vgrid(101,100),dfundv(101,100),nvpt
+
         nvp=nvpt
         allocate(vzj(nvp),dfdvj(nvp))
         do i=1, nvp

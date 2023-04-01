@@ -2,11 +2,6 @@ module manager_mod
     use kind_module
     implicit none
 
-    real(wp) pow
-    !!common /acg/ pow
-
-    integer inak,lenstor,lfree
-    !common /ag/ inak,lenstor,lfree
 contains
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     subroutine manager(iterat,iw0, ntet, spectr)

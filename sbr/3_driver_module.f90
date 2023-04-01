@@ -27,6 +27,13 @@ module driver_module
 
     integer  :: im4
     !common /bg/ im4    
+
+    real(wp) pow
+    !!common /acg/ pow
+
+    integer inak,lenstor,lfree
+    !common /ag/ inak,lenstor,lfree
+
 contains
 
     subroutine driver2(ystart,x1,x2,xsav,hmin,h1, pabs) !sav2008
@@ -196,7 +203,7 @@ contains
         !use spectrum1D, only: pabs
         !use trajectory
         use dispersion_module
-        use manager_mod, only: pow, inak, lenstor, lfree
+        !use manager_mod, only: pow, inak, lenstor, lfree
         !use driver_module !, only:  iabsorp
         implicit real*8 (a-h,o-z)
         real*8 pabs

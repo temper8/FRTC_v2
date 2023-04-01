@@ -22,6 +22,7 @@ contains
         use iterator_mod
         use lock_module
         use math_module
+        use driver_module, only : lfree
         implicit real*8 (a-h,o-z)
         type(Spectrum) spectr
         real*8 outpe,pe_out 
