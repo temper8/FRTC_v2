@@ -22,6 +22,8 @@ module driver_module
     real(wp) :: hrad
     !common /bcg/ hrad    
 
+    integer :: ind
+    !common /cmn/ ind    
 
     integer  :: im4
     !common /bg/ im4    
@@ -46,8 +48,8 @@ contains
         !common /bcg/ hrad
         !common /cefn/ iconv,irefl
         !common /ceg/ ipow,jfoundr
-        integer :: ind
-        common /cmn/ ind
+        !integer :: ind
+        !common /cmn/ ind
         dimension ystart(2)
         integer, parameter :: nvar=2
         dimension yscal(nvar),y(nvar),dydx(nvar),yold(nvar),dyold(nvar)
@@ -318,8 +320,8 @@ contains
         logical first,reduct
         save a,alf,epsold,first,kmax,kopt,nseq,xnew
         double precision dyd
-        integer ii,ind
-        common /cmn/ ind
+        integer ii
+        !common /cmn/ ind
         data first/.true./,epsold/-1.d0/
         data nseq /2,4,6,8,10,12,14,16,18/
         if(eps.ne.epsold)then
@@ -451,8 +453,8 @@ contains
         double precision yz1,yz2
         !integer iconv,irefl
         !common /cefn/ iconv,irefl
-        integer ind
-        common /cmn/ ind
+        !integer ind
+        !common /cmn/ ind
         h=htot/nstep
         yz1=y(1) !sav#
         yz2=y(2) !sav#
