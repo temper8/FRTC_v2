@@ -539,12 +539,18 @@ contains
 
     subroutine rzextr(iest,xest,yest,yz,dy,nv)
         !! rational extrapolation
-        integer iest,nv,imax,nmax
-        double precision xest,dy(nv),yest(nv),yz(nv)
-        parameter (imax=13,nmax=50)
-        integer j,k
-        double precision b,b1,c,ddy,v,yy,d(nmax,imax),fx(imax),x(imax)
-        save d,x
+        integer,  intent(in)    :: iest, nv
+        real(wp), intent(in)    :: xest
+        real(wp), intent(in)    :: yest(nv)
+        real(wp), intent(inout) :: yz(nv)
+        real(wp), intent(inout) :: dy(nv)
+        
+     
+        integer, parameter :: imax=13, nmax=50
+        integer  :: j,k
+        real(wp) :: b,b1,c,ddy,v,yy
+        real(wp) :: d(nmax,imax),fx(imax),x(imax)
+        save d,x !! зачем save ????
         x(iest)=xest
         if(iest.eq.1) then
             do j=1,nv
