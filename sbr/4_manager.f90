@@ -1,16 +1,10 @@
 module manager_mod
+    !! модуль определяет начальные значения лучей и запускает трассировку
     use kind_module
     implicit none
 
-    real(wp) :: yn3
-    !! common /abefo/ yn3
-    integer :: iroot
-    !!common /beo/ iroot
-    integer :: ivar
-    !!common /bdeo/ ivar    
-
 contains
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     subroutine manager(iterat,iw0, ntet, spectr)
         use constants            
         use plasma
@@ -19,9 +13,11 @@ contains
         use trajectory
         use spectrum_mod
         use iterator_mod,only: plost, pnab
+        use dispersion_module, only: icall1, icall2, yn3, ivar, izn,  iroot
+        use driver_module !, only: irs, iabsorp
         implicit none
-        type (spectrum) spectr
-        type (spectrum_point) point
+        type (Spectrum) spectr
+        type (SpectrumPoint) point
         real(wp) pabs
         integer iznzap(mpnt),iwzap(mpnt),irszap(mpnt)
         real(wp) rzap(mpnt),tetzap(mpnt),xmzap(mpnt),yn3zap(mpnt)
@@ -29,24 +25,23 @@ contains
         !common /a0a2/ tet1,tet2
         ! real(wp) plost,pnab
         !common /a0a4/ plost,pnab
-        real(wp) rzz,tetzz,xmzz
-        common /abc/ rzz,tetzz,xmzz,iznzz,iwzz,irszz
-        common /abcd/ irs
-        common /abcde/ izn
-        common /abcdg/ iabsorp
+        !real(wp) rzz,tetzz,xmzz
+        !common /abc/ rzz,tetzz,xmzz,iznzz,iwzz,irszz
+        !common /abcd/ irs
+        !common /abcde/ izn
+        !common /abcdg/ iabsorp
         !common /abefo/ yn3
-        real(wp) pow
-        common /acg/ pow
+
         !common /a0gh/ pabs
-        common /aef2/ icall1,icall2
-        common /ag/ inak,lenstor,lfree
+        !common /aef2/ icall1,icall2
+        !common /ag/ inak,lenstor,lfree
         !common/refl/nrefj(mpnt)
-        integer lenstor, ntet, irs, iout, itr, inak, nnj,  n_it
+        integer ntet, iout, itr,  nnj,  n_it
         integer maxref, iterat, nmax0, ibad, itet, nref
-        integer nbad1, nbad2, icall1, icall2, inz
-        integer iw0, ifail, iabsirp, inak0,ib,ie,izn
-        integer lfree, nmax, iabsorp, i, nb1,nb2
-        integer iznzz, iwzz, irszz
+        integer nbad1, nbad2, inz
+        integer iw0, ifail, iabsirp, inak0,ib,ie
+        integer nmax, i, nb1,nb2
+        !integer iznzz, iwzz, irszz
         real(wp) htet, hr, yn, rin, xmin, rstart
         real(wp) xnr, powexit, dltpow,  pow1, pgamma, xm
         real(wp) tetin0, tetin, tet
@@ -246,23 +241,34 @@ contains
     end    
 
 
-    real(wp) function rini(xm,tet,xnr,point,hr,ifail) !sav2009
+    real(wp) function rini(xm, tet, xnr,point, hr, ifail) !sav2009
         use constants, only : zero
         use rt_parameters, only : inew
         use spectrum_mod
+        !use trajectory
+        use dispersion_module
         implicit none
-        type(spectrum_point) :: point
-        real(wp) xm, tet,xnr,hr
-        integer ifail, ntry
+
+        type(SpectrumPoint), intent(in) :: point
+        real(wp), intent(inout)          :: xm, xnr
+        real(wp), intent(in)             :: tet,  hr
+        integer, intent(inout)           :: ifail
+
+        integer :: ntry
         real(wp) :: vgrp(3),vph(3)
-        real(wp) :: ynz,ynpopq
-        common /bcef/ ynz,ynpopq
-        real(wp) :: g11,g12,g22,g33,gg,g,si,co
-        common/metrika/g11,g12,g22,g33,gg,g,si,co !sav2009
+
+        !real(wp) :: ynz,ynpopq
+        !common /bcef/ ynz,ynpopq
+
+        !real(wp) :: g11,g12,g22,g33,gg,g,si,co
+        !common/metrika/g11,g12,g22,g33,gg,g,si,co !sav2009
+
         real(wp) :: pa, prt, prm
         real(wp) :: f1,f2
+
         real(wp),  parameter :: rhostart=1.d0
-        integer, parameter :: ntry_max=5
+        integer,   parameter :: ntry_max=5
+
         ifail = 1
         rini = zero
         ntry = 0
@@ -294,5 +300,111 @@ contains
                 return
             end if
         end do
-      end      
+    end      
+
+    subroutine dqliter(dltpow,ib,ie,h,powexit,iout) !sav2008
+        use constants, only: clt, zero
+        use rt_parameters
+        use trajectory
+        use dispersion_module
+        use current
+        use plasma, only: vperp
+        use iterator_mod, only: psum4
+        use driver_module !, only: jrad, iww, length        
+        implicit real*8 (a-h,o-z)
+        integer, intent(inout) :: ib, ie
+        integer, intent(inout) :: iout
+        !dimension an1(length),an2(length)
+        !common /xn1xn2/ an1,an2
+        !common /a0ghp/ vlf,vrt,dflf,dfrt
+        !common /vvv2/ psum4
+        integer :: i, iv,  jr, ifast, jchek
+
+        pow=powexit
+        pdec1=zero
+        pdec1z=zero
+        pdec3=zero
+        pdec3z=zero
+        pdecv=zero
+        pintld=zero
+        pintal=zero
+  10    continue
+        iout=0
+        do i=ib,ie
+            !c-----------------------------------
+            !c restore memorized decrements and
+            !c integrate power equation
+            !c------------------------------------
+            v=vel(i)
+            jr=jrad(i)
+            refr=perpn(i)
+            ifast=iww(i)
+            dek3=zero
+            if(itend0.gt.0) then
+                argum=clt/(refr*valfa)
+                dek3=zatukh(argum,abs(jr),vperp,kv)
+            end if
+            !!!old variant
+            !!!       call raspr(v,abs(jr),iv,df)
+            !!!       if(iv.eq.0) iv=1
+            !!!!!!!!!!!!!!!!!!!!!!!!!!
+            call distr(v,abs(jr),iv,df)
+            !!       dfsr=v*df*(vrt-vlf)
+            !!       vsr=v*(vrt-vlf)
+            dfsr=(vlf*dflf+vrt*dfrt)/2d0*(vrt-vlf) !sav2008
+            vsr=(vrt+vlf)*(vrt-vlf)/2d0 !sav2008
+            if(jr.lt.0) then !case of turn
+                jr=-jr
+                !variant        pintld=-dland(i)*df
+                !!        pintld=-dland(i)*(dflf+dfrt)/2d0
+                pintld=dabs(dland(i)*(dflf+dfrt)/2d0)
+                pdec2=dexp(-2d0*dcoll(i))
+                pintal=dabs(dalf(i)*dek3)
+                pcurr=pdec2*dexp(-2d0*pintld-2d0*pintal)
+                psum4=psum4+pow*(1d0-pcurr)
+                dcv=dland(i)/vsr
+            else
+                pdec2=dcoll(i)
+                pdecv=dland(i)
+                !!        pdec1=-pdecv*df
+                pdec1=dabs(pdecv*df)
+                pdec3=dabs(dalf(i)*dek3)
+                pintld=(pdec1+pdec1z)/2d0*h
+                pintal=(pdec3+pdec3z)/2d0*h
+                pdec1z=pdec1
+                pdec3z=pdec3
+            dcv=pdecv*h/vsr
+            end if
+            powpr=pow
+            if(dltpow.ne.zero) then
+                powd=pow*dexp(-2d0*pintld)
+                powcol=powd*pdec2
+                powal=powcol*dexp(-2d0*pintal)
+                pow=powal
+            end if
+            pil=pintld
+            pic=.5d0*dabs(dlog(pdec2))
+            pia=pintal
+            call dfind(jr,iv,v,powpr,pil,pic,pia,dfsr,dcv, &
+                    refr,vlf,vrt,ifast)
+            if(pow.lt.dltpow) then
+            powexit=pow
+            return
+            end if
+        end do
+        jchek=jrad(ie+1)
+        !c-------------------------------------------
+        !c  check whether trajectory has continuation
+        !c---------------------------------------------
+        if(jchek.eq.0) then
+            iout=1
+            powexit=pow
+            return
+        else
+            ib=idnint(dland(ie+1))
+            ie=idnint(dcoll(ie+1))
+            goto 10
+        end if
+    end    
+
 end module manager_mod
