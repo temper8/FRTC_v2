@@ -26,7 +26,7 @@ cc******************************************************************
       include 'for/status.inc'
       real*8 outpe(NRD)
       real*8,dimension(:),allocatable:: outpep,outpem
-      type(spectrum) spectr
+      type(Spectrum) spectr
       type(Timer) my_timer
 cc*********************************************************************
 cc    Co-ordinates used in ray-tracing:
