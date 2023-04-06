@@ -1,4 +1,5 @@
 module plasma
+    !! модуль параметров плазмы
     use kind_module  
     implicit none
     integer ngrid, nspl
@@ -7,8 +8,12 @@ module plasma
     !! время (придумать название для переменной получше)
     real(wp) rm
     !! minor radius in mid-plane, cm
-    real(wp) b_tor0, b_tor
+    real(wp) b_tor0
+    !! тороидальное магнитное поле
     !! временно нужно две переменных, тоже нужно исправить
+    real(wp) b_tor
+    !! тороидальное магнитное поле
+
     real(wp) r0
     real(wp) z0
     real(wp) rh1
